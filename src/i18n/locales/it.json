@@ -1,0 +1,109 @@
+{
+    "app": {
+        "name": "Sistema di Calcolo Costi delle Ricette",
+        "shortName": "Costi Ricette",
+        "description": "Calcola i costi delle ricette gastronomiche con precisione"
+    },
+    "nav": {
+        "dashboard": "Pannello",
+        "ingredients": "Ingredienti",
+        "recipes": "Ricette",
+        "monitor": "Monitor",
+        "settings": "Impostazioni"
+    },
+    "common": {
+        "add": "Aggiungi",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "save": "Salva",
+        "cancel": "Annulla",
+        "search": "Cerca",
+        "filter": "Filtra",
+        "sort": "Ordina",
+        "loading": "Caricamento...",
+        "noResults": "Nessun risultato trovato",
+        "total": "Totale",
+        "unit": "Unità",
+        "quantity": "Quantità",
+        "price": "Prezzo",
+        "cost": "Costo",
+        "name": "Nome",
+        "category": "Categoria",
+        "actions": "Azioni"
+    },
+    "ingredients": {
+        "title": "Gestione Ingredienti",
+        "addNew": "Aggiungi Ingrediente",
+        "purchasePrice": "Prezzo di Acquisto",
+        "unitPrice": "Prezzo Unitario",
+        "rawMaterials": "Materie Prime",
+        "correctionFactor": "Fattore di Correzione",
+        "waste": "Scarto",
+        "categories": {
+            "dry": "Prodotti Secchi",
+            "dairy": "Latticini",
+            "meat": "Carni",
+            "vegetables": "Verdure",
+            "fruits": "Frutta",
+            "other": "Altro"
+        }
+    },
+    "recipes": {
+        "title": "Le Mie Ricette",
+        "newRecipe": "Nuova Ricetta",
+        "portions": "Porzioni",
+        "costPerPortion": "Costo per Porzione",
+        "totalCost": "Costo Totale",
+        "ingredients": "Ingredienti",
+        "netWeight": "Peso Netto",
+        "grossWeight": "Peso Lordo",
+        "nutritionalInfo": "Informazioni Nutrizionali",
+        "calories": "Calorie",
+        "protein": "Proteine",
+        "carbs": "Carboidrati",
+        "fat": "Grassi",
+        "addIngredient": "Aggiungi Ingrediente"
+    },
+    "monitor": {
+        "title": "Monitor dei Costi",
+        "overview": "Panoramica",
+        "costByCategory": "Costo per Categoria",
+        "mostExpensive": "Ricette Più Costose",
+        "recentActivity": "Attività Recente"
+    },
+    "settings": {
+        "title": "Impostazioni",
+        "language": "Lingua",
+        "currency": "Valuta",
+        "units": "Sistema di Unità",
+        "theme": "Tema",
+        "light": "Chiaro",
+        "dark": "Scuro",
+        "currencies": {
+            "ARS": "Peso Argentino (ARS)",
+            "USD": "Dollaro Americano (USD)",
+            "EUR": "Euro (EUR)"
+        },
+        "unitSystems": {
+            "metric": "Metrico (grammi, kg, litri)",
+            "imperial": "USA (once, libbre, galloni)"
+        },
+        "languages": {
+            "es": "Español",
+            "en": "English",
+            "fr": "Français",
+            "it": "Italiano"
+        }
+    },
+    "units": {
+        "kg": "kg",
+        "g": "g",
+        "l": "l",
+        "ml": "ml",
+        "lb": "lb",
+        "oz": "oz",
+        "gal": "gal",
+        "flOz": "fl oz",
+        "units": "unità"
+    }
+}

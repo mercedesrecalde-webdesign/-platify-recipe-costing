@@ -1,0 +1,109 @@
+{
+    "app": {
+        "name": "Recipe Costing System",
+        "shortName": "Recipe Costing",
+        "description": "Calculate gastronomic recipe costs with precision"
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "ingredients": "Ingredients",
+        "recipes": "Recipes",
+        "monitor": "Monitor",
+        "settings": "Settings"
+    },
+    "common": {
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "search": "Search",
+        "filter": "Filter",
+        "sort": "Sort",
+        "loading": "Loading...",
+        "noResults": "No results found",
+        "total": "Total",
+        "unit": "Unit",
+        "quantity": "Quantity",
+        "price": "Price",
+        "cost": "Cost",
+        "name": "Name",
+        "category": "Category",
+        "actions": "Actions"
+    },
+    "ingredients": {
+        "title": "Ingredients Management",
+        "addNew": "Add Ingredient",
+        "purchasePrice": "Purchase Price",
+        "unitPrice": "Unit Price",
+        "rawMaterials": "Raw Materials",
+        "correctionFactor": "Correction Factor",
+        "waste": "Waste",
+        "categories": {
+            "dry": "Dry Goods",
+            "dairy": "Dairy",
+            "meat": "Meat",
+            "vegetables": "Vegetables",
+            "fruits": "Fruits",
+            "other": "Other"
+        }
+    },
+    "recipes": {
+        "title": "My Recipes",
+        "newRecipe": "New Recipe",
+        "portions": "Portions",
+        "costPerPortion": "Cost per Portion",
+        "totalCost": "Total Cost",
+        "ingredients": "Ingredients",
+        "netWeight": "Net Weight",
+        "grossWeight": "Gross Weight",
+        "nutritionalInfo": "Nutritional Information",
+        "calories": "Calories",
+        "protein": "Protein",
+        "carbs": "Carbohydrates",
+        "fat": "Fat",
+        "addIngredient": "Add Ingredient"
+    },
+    "monitor": {
+        "title": "Cost Monitor",
+        "overview": "Overview",
+        "costByCategory": "Cost by Category",
+        "mostExpensive": "Most Expensive Recipes",
+        "recentActivity": "Recent Activity"
+    },
+    "settings": {
+        "title": "Settings",
+        "language": "Language",
+        "currency": "Currency",
+        "units": "Unit System",
+        "theme": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "currencies": {
+            "ARS": "Argentine Peso (ARS)",
+            "USD": "US Dollar (USD)",
+            "EUR": "Euro (EUR)"
+        },
+        "unitSystems": {
+            "metric": "Metric (grams, kg, liters)",
+            "imperial": "US (ounces, pounds, gallons)"
+        },
+        "languages": {
+            "es": "Español",
+            "en": "English",
+            "fr": "Français",
+            "it": "Italiano"
+        }
+    },
+    "units": {
+        "kg": "kg",
+        "g": "g",
+        "l": "l",
+        "ml": "ml",
+        "lb": "lb",
+        "oz": "oz",
+        "gal": "gal",
+        "flOz": "fl oz",
+        "units": "units"
+    }
+}

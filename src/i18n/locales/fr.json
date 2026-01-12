@@ -1,0 +1,109 @@
+{
+    "app": {
+        "name": "Système de Calcul de Coûts des Recettes",
+        "shortName": "Coûts Recettes",
+        "description": "Calculez les coûts des recettes gastronomiques avec précision"
+    },
+    "nav": {
+        "dashboard": "Tableau de bord",
+        "ingredients": "Ingrédients",
+        "recipes": "Recettes",
+        "monitor": "Moniteur",
+        "settings": "Paramètres"
+    },
+    "common": {
+        "add": "Ajouter",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "search": "Rechercher",
+        "filter": "Filtrer",
+        "sort": "Trier",
+        "loading": "Chargement...",
+        "noResults": "Aucun résultat trouvé",
+        "total": "Total",
+        "unit": "Unité",
+        "quantity": "Quantité",
+        "price": "Prix",
+        "cost": "Coût",
+        "name": "Nom",
+        "category": "Catégorie",
+        "actions": "Actions"
+    },
+    "ingredients": {
+        "title": "Gestion des Ingrédients",
+        "addNew": "Ajouter un Ingrédient",
+        "purchasePrice": "Prix d'Achat",
+        "unitPrice": "Prix Unitaire",
+        "rawMaterials": "Matières Premières",
+        "correctionFactor": "Facteur de Correction",
+        "waste": "Perte",
+        "categories": {
+            "dry": "Produits Secs",
+            "dairy": "Produits Laitiers",
+            "meat": "Viandes",
+            "vegetables": "Légumes",
+            "fruits": "Fruits",
+            "other": "Autres"
+        }
+    },
+    "recipes": {
+        "title": "Mes Recettes",
+        "newRecipe": "Nouvelle Recette",
+        "portions": "Portions",
+        "costPerPortion": "Coût par Portion",
+        "totalCost": "Coût Total",
+        "ingredients": "Ingrédients",
+        "netWeight": "Poids Net",
+        "grossWeight": "Poids Brut",
+        "nutritionalInfo": "Informations Nutritionnelles",
+        "calories": "Calories",
+        "protein": "Protéines",
+        "carbs": "Glucides",
+        "fat": "Graisses",
+        "addIngredient": "Ajouter un Ingrédient"
+    },
+    "monitor": {
+        "title": "Moniteur de Coûts",
+        "overview": "Vue d'Ensemble",
+        "costByCategory": "Coût par Catégorie",
+        "mostExpensive": "Recettes les Plus Chères",
+        "recentActivity": "Activité Récente"
+    },
+    "settings": {
+        "title": "Paramètres",
+        "language": "Langue",
+        "currency": "Devise",
+        "units": "Système d'Unités",
+        "theme": "Thème",
+        "light": "Clair",
+        "dark": "Sombre",
+        "currencies": {
+            "ARS": "Peso Argentin (ARS)",
+            "USD": "Dollar Américain (USD)",
+            "EUR": "Euro (EUR)"
+        },
+        "unitSystems": {
+            "metric": "Métrique (grammes, kg, litres)",
+            "imperial": "USA (onces, livres, gallons)"
+        },
+        "languages": {
+            "es": "Español",
+            "en": "English",
+            "fr": "Français",
+            "it": "Italiano"
+        }
+    },
+    "units": {
+        "kg": "kg",
+        "g": "g",
+        "l": "l",
+        "ml": "ml",
+        "lb": "lb",
+        "oz": "oz",
+        "gal": "gal",
+        "flOz": "fl oz",
+        "units": "unités"
+    }
+}

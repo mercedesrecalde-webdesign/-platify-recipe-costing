@@ -1,0 +1,305 @@
+[
+  {
+    "id": "recipe_1",
+    "name": "Ensalada de chauchas, atún y endivia al pesto (rinde 4  PORCIONES de 316 grs.)",
+    "ingredients": [
+      {
+        "name": "chauchas",
+        "netQuantity": 400.0,
+        "unit": "grs",
+        "correctionFactor": 1.23,
+        "grossQuantity": 492.0,
+        "cost": 6.888
+      },
+      {
+        "name": "papa cocida grande",
+        "netQuantity": 200.0,
+        "unit": "grs",
+        "correctionFactor": 1.18,
+        "grossQuantity": 236.0,
+        "cost": 15.0
+      },
+      {
+        "name": "endivias",
+        "netQuantity": 300.0,
+        "unit": "grs",
+        "correctionFactor": 1.12,
+        "grossQuantity": 336.00000000000006,
+        "cost": 17.539200000000005
+      },
+      {
+        "name": "huevo duro",
+        "netQuantity": 1.0,
+        "unit": "unidad",
+        "correctionFactor": 1.11,
+        "grossQuantity": 1.11,
+        "cost": 0.06520000000000001
+      },
+      {
+        "name": "atun en lata",
+        "netQuantity": 120.0,
+        "unit": "grs",
+        "correctionFactor": 1.37,
+        "grossQuantity": 164.4,
+        "cost": 191.782464
+      },
+      {
+        "name": "ajo",
+        "netQuantity": 8.0,
+        "unit": "grs",
+        "correctionFactor": 1.29,
+        "grossQuantity": 10.32,
+        "cost": 1.161
+      },
+      {
+        "name": "almendras peladas y  tostadas",
+        "netQuantity": 20.0,
+        "unit": "gs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 21.06,
+        "cost": 2.90628
+      },
+      {
+        "name": "queso parmesano rallado",
+        "netQuantity": 50.0,
+        "unit": "grs",
+        "correctionFactor": 1.11,
+        "grossQuantity": 55.50000000000001,
+        "cost": 13.875000000000002
+      },
+      {
+        "name": "albahaca",
+        "netQuantity": 10.0,
+        "unit": "grs",
+        "correctionFactor": 1.11,
+        "grossQuantity": 11.100000000000001,
+        "cost": 0.8325000000000001
+      },
+      {
+        "name": "aceite de oliva",
+        "netQuantity": 150.0,
+        "unit": "cc",
+        "correctionFactor": 1.07,
+        "grossQuantity": 160.5,
+        "cost": 12.0375
+      },
+      {
+        "name": "sal",
+        "netQuantity": 3.0,
+        "unit": "grs",
+        "correctionFactor": 0.01,
+        "grossQuantity": 0.03,
+        "cost": 0.000495
+      },
+      {
+        "name": "pimienta negra molida",
+        "netQuantity": 2.0,
+        "unit": "grs",
+        "correctionFactor": 0.01,
+        "grossQuantity": 0.02,
+        "cost": 0.0018
+      },
+      {
+        "name": "PESO TOTAL",
+        "netQuantity": 1264.0,
+        "unit": "grs",
+        "correctionFactor": 1.0,
+        "grossQuantity": 0,
+        "cost": 262.089439
+      },
+      {
+        "name": "Ingredientes",
+        "netQuantity": 0,
+        "unit": "u.m.",
+        "correctionFactor": 1.0,
+        "grossQuantity": 0,
+        "cost": 0
+      },
+      {
+        "name": "carre de cerdo",
+        "netQuantity": 800.0,
+        "unit": "grs",
+        "correctionFactor": 1.51,
+        "grossQuantity": 1208.0,
+        "cost": 277.84000000000003
+      },
+      {
+        "name": "papa",
+        "netQuantity": 200.0,
+        "unit": "grs",
+        "correctionFactor": 1.18,
+        "grossQuantity": 236.0,
+        "cost": 80.0
+      },
+      {
+        "name": "morron rojo",
+        "netQuantity": 80.0,
+        "unit": "grs",
+        "correctionFactor": 1.35,
+        "grossQuantity": 108.0,
+        "cost": 5.6000000000000005
+      },
+      {
+        "name": "cebolla de verdeo",
+        "netQuantity": 50.0,
+        "unit": "grs",
+        "correctionFactor": 2.44,
+        "grossQuantity": 122.0,
+        "cost": 4.5
+      },
+      {
+        "name": "limon",
+        "netQuantity": 15.0,
+        "unit": "cc",
+        "correctionFactor": 1.56,
+        "grossQuantity": 23.400000000000002,
+        "cost": 0.48360000000000003
+      },
+      {
+        "name": "ajo",
+        "netQuantity": 12.0,
+        "unit": "grs",
+        "correctionFactor": 1.29,
+        "grossQuantity": 15.48,
+        "cost": 0.96
+      },
+      {
+        "name": "oregano",
+        "netQuantity": 2.0,
+        "unit": "grs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 2.106,
+        "cost": 0.09
+      },
+      {
+        "name": "aceite",
+        "netQuantity": 80.0,
+        "unit": "cc",
+        "correctionFactor": 1.053,
+        "grossQuantity": 84.24,
+        "cost": 2.72
+      },
+      {
+        "name": "sal",
+        "netQuantity": 2.0,
+        "unit": "grs",
+        "correctionFactor": 0.01,
+        "grossQuantity": 0.02,
+        "cost": 0.186
+      },
+      {
+        "name": "pimienta",
+        "netQuantity": 1.0,
+        "unit": "grs",
+        "correctionFactor": 0.01,
+        "grossQuantity": 0.01,
+        "cost": 0.0225
+      },
+      {
+        "name": "Peso total",
+        "netQuantity": 1242.0,
+        "unit": "grs",
+        "correctionFactor": 1.0,
+        "grossQuantity": 0,
+        "cost": 372.4021
+      },
+      {
+        "name": "Ingredientes",
+        "netQuantity": 0,
+        "unit": "U.M.",
+        "correctionFactor": 1.0,
+        "grossQuantity": 0,
+        "cost": 0
+      },
+      {
+        "name": "harina",
+        "netQuantity": 300.0,
+        "unit": "grs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 315.9,
+        "cost": 10.127754000000001
+      },
+      {
+        "name": "manteca",
+        "netQuantity": 50.0,
+        "unit": "grs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 52.65,
+        "cost": 1.7901
+      },
+      {
+        "name": "azucar comun",
+        "netQuantity": 175.0,
+        "unit": "grs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 184.27499999999998,
+        "cost": 3.0405374999999997
+      },
+      {
+        "name": "huevo",
+        "netQuantity": 2.0,
+        "unit": "grs",
+        "correctionFactor": 1.11,
+        "grossQuantity": 2.22,
+        "cost": 0.00592
+      },
+      {
+        "name": "peras",
+        "netQuantity": 1000.0,
+        "unit": "grs",
+        "correctionFactor": 1.35,
+        "grossQuantity": 1350.0,
+        "cost": 64.8
+      },
+      {
+        "name": "vino tinto",
+        "netQuantity": 350.0,
+        "unit": "cc",
+        "correctionFactor": 1.053,
+        "grossQuantity": 368.54999999999995,
+        "cost": 46.59375
+      },
+      {
+        "name": "gelatina sin sabor",
+        "netQuantity": 5.0,
+        "unit": "grs",
+        "correctionFactor": 1.053,
+        "grossQuantity": 5.265,
+        "cost": 0.33696
+      },
+      {
+        "name": "leche",
+        "netQuantity": 500.0,
+        "unit": "cc",
+        "correctionFactor": 1.053,
+        "grossQuantity": 526.5,
+        "cost": 10.53
+      },
+      {
+        "name": "almidon de maiz",
+        "netQuantity": 30.0,
+        "unit": "grs",
+        "correctionFactor": 1.0,
+        "grossQuantity": 30.0,
+        "cost": 0.40499999999999997
+      },
+      {
+        "name": "esencia de vainilla",
+        "netQuantity": 2.0,
+        "unit": "cc",
+        "correctionFactor": 1.053,
+        "grossQuantity": 2.106,
+        "cost": 0.05265
+      },
+      {
+        "name": "Peso total",
+        "netQuantity": 2414.0,
+        "unit": "grs",
+        "correctionFactor": 1.0,
+        "grossQuantity": 0,
+        "cost": 137.6826715
+      }
+    ],
+    "portions": 4
+  }
+]

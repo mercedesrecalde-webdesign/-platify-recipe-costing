@@ -1,0 +1,1130 @@
+[
+  {
+    "name": "Acelga",
+    "category": "vegetables",
+    "correctionFactor": 1.66,
+    "wastePercentage": 40.0
+  },
+  {
+    "name": "Ananá",
+    "category": "fruits",
+    "correctionFactor": 1.61,
+    "wastePercentage": 38.0
+  },
+  {
+    "name": "Cerdo",
+    "category": "meat",
+    "correctionFactor": 1.51,
+    "wastePercentage": 33.0
+  },
+  {
+    "name": "Atun en lata",
+    "category": "other",
+    "correctionFactor": 1.37,
+    "wastePercentage": 72.0
+  },
+  {
+    "name": "Achicoria",
+    "category": "vegetables",
+    "correctionFactor": 1.12,
+    "wastePercentage": 11.0
+  },
+  {
+    "name": "Banana",
+    "category": "fruits",
+    "correctionFactor": 1.54,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "Cerdo (carne magra)",
+    "category": "meat",
+    "correctionFactor": 1.22,
+    "wastePercentage": 18.0
+  },
+  {
+    "name": "Huevo",
+    "category": "other",
+    "correctionFactor": 1.11,
+    "wastePercentage": 10.0
+  },
+  {
+    "name": "Ajo",
+    "category": "vegetables",
+    "correctionFactor": 1.29,
+    "wastePercentage": 23.0
+  },
+  {
+    "name": "Cereza",
+    "category": "fruits",
+    "correctionFactor": 1.09,
+    "wastePercentage": 8.0
+  },
+  {
+    "name": "Ganso",
+    "category": "meat",
+    "correctionFactor": 1.69,
+    "wastePercentage": 41.0
+  },
+  {
+    "name": "Aceite de oliva",
+    "category": "other",
+    "correctionFactor": 1.07,
+    "wastePercentage": 7.000000000000001
+  },
+  {
+    "name": "Ajo Puerro",
+    "category": "vegetables",
+    "correctionFactor": 1.92,
+    "wastePercentage": 48.0
+  },
+  {
+    "name": "Ciruela",
+    "category": "fruits",
+    "correctionFactor": 1.05,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Cordero (paleta)",
+    "category": "meat",
+    "correctionFactor": 1.25,
+    "wastePercentage": 20.0
+  },
+  {
+    "name": "Aceite de oliva",
+    "category": "other",
+    "correctionFactor": 1.07,
+    "wastePercentage": 7.000000000000001
+  },
+  {
+    "name": "Alcaucil",
+    "category": "vegetables",
+    "correctionFactor": 2.08,
+    "wastePercentage": 52.0
+  },
+  {
+    "name": "Ciruela pasa",
+    "category": "fruits",
+    "correctionFactor": 1.23,
+    "wastePercentage": 19.0
+  },
+  {
+    "name": "Cordero (costillas)",
+    "category": "meat",
+    "correctionFactor": 1.31,
+    "wastePercentage": 24.0
+  },
+  {
+    "name": "Aceite de sesamo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Apio",
+    "category": "vegetables",
+    "correctionFactor": 1.58,
+    "wastePercentage": 37.0
+  },
+  {
+    "name": "Chirimoya",
+    "category": "fruits",
+    "correctionFactor": 1.41,
+    "wastePercentage": 28.999999999999996
+  },
+  {
+    "name": "Liebre",
+    "category": "meat",
+    "correctionFactor": 1.62,
+    "wastePercentage": 38.0
+  },
+  {
+    "name": "Aceite mezcla",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Arvejas frescas",
+    "category": "vegetables",
+    "correctionFactor": 2.22,
+    "wastePercentage": 55.00000000000001
+  },
+  {
+    "name": "Dátil",
+    "category": "fruits",
+    "correctionFactor": 1.15,
+    "wastePercentage": 13.0
+  },
+  {
+    "name": "Pato",
+    "category": "meat",
+    "correctionFactor": 1.19,
+    "wastePercentage": 16.0
+  },
+  {
+    "name": "Aceitunas descarozadas",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Batatas",
+    "category": "vegetables",
+    "correctionFactor": 1.33,
+    "wastePercentage": 25.0
+  },
+  {
+    "name": "Damasco",
+    "category": "fruits",
+    "correctionFactor": 1.16,
+    "wastePercentage": 14.000000000000002
+  },
+  {
+    "name": "Pavo",
+    "category": "meat",
+    "correctionFactor": 1.64,
+    "wastePercentage": 39.0
+  },
+  {
+    "name": "Aceto Balsamico",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Berenjenas",
+    "category": "vegetables",
+    "correctionFactor": 1.15,
+    "wastePercentage": 13.0
+  },
+  {
+    "name": "Durazno",
+    "category": "fruits",
+    "correctionFactor": 1.23,
+    "wastePercentage": 19.0
+  },
+  {
+    "name": "Pollo",
+    "category": "meat",
+    "correctionFactor": 1.88,
+    "wastePercentage": 47.0
+  },
+  {
+    "name": "Almendras Peladas",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Berro",
+    "category": "vegetables",
+    "correctionFactor": 1.96,
+    "wastePercentage": 49.0
+  },
+  {
+    "name": "Durazno pelón",
+    "category": "fruits",
+    "correctionFactor": 1.1,
+    "wastePercentage": 9.0
+  },
+  {
+    "name": "Gallina",
+    "category": "meat",
+    "correctionFactor": 1.72,
+    "wastePercentage": 42.0
+  },
+  {
+    "name": "Almibar",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Brócoli",
+    "category": "vegetables",
+    "correctionFactor": 2.0,
+    "wastePercentage": 50.0
+  },
+  {
+    "name": "Frutilla",
+    "category": "fruits",
+    "correctionFactor": 1.04,
+    "wastePercentage": 4.0
+  },
+  {
+    "name": "Vacuno (puchero/guisado)",
+    "category": "meat",
+    "correctionFactor": 1.37,
+    "wastePercentage": 27.0
+  },
+  {
+    "name": "Almidón de maíz",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Cebolla de cabeza",
+    "category": "vegetables",
+    "correctionFactor": 1.17,
+    "wastePercentage": 15.0
+  },
+  {
+    "name": "Granada",
+    "category": "fruits",
+    "correctionFactor": 1.56,
+    "wastePercentage": 36.0
+  },
+  {
+    "name": "Vacuno (tira de asado)",
+    "category": "meat",
+    "correctionFactor": 1.26,
+    "wastePercentage": 21.0
+  },
+  {
+    "name": "almidon de tapioca",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Cebolla de verdeo",
+    "category": "vegetables",
+    "correctionFactor": 2.44,
+    "wastePercentage": 59.0
+  },
+  {
+    "name": "Guayaba",
+    "category": "fruits",
+    "correctionFactor": 1.15,
+    "wastePercentage": 13.0
+  },
+  {
+    "name": "Vacuno (lomo)",
+    "category": "meat",
+    "correctionFactor": 1.7,
+    "wastePercentage": 41.0
+  },
+  {
+    "name": "Amareto",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Chaucha",
+    "category": "vegetables",
+    "correctionFactor": 1.11,
+    "wastePercentage": 10.0
+  },
+  {
+    "name": "Higo",
+    "category": "fruits",
+    "correctionFactor": 1.03,
+    "wastePercentage": 3.0
+  },
+  {
+    "name": "Vacuno (nalga)",
+    "category": "meat",
+    "correctionFactor": 1.19,
+    "wastePercentage": 16.0
+  },
+  {
+    "name": "atun en ceite",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Coliflor",
+    "category": "vegetables",
+    "correctionFactor": 2.22,
+    "wastePercentage": 55.00000000000001
+  },
+  {
+    "name": "Tuna",
+    "category": "fruits",
+    "correctionFactor": 2.27,
+    "wastePercentage": 56.00000000000001
+  },
+  {
+    "name": "Lengua",
+    "category": "meat",
+    "correctionFactor": 1.3,
+    "wastePercentage": 23.0
+  },
+  {
+    "name": "avellanas peladas",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Col crespa",
+    "category": "vegetables",
+    "correctionFactor": 2.22,
+    "wastePercentage": 55.00000000000001
+  },
+  {
+    "name": "Kaki",
+    "category": "fruits",
+    "correctionFactor": 1.26,
+    "wastePercentage": 21.0
+  },
+  {
+    "name": "Abadejo",
+    "category": "meat",
+    "correctionFactor": 2.2,
+    "wastePercentage": 55.00000000000001
+  },
+  {
+    "name": "azafran",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Colinabo",
+    "category": "vegetables",
+    "correctionFactor": 1.85,
+    "wastePercentage": 46.0
+  },
+  {
+    "name": "Kiwi",
+    "category": "fruits",
+    "correctionFactor": 1.25,
+    "wastePercentage": 20.0
+  },
+  {
+    "name": "Almeja",
+    "category": "meat",
+    "correctionFactor": 3.12,
+    "wastePercentage": 0
+  },
+  {
+    "name": "azucar",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Espárrago",
+    "category": "vegetables",
+    "correctionFactor": 3.03,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Kinoto",
+    "category": "fruits",
+    "correctionFactor": 1.05,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Anguila",
+    "category": "meat",
+    "correctionFactor": 1.31,
+    "wastePercentage": 24.0
+  },
+  {
+    "name": "azucar en polvo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Escarola",
+    "category": "vegetables",
+    "correctionFactor": 1.18,
+    "wastePercentage": 15.0
+  },
+  {
+    "name": "Lima",
+    "category": "fruits",
+    "correctionFactor": 1.31,
+    "wastePercentage": 24.0
+  },
+  {
+    "name": "Arenque de lago",
+    "category": "meat",
+    "correctionFactor": 1.78,
+    "wastePercentage": 44.0
+  },
+  {
+    "name": "azucar negra",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Espinaca",
+    "category": "vegetables",
+    "correctionFactor": 1.3,
+    "wastePercentage": 23.0
+  },
+  {
+    "name": "Limón",
+    "category": "fruits",
+    "correctionFactor": 1.56,
+    "wastePercentage": 36.0
+  },
+  {
+    "name": "Arenque de mar",
+    "category": "meat",
+    "correctionFactor": 1.96,
+    "wastePercentage": 49.0
+  },
+  {
+    "name": "cacao amargo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Hinojo",
+    "category": "vegetables",
+    "correctionFactor": 2.85,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Mandarina",
+    "category": "fruits",
+    "correctionFactor": 1.59,
+    "wastePercentage": 37.0
+  },
+  {
+    "name": "Bacalao",
+    "category": "meat",
+    "correctionFactor": 2.08,
+    "wastePercentage": 52.0
+  },
+  {
+    "name": "café en grano",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Lechuga",
+    "category": "vegetables",
+    "correctionFactor": 1.33,
+    "wastePercentage": 25.0
+  },
+  {
+    "name": "Manzana",
+    "category": "fruits",
+    "correctionFactor": 1.16,
+    "wastePercentage": 14.000000000000002
+  },
+  {
+    "name": "Bonito",
+    "category": "meat",
+    "correctionFactor": 1.72,
+    "wastePercentage": 42.0
+  },
+  {
+    "name": "café molido",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Choclo",
+    "category": "vegetables",
+    "correctionFactor": 2.63,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Melón",
+    "category": "fruits",
+    "correctionFactor": 1.51,
+    "wastePercentage": 33.0
+  },
+  {
+    "name": "Carpa",
+    "category": "meat",
+    "correctionFactor": 2.56,
+    "wastePercentage": 0
+  },
+  {
+    "name": "choclo desgranado",
+    "category": "other",
+    "correctionFactor": 1.49,
+    "wastePercentage": 3.3300000000000005
+  },
+  {
+    "name": "Mandioca",
+    "category": "vegetables",
+    "correctionFactor": 1.33,
+    "wastePercentage": 25.0
+  },
+  {
+    "name": "Membrillo",
+    "category": "fruits",
+    "correctionFactor": 1.44,
+    "wastePercentage": 31.0
+  },
+  {
+    "name": "Caballo",
+    "category": "meat",
+    "correctionFactor": 2.08,
+    "wastePercentage": 52.0
+  },
+  {
+    "name": "fondo de gallina",
+    "category": "other",
+    "correctionFactor": 1.02,
+    "wastePercentage": 2.0
+  },
+  {
+    "name": "Nabiza",
+    "category": "vegetables",
+    "correctionFactor": 1.19,
+    "wastePercentage": 16.0
+  },
+  {
+    "name": "Mora",
+    "category": "fruits",
+    "correctionFactor": 1.07,
+    "wastePercentage": 7.000000000000001
+  },
+  {
+    "name": "Camarón",
+    "category": "meat",
+    "correctionFactor": 2.56,
+    "wastePercentage": 0
+  },
+  {
+    "name": "fondo de verdura",
+    "category": "other",
+    "correctionFactor": 1.02,
+    "wastePercentage": 2.0
+  },
+  {
+    "name": "Nabo",
+    "category": "vegetables",
+    "correctionFactor": 1.13,
+    "wastePercentage": 12.0
+  },
+  {
+    "name": "Naranja",
+    "category": "fruits",
+    "correctionFactor": 1.54,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "Merluza",
+    "category": "meat",
+    "correctionFactor": 1.42,
+    "wastePercentage": 30.0
+  },
+  {
+    "name": "harina de algarrobo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Papa",
+    "category": "vegetables",
+    "correctionFactor": 1.18,
+    "wastePercentage": 15.0
+  },
+  {
+    "name": "Níspero",
+    "category": "fruits",
+    "correctionFactor": 1.31,
+    "wastePercentage": 24.0
+  },
+  {
+    "name": "Lenguado",
+    "category": "meat",
+    "correctionFactor": 3.45,
+    "wastePercentage": 0
+  },
+  {
+    "name": "harina de avellana",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Pepino",
+    "category": "vegetables",
+    "correctionFactor": 1.43,
+    "wastePercentage": 30.0
+  },
+  {
+    "name": "Palta o aguacate",
+    "category": "fruits",
+    "correctionFactor": 1.59,
+    "wastePercentage": 37.0
+  },
+  {
+    "name": "Panceta ahumada",
+    "category": "meat",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "harina de maiz",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Perejil",
+    "category": "vegetables",
+    "correctionFactor": 1.66,
+    "wastePercentage": 40.0
+  },
+  {
+    "name": "Papaya",
+    "category": "fruits",
+    "correctionFactor": 1.47,
+    "wastePercentage": 32.0
+  },
+  {
+    "name": "Mejillón",
+    "category": "meat",
+    "correctionFactor": 1.81,
+    "wastePercentage": 45.0
+  },
+  {
+    "name": "harina de malta",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Pimiento Verde",
+    "category": "vegetables",
+    "correctionFactor": 1.35,
+    "wastePercentage": 26.0
+  },
+  {
+    "name": "Pera",
+    "category": "fruits",
+    "correctionFactor": 1.35,
+    "wastePercentage": 26.0
+  },
+  {
+    "name": "Pejerrey de rio",
+    "category": "meat",
+    "correctionFactor": 1.81,
+    "wastePercentage": 45.0
+  },
+  {
+    "name": "harina de trigo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Poroto fresco",
+    "category": "vegetables",
+    "correctionFactor": 2.5,
+    "wastePercentage": 60.0
+  },
+  {
+    "name": "Pomelo",
+    "category": "fruits",
+    "correctionFactor": 1.72,
+    "wastePercentage": 42.0
+  },
+  {
+    "name": "Pejerrey de mar",
+    "category": "meat",
+    "correctionFactor": 2.0,
+    "wastePercentage": 50.0
+  },
+  {
+    "name": "hielo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Haba",
+    "category": "vegetables",
+    "correctionFactor": 3.33,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Sandía",
+    "category": "fruits",
+    "correctionFactor": 1.43,
+    "wastePercentage": 30.0
+  },
+  {
+    "name": "Pescadilla",
+    "category": "meat",
+    "correctionFactor": 2.78,
+    "wastePercentage": 0
+  },
+  {
+    "name": "hongos portobelos",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Remolacha",
+    "category": "vegetables",
+    "correctionFactor": 1.13,
+    "wastePercentage": 12.0
+  },
+  {
+    "name": "Uva",
+    "category": "fruits",
+    "correctionFactor": 1.06,
+    "wastePercentage": 6.0
+  },
+  {
+    "name": "Perca",
+    "category": "meat",
+    "correctionFactor": 2.08,
+    "wastePercentage": 52.0
+  },
+  {
+    "name": "hongos secos",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Radicheta",
+    "category": "vegetables",
+    "correctionFactor": 1.33,
+    "wastePercentage": 25.0
+  },
+  {
+    "name": "Sábana",
+    "category": "meat",
+    "correctionFactor": 1.54,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "jengibre",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Repollito de Bruselas",
+    "category": "vegetables",
+    "correctionFactor": 1.3,
+    "wastePercentage": 23.0
+  },
+  {
+    "name": "Salmón (entero)",
+    "category": "meat",
+    "correctionFactor": 1.54,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "Jengibre Pasta",
+    "category": "other",
+    "correctionFactor": 1.01,
+    "wastePercentage": 1.0
+  },
+  {
+    "name": "Repollo",
+    "category": "vegetables",
+    "correctionFactor": 1.53,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "Sardina",
+    "category": "meat",
+    "correctionFactor": 1.22,
+    "wastePercentage": 18.0
+  },
+  {
+    "name": "jerez",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Rúcula",
+    "category": "vegetables",
+    "correctionFactor": 1.33,
+    "wastePercentage": 25.0
+  },
+  {
+    "name": "Sardina envasada",
+    "category": "meat",
+    "correctionFactor": 1.53,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "jugo de lima",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Salsifí",
+    "category": "vegetables",
+    "correctionFactor": 1.31,
+    "wastePercentage": 24.0
+  },
+  {
+    "name": "Surubí",
+    "category": "meat",
+    "correctionFactor": 1.81,
+    "wastePercentage": 45.0
+  },
+  {
+    "name": "jugo de limon",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Tomate",
+    "category": "vegetables",
+    "correctionFactor": 1.05,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "langostino entero",
+    "category": "meat",
+    "correctionFactor": 2.0,
+    "wastePercentage": 50.0
+  },
+  {
+    "name": "jugo de pomelo",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Zanahoria",
+    "category": "vegetables",
+    "correctionFactor": 1.59,
+    "wastePercentage": 37.0
+  },
+  {
+    "name": "langostino limpio",
+    "category": "meat",
+    "correctionFactor": 1.0,
+    "wastePercentage": 0.3
+  },
+  {
+    "name": "laurel",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Zapallito",
+    "category": "vegetables",
+    "correctionFactor": 1.38,
+    "wastePercentage": 28.000000000000004
+  },
+  {
+    "name": "leche",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Zapallo",
+    "category": "vegetables",
+    "correctionFactor": 1.45,
+    "wastePercentage": 31.0
+  },
+  {
+    "name": "Leche de coco 0.1",
+    "category": "other",
+    "correctionFactor": 1.0,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Albahaca",
+    "category": "vegetables",
+    "correctionFactor": 1.11,
+    "wastePercentage": 10.0
+  },
+  {
+    "name": "levadura",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "licor de café",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "licor de chocolate",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "licor de crema de cassis",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "mozarella",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Oregano",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Palta o aguacate",
+    "category": "other",
+    "correctionFactor": 1.587,
+    "wastePercentage": 37.0
+  },
+  {
+    "name": "pan blanco",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "pan lactal negro",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "pan rayado",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Poroto fresco",
+    "category": "other",
+    "correctionFactor": 2.5,
+    "wastePercentage": 60.0
+  },
+  {
+    "name": "pure de tomate",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "queso azul",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "queso crema",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "queso parmesano",
+    "category": "other",
+    "correctionFactor": 1.11,
+    "wastePercentage": 10.0
+  },
+  {
+    "name": "Queso rallado",
+    "category": "other",
+    "correctionFactor": 1.0,
+    "wastePercentage": 0
+  },
+  {
+    "name": "Sardina envasada",
+    "category": "other",
+    "correctionFactor": 1.538,
+    "wastePercentage": 35.0
+  },
+  {
+    "name": "tomates secos",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "tomillo fresco",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "sal fina",
+    "category": "other",
+    "correctionFactor": 0.01,
+    "wastePercentage": 0
+  },
+  {
+    "name": "sal gruesa",
+    "category": "other",
+    "correctionFactor": 0.01,
+    "wastePercentage": 0
+  },
+  {
+    "name": "pimienta",
+    "category": "other",
+    "correctionFactor": 0.01,
+    "wastePercentage": 0
+  },
+  {
+    "name": "manteca",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "vino tinto",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Gelatina sin sabor",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Almidon de maiz",
+    "category": "other",
+    "correctionFactor": 1.0,
+    "wastePercentage": 0.05
+  },
+  {
+    "name": "esencia de vainilla",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "piñones",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "Crema de leche",
+    "category": "other",
+    "correctionFactor": 1.053,
+    "wastePercentage": 5.0
+  },
+  {
+    "name": "duraznos en lata",
+    "category": "other",
+    "correctionFactor": 1.64,
+    "wastePercentage": 39.03
+  }
+]

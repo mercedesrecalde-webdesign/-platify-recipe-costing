@@ -1,0 +1,56 @@
+# Netlify Build Configuration
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Directory with the static content (output of build)
+  publish = "dist"
+  
+  # Directory with functions (serverless functions)
+  # functions = "netlify/functions"
+
+# SPA redirect for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for PWA optimization
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Cache control for HTML
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Cache static assets for 1 year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    # Service Worker should never be cached
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Environment variables (if needed)
+# [build.environment]
+#   NODE_VERSION = "18"

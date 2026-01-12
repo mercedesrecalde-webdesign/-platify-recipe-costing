@@ -1,0 +1,2441 @@
+[
+  {
+    "id": "ing_1",
+    "name": "HARINA  000",
+    "category": "Otros",
+    "quantity": 50.0,
+    "unit": "KG",
+    "purchasePrice": 700.0,
+    "unitPrice": 14.0
+  },
+  {
+    "id": "ing_2",
+    "name": "harina leudante",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 150.0,
+    "unitPrice": 15.0
+  },
+  {
+    "id": "ing_3",
+    "name": "harina 0000",
+    "category": "Otros",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 32.06,
+    "unitPrice": 32.06
+  },
+  {
+    "id": "ing_4",
+    "name": "polvo de hornear",
+    "category": "Otros",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 120.0,
+    "unitPrice": 24.0
+  },
+  {
+    "id": "ing_5",
+    "name": "fainaland",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 315.0,
+    "unitPrice": 31.5
+  },
+  {
+    "id": "ing_6",
+    "name": "sal fina",
+    "category": "Otros",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 52.2,
+    "unitPrice": 52.2
+  },
+  {
+    "id": "ing_7",
+    "name": "huevos",
+    "category": "Otros",
+    "quantity": 30.0,
+    "unit": "unidades",
+    "purchasePrice": 80.0,
+    "unitPrice": 2.6666666666666665
+  },
+  {
+    "id": "ing_8",
+    "name": "azúcar",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 165.0,
+    "unitPrice": 16.5
+  },
+  {
+    "id": "ing_9",
+    "name": "azúcar impalpable",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 350.0,
+    "unitPrice": 35.0
+  },
+  {
+    "id": "ing_10",
+    "name": "cacao amargo",
+    "category": "Otros",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 175.0,
+    "unitPrice": 175.0
+  },
+  {
+    "id": "ing_11",
+    "name": "maltarina",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 130.0,
+    "unitPrice": 13.0
+  },
+  {
+    "id": "ing_12",
+    "name": "almidon de maiz",
+    "category": "Otros",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 135.0,
+    "unitPrice": 13.5
+  },
+  {
+    "id": "ing_13",
+    "name": "tapioca",
+    "category": "Otros",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 2900.0,
+    "unitPrice": 145.0
+  },
+  {
+    "id": "ing_14",
+    "name": "pan rallado",
+    "category": "Otros",
+    "quantity": 25.0,
+    "unit": "KG",
+    "purchasePrice": 310.0,
+    "unitPrice": 12.4
+  },
+  {
+    "id": "ing_15",
+    "name": "panko",
+    "category": "Otros",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 1790.0,
+    "unitPrice": 358.0
+  },
+  {
+    "id": "ing_16",
+    "name": "miel",
+    "category": "Otros",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 80.0,
+    "unitPrice": 80.0
+  },
+  {
+    "id": "ing_17",
+    "name": "chocolate",
+    "category": "Otros",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 600.0,
+    "unitPrice": 120.0
+  },
+  {
+    "id": "ing_18",
+    "name": "gelatina sin sabor",
+    "category": "Otros",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 320.0,
+    "unitPrice": 64.0
+  },
+  {
+    "id": "ing_19",
+    "name": "comino",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 45.0,
+    "unitPrice": 45.0
+  },
+  {
+    "id": "ing_20",
+    "name": "pimienta blanca",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 230.0,
+    "unitPrice": 230.0
+  },
+  {
+    "id": "ing_21",
+    "name": "pimienta negra",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 250.0,
+    "unitPrice": 250.0
+  },
+  {
+    "id": "ing_22",
+    "name": "provenzal",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 75.0,
+    "unitPrice": 75.0
+  },
+  {
+    "id": "ing_23",
+    "name": "aji molido",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 85.0,
+    "unitPrice": 85.0
+  },
+  {
+    "id": "ing_24",
+    "name": "mayonesa",
+    "category": "CONDIMENTOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 317.5,
+    "unitPrice": 105.83333333333333
+  },
+  {
+    "id": "ing_25",
+    "name": "miel pura de abejas",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 85.0,
+    "unitPrice": 85.0
+  },
+  {
+    "id": "ing_26",
+    "name": "caldo granulado verdura",
+    "category": "CONDIMENTOS",
+    "quantity": 0.65,
+    "unit": "KG",
+    "purchasePrice": 605.0,
+    "unitPrice": 930.7692307692307
+  },
+  {
+    "id": "ing_27",
+    "name": "caldo granulado carne",
+    "category": "CONDIMENTOS",
+    "quantity": 0.65,
+    "unit": "KG",
+    "purchasePrice": 605.0,
+    "unitPrice": 930.7692307692307
+  },
+  {
+    "id": "ing_28",
+    "name": "caldo granulado ave",
+    "category": "CONDIMENTOS",
+    "quantity": 0.65,
+    "unit": "KG",
+    "purchasePrice": 605.0,
+    "unitPrice": 930.7692307692307
+  },
+  {
+    "id": "ing_29",
+    "name": "mostaza",
+    "category": "CONDIMENTOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 279.0,
+    "unitPrice": 93.0
+  },
+  {
+    "id": "ing_30",
+    "name": "kechup",
+    "category": "CONDIMENTOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 339.1,
+    "unitPrice": 113.03333333333335
+  },
+  {
+    "id": "ing_31",
+    "name": "SAL FINA",
+    "category": "CONDIMENTOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 625.0,
+    "unitPrice": 125.0
+  },
+  {
+    "id": "ing_32",
+    "name": "SAL GRUESA",
+    "category": "CONDIMENTOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 625.0,
+    "unitPrice": 125.0
+  },
+  {
+    "id": "ing_33",
+    "name": "salsa golf",
+    "category": "CONDIMENTOS",
+    "quantity": 2.7,
+    "unit": "KG",
+    "purchasePrice": 274.0,
+    "unitPrice": 101.48148148148148
+  },
+  {
+    "id": "ing_34",
+    "name": "oregano",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 75.0,
+    "unitPrice": 75.0
+  },
+  {
+    "id": "ing_35",
+    "name": "pimenton",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 70.0,
+    "unitPrice": 70.0
+  },
+  {
+    "id": "ing_36",
+    "name": "laurel",
+    "category": "CONDIMENTOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 90.0,
+    "unitPrice": 90.0
+  },
+  {
+    "id": "ing_37",
+    "name": "esencia de vainilla",
+    "category": "LIQUIDOS",
+    "quantity": 2.0,
+    "unit": "LITROS",
+    "purchasePrice": 50.0,
+    "unitPrice": 25.0
+  },
+  {
+    "id": "ing_38",
+    "name": "aceite de girasol",
+    "category": "LIQUIDOS",
+    "quantity": 5.0,
+    "unit": "LITROS",
+    "purchasePrice": 326.0,
+    "unitPrice": 65.2
+  },
+  {
+    "id": "ing_39",
+    "name": "Aceite de oliva",
+    "category": "LIQUIDOS",
+    "quantity": 5.0,
+    "unit": "LITROS",
+    "purchasePrice": 690.0,
+    "unitPrice": 138.0
+  },
+  {
+    "id": "ing_40",
+    "name": "extracto de malta",
+    "category": "LIQUIDOS",
+    "quantity": 1.0,
+    "unit": "LITROS",
+    "purchasePrice": 40.0,
+    "unitPrice": 40.0
+  },
+  {
+    "id": "ing_41",
+    "name": "aceite de maiz",
+    "category": "LIQUIDOS",
+    "quantity": 1.0,
+    "unit": "LITROS",
+    "purchasePrice": 132.0,
+    "unitPrice": 132.0
+  },
+  {
+    "id": "ing_42",
+    "name": "rhum",
+    "category": "LIQUIDOS",
+    "quantity": 0.95,
+    "unit": "LITROS",
+    "purchasePrice": 191.6,
+    "unitPrice": 201.68421052631578
+  },
+  {
+    "id": "ing_43",
+    "name": "oporto",
+    "category": "LIQUIDOS",
+    "quantity": 0.75,
+    "unit": "LITROS",
+    "purchasePrice": 220.0,
+    "unitPrice": 293.3333333333333
+  },
+  {
+    "id": "ing_44",
+    "name": "vino tinto",
+    "category": "LIQUIDOS",
+    "quantity": 1.0,
+    "unit": "LITROS",
+    "purchasePrice": 40.0,
+    "unitPrice": 40.0
+  },
+  {
+    "id": "ing_45",
+    "name": "vino blanco",
+    "category": "LIQUIDOS",
+    "quantity": 1.0,
+    "unit": "LITROS",
+    "purchasePrice": 40.0,
+    "unitPrice": 40.0
+  },
+  {
+    "id": "ing_46",
+    "name": "leche",
+    "category": "LACTEOS",
+    "quantity": 1.0,
+    "unit": "LITROS",
+    "purchasePrice": 20.0,
+    "unitPrice": 20.0
+  },
+  {
+    "id": "ing_47",
+    "name": "dulce de leche repostero",
+    "category": "LACTEOS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 390.0,
+    "unitPrice": 39.0
+  },
+  {
+    "id": "ing_48",
+    "name": "crema de leche",
+    "category": "LACTEOS",
+    "quantity": 5.0,
+    "unit": "LITROS",
+    "purchasePrice": 465.0,
+    "unitPrice": 93.0
+  },
+  {
+    "id": "ing_49",
+    "name": "mozzarella",
+    "category": "LACTEOS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1150.0,
+    "unitPrice": 115.0
+  },
+  {
+    "id": "ing_50",
+    "name": "manteca",
+    "category": "LACTEOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 1300.0,
+    "unitPrice": 260.0
+  },
+  {
+    "id": "ing_51",
+    "name": "margarina 70/30",
+    "category": "LACTEOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 170.0,
+    "unitPrice": 34.0
+  },
+  {
+    "id": "ing_52",
+    "name": "grasa",
+    "category": "LACTEOS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 450.0,
+    "unitPrice": 22.5
+  },
+  {
+    "id": "ing_53",
+    "name": "levadura",
+    "category": "LACTEOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 75.0,
+    "unitPrice": 75.0
+  },
+  {
+    "id": "ing_54",
+    "name": "jamon cocido",
+    "category": "LACTEOS",
+    "quantity": 1.0,
+    "unit": "kg",
+    "purchasePrice": 93.0,
+    "unitPrice": 93.0
+  },
+  {
+    "id": "ing_55",
+    "name": "queso blanco la paulina",
+    "category": "LACTEOS",
+    "quantity": 4.0,
+    "unit": "KG",
+    "purchasePrice": 1070.0,
+    "unitPrice": 267.5
+  },
+  {
+    "id": "ing_56",
+    "name": "queso parmesano rallado",
+    "category": "LACTEOS",
+    "quantity": 7.0,
+    "unit": "KG",
+    "purchasePrice": 630.0,
+    "unitPrice": 90.0
+  },
+  {
+    "id": "ing_57",
+    "name": "queso cremoso",
+    "category": "LACTEOS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1030.0,
+    "unitPrice": 103.0
+  },
+  {
+    "id": "ing_58",
+    "name": "tomate triturado",
+    "category": "ENLATADOS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 900.0,
+    "unitPrice": 112.5
+  },
+  {
+    "id": "ing_59",
+    "name": "aceitunas negras",
+    "category": "ENLATADOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 762.29,
+    "unitPrice": 152.458
+  },
+  {
+    "id": "ing_60",
+    "name": "aceituna verde num 2",
+    "category": "ENLATADOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 622.53,
+    "unitPrice": 124.506
+  },
+  {
+    "id": "ing_61",
+    "name": "ajies en vinagre",
+    "category": "ENLATADOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 390.0,
+    "unitPrice": 130.0
+  },
+  {
+    "id": "ing_62",
+    "name": "palmitos",
+    "category": "ENLATADOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 90.0,
+    "unitPrice": 90.0
+  },
+  {
+    "id": "ing_63",
+    "name": "morrones en lata",
+    "category": "ENLATADOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 135.0,
+    "unitPrice": 45.0
+  },
+  {
+    "id": "ing_64",
+    "name": "champignones",
+    "category": "ENLATADOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 130.0,
+    "unitPrice": 130.0
+  },
+  {
+    "id": "ing_65",
+    "name": "choclo enlatado",
+    "category": "ENLATADOS",
+    "quantity": 1.8,
+    "unit": "KG",
+    "purchasePrice": 365.38,
+    "unitPrice": 202.98888888888888
+  },
+  {
+    "id": "ing_66",
+    "name": "duraznos",
+    "category": "ENLATADOS",
+    "quantity": 0.82,
+    "unit": "KG",
+    "purchasePrice": 109.0,
+    "unitPrice": 132.9268292682927
+  },
+  {
+    "id": "ing_67",
+    "name": "cerezas marraschino",
+    "category": "ENLATADOS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 340.0,
+    "unitPrice": 113.33333333333333
+  },
+  {
+    "id": "ing_68",
+    "name": "higos",
+    "category": "ENLATADOS",
+    "quantity": 2.0,
+    "unit": "KG",
+    "purchasePrice": 200.0,
+    "unitPrice": 100.0
+  },
+  {
+    "id": "ing_69",
+    "name": "anana",
+    "category": "ENLATADOS",
+    "quantity": 2.0,
+    "unit": "KG",
+    "purchasePrice": 150.0,
+    "unitPrice": 75.0
+  },
+  {
+    "id": "ing_70",
+    "name": "dulce de membrillo",
+    "category": "ENLATADOS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 140.0,
+    "unitPrice": 28.0
+  },
+  {
+    "id": "ing_71",
+    "name": "frutillas",
+    "category": "ENLATADOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 180.0,
+    "unitPrice": 180.0
+  },
+  {
+    "id": "ing_72",
+    "name": "brillo ledevit",
+    "category": "ENLATADOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 100.0,
+    "unitPrice": 100.0
+  },
+  {
+    "id": "ing_73",
+    "name": "salsa demi glace",
+    "category": "ENLATADOS",
+    "quantity": 4.0,
+    "unit": "KG",
+    "purchasePrice": 2496.0,
+    "unitPrice": 624.0
+  },
+  {
+    "id": "ing_74",
+    "name": "atun lomito en lata",
+    "category": "ENLATADOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 1166.56,
+    "unitPrice": 1166.56
+  },
+  {
+    "id": "ing_75",
+    "name": "nueces mariposa",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 400.0,
+    "unitPrice": 400.0
+  },
+  {
+    "id": "ing_76",
+    "name": "almendras",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 1099.0,
+    "unitPrice": 1099.0
+  },
+  {
+    "id": "ing_77",
+    "name": "Piñones",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 8353.0,
+    "unitPrice": 8353.0
+  },
+  {
+    "id": "ing_78",
+    "name": "avellanas",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 500.0,
+    "unitPrice": 500.0
+  },
+  {
+    "id": "ing_79",
+    "name": "castañas de caju",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 380.0,
+    "unitPrice": 380.0
+  },
+  {
+    "id": "ing_80",
+    "name": "uvas pasas",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 80.0,
+    "unitPrice": 80.0
+  },
+  {
+    "id": "ing_81",
+    "name": "ciruelas pasas",
+    "category": "FRUTOS SECOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 80.0,
+    "unitPrice": 80.0
+  },
+  {
+    "id": "ing_82",
+    "name": "anana",
+    "category": "FRUTAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 1450.0,
+    "unitPrice": 96.66666666666667
+  },
+  {
+    "id": "ing_83",
+    "name": "arandano",
+    "category": "FRUTAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 560.0,
+    "unitPrice": 560.0
+  },
+  {
+    "id": "ing_84",
+    "name": "banana",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 1280.0,
+    "unitPrice": 71.11111111111111
+  },
+  {
+    "id": "ing_85",
+    "name": "carambola",
+    "category": "FRUTAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 229.0,
+    "unitPrice": 229.0
+  },
+  {
+    "id": "ing_86",
+    "name": "cayote",
+    "category": "FRUTAS",
+    "quantity": 2.5,
+    "unit": "KG",
+    "purchasePrice": 180.0,
+    "unitPrice": 72.0
+  },
+  {
+    "id": "ing_87",
+    "name": "ciruelas",
+    "category": "FRUTAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 49.9,
+    "unitPrice": 49.9
+  },
+  {
+    "id": "ing_88",
+    "name": "cerezas",
+    "category": "FRUTAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 322.0,
+    "unitPrice": 322.0
+  },
+  {
+    "id": "ing_89",
+    "name": "coco",
+    "category": "FRUTAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 510.0,
+    "unitPrice": 102.0
+  },
+  {
+    "id": "ing_90",
+    "name": "duraznos",
+    "category": "FRUTAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 590.0,
+    "unitPrice": 59.0
+  },
+  {
+    "id": "ing_91",
+    "name": "frutillas",
+    "category": "FRUTAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 1250.0,
+    "unitPrice": 250.0
+  },
+  {
+    "id": "ing_92",
+    "name": "kiwi",
+    "category": "FRUTAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1550.0,
+    "unitPrice": 155.0
+  },
+  {
+    "id": "ing_93",
+    "name": "kumquat",
+    "category": "FRUTAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 65.0,
+    "unitPrice": 65.0
+  },
+  {
+    "id": "ing_94",
+    "name": "lma",
+    "category": "FRUTAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 650.0,
+    "unitPrice": 32.5
+  },
+  {
+    "id": "ing_95",
+    "name": "limon",
+    "category": "FRUTAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 310.0,
+    "unitPrice": 20.666666666666668
+  },
+  {
+    "id": "ing_96",
+    "name": "mandarina",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 730.0,
+    "unitPrice": 40.55555555555556
+  },
+  {
+    "id": "ing_97",
+    "name": "mamon",
+    "category": "FRUTAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 1065.0,
+    "unitPrice": 133.125
+  },
+  {
+    "id": "ing_98",
+    "name": "mango",
+    "category": "FRUTAS",
+    "quantity": 4.0,
+    "unit": "KG",
+    "purchasePrice": 630.0,
+    "unitPrice": 157.5
+  },
+  {
+    "id": "ing_99",
+    "name": "mani",
+    "category": "FRUTAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 640.0,
+    "unitPrice": 128.0
+  },
+  {
+    "id": "ing_100",
+    "name": "manzana red deliciosa",
+    "category": "FRUTAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 1400.0,
+    "unitPrice": 70.0
+  },
+  {
+    "id": "ing_101",
+    "name": "manzana verde granny smith",
+    "category": "FRUTAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 1150.0,
+    "unitPrice": 57.5
+  },
+  {
+    "id": "ing_102",
+    "name": "membrillo",
+    "category": "FRUTAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 900.0,
+    "unitPrice": 90.0
+  },
+  {
+    "id": "ing_103",
+    "name": "melon",
+    "category": "FRUTAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1150.0,
+    "unitPrice": 115.0
+  },
+  {
+    "id": "ing_104",
+    "name": "mburucuya",
+    "category": "FRUTAS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 360.0,
+    "unitPrice": 120.0
+  },
+  {
+    "id": "ing_105",
+    "name": "naranja jugo",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 680.0,
+    "unitPrice": 37.77777777777778
+  },
+  {
+    "id": "ing_106",
+    "name": "naranja ombligo",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 600.0,
+    "unitPrice": 33.333333333333336
+  },
+  {
+    "id": "ing_107",
+    "name": "pelon",
+    "category": "FRUTAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1880.0,
+    "unitPrice": 188.0
+  },
+  {
+    "id": "ing_108",
+    "name": "peras",
+    "category": "FRUTAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 960.0,
+    "unitPrice": 48.0
+  },
+  {
+    "id": "ing_109",
+    "name": "platano",
+    "category": "FRUTAS",
+    "quantity": 13.0,
+    "unit": "KG",
+    "purchasePrice": 1450.0,
+    "unitPrice": 111.53846153846153
+  },
+  {
+    "id": "ing_110",
+    "name": "pomelo",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 530.0,
+    "unitPrice": 29.444444444444443
+  },
+  {
+    "id": "ing_111",
+    "name": "pomelo rosado",
+    "category": "FRUTAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 580.0,
+    "unitPrice": 32.22222222222222
+  },
+  {
+    "id": "ing_112",
+    "name": "sandia",
+    "category": "FRUTAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 1530.0,
+    "unitPrice": 191.25
+  },
+  {
+    "id": "ing_113",
+    "name": "uva",
+    "category": "FRUTAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 1500.0,
+    "unitPrice": 187.5
+  },
+  {
+    "id": "ing_114",
+    "name": "POTE CON TAPA 400CC",
+    "category": "DESCARTABLES",
+    "quantity": 50.0,
+    "unit": "UNIDADES",
+    "purchasePrice": 360.0,
+    "unitPrice": 7.2
+  },
+  {
+    "id": "ing_115",
+    "name": "CUCHARAS POSTRE",
+    "category": "DESCARTABLES",
+    "quantity": 100.0,
+    "unit": "UNIDADES",
+    "purchasePrice": 135.0,
+    "unitPrice": 1.35
+  },
+  {
+    "id": "ing_116",
+    "name": "BANDEJAS DE ALUMINIO P14",
+    "category": "DESCARTABLES",
+    "quantity": 100.0,
+    "unit": "UNIDADES",
+    "purchasePrice": 487.3,
+    "unitPrice": 4.873
+  },
+  {
+    "id": "ing_117",
+    "name": "BOLSAS DE POLIPROPILENO",
+    "category": "DESCARTABLES",
+    "quantity": 300.0,
+    "unit": "UNIDADES",
+    "purchasePrice": 191.0,
+    "unitPrice": 0.6366666666666667
+  },
+  {
+    "id": "ing_118",
+    "name": "HELADO DE LIMON",
+    "category": "OTROS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 1850.0,
+    "unitPrice": 185.0
+  },
+  {
+    "id": "ing_119",
+    "name": "CHAMPAGNE",
+    "category": "OTROS",
+    "quantity": 4.5,
+    "unit": "L",
+    "purchasePrice": 2160.0,
+    "unitPrice": 480.0
+  },
+  {
+    "id": "ing_120",
+    "name": "Achicoria",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 160.0,
+    "unitPrice": 16.0
+  },
+  {
+    "id": "ing_121",
+    "name": "acelga",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "kg",
+    "purchasePrice": 250.0,
+    "unitPrice": 25.0
+  },
+  {
+    "id": "ing_122",
+    "name": "Akusay",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 250.0,
+    "unitPrice": 25.0
+  },
+  {
+    "id": "ing_123",
+    "name": "Ajo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 1900.0,
+    "unitPrice": 380.0
+  },
+  {
+    "id": "ing_124",
+    "name": "Albahaca",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 15.0,
+    "unitPrice": 15.0
+  },
+  {
+    "id": "ing_125",
+    "name": "Alcaucil",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 6.0,
+    "unit": "KG",
+    "purchasePrice": 700.0,
+    "unitPrice": 116.66666666666667
+  },
+  {
+    "id": "ing_126",
+    "name": "Apio",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 102.0,
+    "unitPrice": 102.0
+  },
+  {
+    "id": "ing_127",
+    "name": "Batata",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 655.0,
+    "unitPrice": 32.75
+  },
+  {
+    "id": "ing_128",
+    "name": "Berro",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 40.0,
+    "unitPrice": 40.0
+  },
+  {
+    "id": "ing_129",
+    "name": "Brócoli",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 51.0,
+    "unitPrice": 51.0
+  },
+  {
+    "id": "ing_130",
+    "name": "Brote Soja",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 126.0,
+    "unitPrice": 126.0
+  },
+  {
+    "id": "ing_131",
+    "name": "Berenjena",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 12.0,
+    "unit": "KG",
+    "purchasePrice": 680.0,
+    "unitPrice": 56.666666666666664
+  },
+  {
+    "id": "ing_132",
+    "name": "Cebolla",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 17.0,
+    "unit": "KG",
+    "purchasePrice": 1130.0,
+    "unitPrice": 66.47058823529412
+  },
+  {
+    "id": "ing_133",
+    "name": "cebolla morada",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 999.0,
+    "unitPrice": 99.9
+  },
+  {
+    "id": "ing_134",
+    "name": "ciboulette",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 0.1,
+    "unit": "KG",
+    "purchasePrice": 346.34,
+    "unitPrice": 3463.3999999999996
+  },
+  {
+    "id": "ing_135",
+    "name": "Ceb.Verdeo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 718.0,
+    "unitPrice": 71.8
+  },
+  {
+    "id": "ing_136",
+    "name": "Chaucha",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 12.0,
+    "unit": "KG",
+    "purchasePrice": 1550.0,
+    "unitPrice": 129.16666666666666
+  },
+  {
+    "id": "ing_137",
+    "name": "choclo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 1575.0,
+    "unitPrice": 105.0
+  },
+  {
+    "id": "ing_138",
+    "name": "cilantro",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 21.0,
+    "unitPrice": 21.0
+  },
+  {
+    "id": "ing_139",
+    "name": "Coliflor",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 382.0,
+    "unitPrice": 25.466666666666665
+  },
+  {
+    "id": "ing_140",
+    "name": "Eneldo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 190.0,
+    "unitPrice": 190.0
+  },
+  {
+    "id": "ing_141",
+    "name": "Endivias",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 576.23,
+    "unitPrice": 0.57623
+  },
+  {
+    "id": "ing_142",
+    "name": "Escarola",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 150.0,
+    "unitPrice": 30.0
+  },
+  {
+    "id": "ing_143",
+    "name": "Esparrago",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 190.0,
+    "unitPrice": 190.0
+  },
+  {
+    "id": "ing_144",
+    "name": "Hinojo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 20.0,
+    "unitPrice": 20.0
+  },
+  {
+    "id": "ing_145",
+    "name": "Hongos",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 385.0,
+    "unitPrice": 385.0
+  },
+  {
+    "id": "ing_146",
+    "name": "Jengibre",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 180.0,
+    "unitPrice": 180.0
+  },
+  {
+    "id": "ing_147",
+    "name": "lechuga francesa",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 210.0,
+    "unitPrice": 26.25
+  },
+  {
+    "id": "ing_148",
+    "name": "lechuga criolla",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 280.0,
+    "unitPrice": 28.0
+  },
+  {
+    "id": "ing_149",
+    "name": "lechuga mantecosa",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 270.0,
+    "unitPrice": 54.0
+  },
+  {
+    "id": "ing_150",
+    "name": "lechuga capuchina",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 283.0,
+    "unitPrice": 18.866666666666667
+  },
+  {
+    "id": "ing_151",
+    "name": "Menta",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 597.0,
+    "unitPrice": 597.0
+  },
+  {
+    "id": "ing_152",
+    "name": "papa var. Spunta",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 318.0,
+    "unitPrice": 15.9
+  },
+  {
+    "id": "ing_153",
+    "name": "palta haas",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 2615.0,
+    "unitPrice": 523.0
+  },
+  {
+    "id": "ing_154",
+    "name": "papines andinos",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 120.0,
+    "unitPrice": 120.0
+  },
+  {
+    "id": "ing_155",
+    "name": "Pack Choy",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 80.0,
+    "unitPrice": 80.0
+  },
+  {
+    "id": "ing_156",
+    "name": "Pepino",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 637.0,
+    "unitPrice": 35.388888888888886
+  },
+  {
+    "id": "ing_157",
+    "name": "Perejil",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 523.0,
+    "unitPrice": 52.3
+  },
+  {
+    "id": "ing_158",
+    "name": "pimiento jalapeño",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 4.0,
+    "unit": "KG",
+    "purchasePrice": 421.0,
+    "unitPrice": 105.25
+  },
+  {
+    "id": "ing_159",
+    "name": "Pimiento Rojo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 1422.0,
+    "unitPrice": 177.75
+  },
+  {
+    "id": "ing_160",
+    "name": "Pimiento Verde",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 8.0,
+    "unit": "KG",
+    "purchasePrice": 691.0,
+    "unitPrice": 86.375
+  },
+  {
+    "id": "ing_161",
+    "name": "Puerro",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 922.0,
+    "unitPrice": 92.2
+  },
+  {
+    "id": "ing_162",
+    "name": "Tomate perita",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 1360.0,
+    "unitPrice": 75.55555555555556
+  },
+  {
+    "id": "ing_163",
+    "name": "tomate cherry",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 5.0,
+    "unit": "KG",
+    "purchasePrice": 437.0,
+    "unitPrice": 87.4
+  },
+  {
+    "id": "ing_164",
+    "name": "tomate redondo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 1380.0,
+    "unitPrice": 76.66666666666667
+  },
+  {
+    "id": "ing_165",
+    "name": "Rabanito",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 6.0,
+    "unit": "KG",
+    "purchasePrice": 220.0,
+    "unitPrice": 36.666666666666664
+  },
+  {
+    "id": "ing_166",
+    "name": "Radicheta",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 3.0,
+    "unit": "KG",
+    "purchasePrice": 115.0,
+    "unitPrice": 38.333333333333336
+  },
+  {
+    "id": "ing_167",
+    "name": "Remolacha",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 290.0,
+    "unitPrice": 19.333333333333332
+  },
+  {
+    "id": "ing_168",
+    "name": "repollo blanco",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 235.0,
+    "unitPrice": 15.666666666666666
+  },
+  {
+    "id": "ing_169",
+    "name": "Repollo colorado",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 304.0,
+    "unitPrice": 20.266666666666666
+  },
+  {
+    "id": "ing_170",
+    "name": "Radicchio",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 60.0,
+    "unitPrice": 60.0
+  },
+  {
+    "id": "ing_171",
+    "name": "Romero",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 180.0,
+    "unitPrice": 180.0
+  },
+  {
+    "id": "ing_172",
+    "name": "Rúcula",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 95.0,
+    "unitPrice": 95.0
+  },
+  {
+    "id": "ing_173",
+    "name": "zanahoria",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 255.0,
+    "unitPrice": 25.5
+  },
+  {
+    "id": "ing_174",
+    "name": "Zapallito Redondo",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 18.0,
+    "unit": "KG",
+    "purchasePrice": 2285.0,
+    "unitPrice": 126.94444444444444
+  },
+  {
+    "id": "ing_175",
+    "name": "zucchini",
+    "category": "VEGETALES Y HORTALIZAS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 124.0,
+    "unitPrice": 124.0
+  },
+  {
+    "id": "ing_176",
+    "name": "ABADEJO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 194.0,
+    "unitPrice": 194.0
+  },
+  {
+    "id": "ing_177",
+    "name": "ALMEJA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 485.0,
+    "unitPrice": 485.0
+  },
+  {
+    "id": "ing_178",
+    "name": "ANCHOA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 126.0,
+    "unitPrice": 126.0
+  },
+  {
+    "id": "ing_179",
+    "name": "ATUN ROJO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 540.0,
+    "unitPrice": 540.0
+  },
+  {
+    "id": "ing_180",
+    "name": "BAGRE",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 76.5,
+    "unitPrice": 76.5
+  },
+  {
+    "id": "ing_181",
+    "name": "BERBERECHO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 496.0,
+    "unitPrice": 496.0
+  },
+  {
+    "id": "ing_182",
+    "name": "BESUGO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 127.0,
+    "unitPrice": 127.0
+  },
+  {
+    "id": "ing_183",
+    "name": "BOGA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 110.0,
+    "unitPrice": 110.0
+  },
+  {
+    "id": "ing_184",
+    "name": "BONITO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 355.0,
+    "unitPrice": 355.0
+  },
+  {
+    "id": "ing_185",
+    "name": "BROTOLA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 213.0,
+    "unitPrice": 213.0
+  },
+  {
+    "id": "ing_186",
+    "name": "CABALLA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 124.0,
+    "unitPrice": 124.0
+  },
+  {
+    "id": "ing_187",
+    "name": "CALAMAR ALETA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 237.0,
+    "unitPrice": 237.0
+  },
+  {
+    "id": "ing_188",
+    "name": "CALAMAR CONGELADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 255.0,
+    "unitPrice": 255.0
+  },
+  {
+    "id": "ing_189",
+    "name": "CALAMAR ENTERO FRESCO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 355.0,
+    "unitPrice": 355.0
+  },
+  {
+    "id": "ing_190",
+    "name": "CALAMAR TENTACULO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 360.0,
+    "unitPrice": 360.0
+  },
+  {
+    "id": "ing_191",
+    "name": "CALAMAR TUBO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 537.0,
+    "unitPrice": 537.0
+  },
+  {
+    "id": "ing_192",
+    "name": "CALAMARETE",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 285.0,
+    "unitPrice": 285.0
+  },
+  {
+    "id": "ing_193",
+    "name": "CAMARON",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 720.0,
+    "unitPrice": 720.0
+  },
+  {
+    "id": "ing_194",
+    "name": "CHERNIA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 287.0,
+    "unitPrice": 287.0
+  },
+  {
+    "id": "ing_195",
+    "name": "CHERNIA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 720.0,
+    "unitPrice": 720.0
+  },
+  {
+    "id": "ing_196",
+    "name": "CONGRIO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 173.0,
+    "unitPrice": 173.0
+  },
+  {
+    "id": "ing_197",
+    "name": "CORNALITO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 166.0,
+    "unitPrice": 166.0
+  },
+  {
+    "id": "ing_198",
+    "name": "CORV.NEGRA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 105.0,
+    "unitPrice": 105.0
+  },
+  {
+    "id": "ing_199",
+    "name": "CORVINA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 145.0,
+    "unitPrice": 145.0
+  },
+  {
+    "id": "ing_200",
+    "name": "DORADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 145.0,
+    "unitPrice": 145.0
+  },
+  {
+    "id": "ing_201",
+    "name": "GATUSO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 274.0,
+    "unitPrice": 274.0
+  },
+  {
+    "id": "ing_202",
+    "name": "JIBIA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 387.0,
+    "unitPrice": 387.0
+  },
+  {
+    "id": "ing_203",
+    "name": "JUREL",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 0,
+    "unitPrice": 0
+  },
+  {
+    "id": "ing_204",
+    "name": "KANIKAMA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 185.0,
+    "unitPrice": 185.0
+  },
+  {
+    "id": "ing_205",
+    "name": "LANGOSTINO ENTREDO CRUDO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 315.0,
+    "unitPrice": 315.0
+  },
+  {
+    "id": "ing_206",
+    "name": "LANGOSTINO PELADO CRUDO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 570.0,
+    "unitPrice": 570.0
+  },
+  {
+    "id": "ing_207",
+    "name": "LENGUADO ENTERO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 177.0,
+    "unitPrice": 177.0
+  },
+  {
+    "id": "ing_208",
+    "name": "LENGUADO FILET",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 440.0,
+    "unitPrice": 440.0
+  },
+  {
+    "id": "ing_209",
+    "name": "LISA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 112.0,
+    "unitPrice": 112.0
+  },
+  {
+    "id": "ing_210",
+    "name": "MEJILLON 1/2 VALVA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 361.0,
+    "unitPrice": 361.0
+  },
+  {
+    "id": "ing_211",
+    "name": "MEJILLON PELADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 335.0,
+    "unitPrice": 335.0
+  },
+  {
+    "id": "ing_212",
+    "name": "MEJILLON TOTAL",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 335.0,
+    "unitPrice": 335.0
+  },
+  {
+    "id": "ing_213",
+    "name": "MERLUZA ENTERA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 241.0,
+    "unitPrice": 241.0
+  },
+  {
+    "id": "ing_214",
+    "name": "MERLUZA DESPINADA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 162.0,
+    "unitPrice": 162.0
+  },
+  {
+    "id": "ing_215",
+    "name": "MERLUZA FILET CONGELADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 169.0,
+    "unitPrice": 169.0
+  },
+  {
+    "id": "ing_216",
+    "name": "MERO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 157.0,
+    "unitPrice": 157.0
+  },
+  {
+    "id": "ing_217",
+    "name": "PALOMETA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 120.0,
+    "unitPrice": 120.0
+  },
+  {
+    "id": "ing_218",
+    "name": "PARGO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 90.2,
+    "unitPrice": 90.2
+  },
+  {
+    "id": "ing_219",
+    "name": "PATI",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 78.2,
+    "unitPrice": 78.2
+  },
+  {
+    "id": "ing_220",
+    "name": "PEJERREY ENTERO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 165.0,
+    "unitPrice": 165.0
+  },
+  {
+    "id": "ing_221",
+    "name": "PEJERREY DESPINADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 175.0,
+    "unitPrice": 175.0
+  },
+  {
+    "id": "ing_222",
+    "name": "PEJERREY FILET",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 178.0,
+    "unitPrice": 178.0
+  },
+  {
+    "id": "ing_223",
+    "name": "PESC. REAL",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 125.0,
+    "unitPrice": 125.0
+  },
+  {
+    "id": "ing_224",
+    "name": "PESCADILLA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 126.0,
+    "unitPrice": 126.0
+  },
+  {
+    "id": "ing_225",
+    "name": "PEZ ANGEL",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 127.0,
+    "unitPrice": 127.0
+  },
+  {
+    "id": "ing_226",
+    "name": "PEZ GALLO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 128.0,
+    "unitPrice": 128.0
+  },
+  {
+    "id": "ing_227",
+    "name": "PEZ PALO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 129.0,
+    "unitPrice": 129.0
+  },
+  {
+    "id": "ing_228",
+    "name": "PEZ SABLE",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 130.0,
+    "unitPrice": 130.0
+  },
+  {
+    "id": "ing_229",
+    "name": "PULPO español",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 131.0,
+    "unitPrice": 131.0
+  },
+  {
+    "id": "ing_230",
+    "name": "PULPO chileno",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 132.0,
+    "unitPrice": 132.0
+  },
+  {
+    "id": "ing_231",
+    "name": "RAYA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 133.0,
+    "unitPrice": 133.0
+  },
+  {
+    "id": "ing_232",
+    "name": "RUBIO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 134.0,
+    "unitPrice": 134.0
+  },
+  {
+    "id": "ing_233",
+    "name": "SABALO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 135.0,
+    "unitPrice": 135.0
+  },
+  {
+    "id": "ing_234",
+    "name": "SALMON ENTERO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 136.0,
+    "unitPrice": 136.0
+  },
+  {
+    "id": "ing_235",
+    "name": "SALMON FILET",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 137.0,
+    "unitPrice": 137.0
+  },
+  {
+    "id": "ing_236",
+    "name": "SALMON CONGELADO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 138.0,
+    "unitPrice": 138.0
+  },
+  {
+    "id": "ing_237",
+    "name": "SARD.PORTU",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 139.0,
+    "unitPrice": 139.0
+  },
+  {
+    "id": "ing_238",
+    "name": "SURUBI",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 140.0,
+    "unitPrice": 140.0
+  },
+  {
+    "id": "ing_239",
+    "name": "TIBURON",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 141.0,
+    "unitPrice": 141.0
+  },
+  {
+    "id": "ing_240",
+    "name": "TRILLA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 142.0,
+    "unitPrice": 142.0
+  },
+  {
+    "id": "ing_241",
+    "name": "TRUCHA DESPINADA LAGUNA",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 143.0,
+    "unitPrice": 143.0
+  },
+  {
+    "id": "ing_242",
+    "name": "TRUCHA DESPINADA RIO",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 144.0,
+    "unitPrice": 144.0
+  },
+  {
+    "id": "ing_243",
+    "name": "VIEYRAS ENTERAS",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 145.0,
+    "unitPrice": 145.0
+  },
+  {
+    "id": "ing_244",
+    "name": "VIEYRAS PELADAS",
+    "category": "PESCADOS Y MARISCOS",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 146.0,
+    "unitPrice": 146.0
+  },
+  {
+    "id": "ing_245",
+    "name": "CORDERO PALETA",
+    "category": "CARNES",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 560.0,
+    "unitPrice": 560.0
+  },
+  {
+    "id": "ing_246",
+    "name": "SUPREMAS",
+    "category": "POLLO",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 2985.0,
+    "unitPrice": 199.0
+  },
+  {
+    "id": "ing_247",
+    "name": "PATA MUSLO",
+    "category": "POLLO",
+    "quantity": 15.0,
+    "unit": "KG",
+    "purchasePrice": 1725.0,
+    "unitPrice": 115.0
+  },
+  {
+    "id": "ing_248",
+    "name": "POLLO ENTERO",
+    "category": "POLLO",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 2220.0,
+    "unitPrice": 111.0
+  },
+  {
+    "id": "ing_249",
+    "name": "MILANESAS DE POLLO PREPARADAS",
+    "category": "POLLO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 2500.0,
+    "unitPrice": 250.0
+  },
+  {
+    "id": "ing_250",
+    "name": "BONDIOLA",
+    "category": "CERDO",
+    "quantity": 20.0,
+    "unit": "KG",
+    "purchasePrice": 8600.0,
+    "unitPrice": 430.0
+  },
+  {
+    "id": "ing_251",
+    "name": "RIBS",
+    "category": "CERDO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4300.0,
+    "unitPrice": 430.0
+  },
+  {
+    "id": "ing_252",
+    "name": "SOLOMILLO",
+    "category": "CERDO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4300.0,
+    "unitPrice": 430.0
+  },
+  {
+    "id": "ing_253",
+    "name": "CARRE SIN HUESO",
+    "category": "CERDO",
+    "quantity": 3.5,
+    "unit": "KG",
+    "purchasePrice": 1505.0,
+    "unitPrice": 430.0
+  },
+  {
+    "id": "ing_254",
+    "name": "CHORIZO",
+    "category": "CERDO",
+    "quantity": 2.0,
+    "unit": "KG",
+    "purchasePrice": 540.0,
+    "unitPrice": 270.0
+  },
+  {
+    "id": "ing_255",
+    "name": "PANCETA",
+    "category": "CERDO",
+    "quantity": 4.0,
+    "unit": "KG",
+    "purchasePrice": 2200.0,
+    "unitPrice": 550.0
+  },
+  {
+    "id": "ing_256",
+    "name": "PATITA DE CERDO",
+    "category": "CERDO",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 120.0,
+    "unitPrice": 120.0
+  },
+  {
+    "id": "ing_257",
+    "name": "COLITA DE CUADRIL",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4600.0,
+    "unitPrice": 460.0
+  },
+  {
+    "id": "ing_258",
+    "name": "VACIO",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 3900.0,
+    "unitPrice": 390.0
+  },
+  {
+    "id": "ing_259",
+    "name": "BIFE DE CHORIZO",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4400.0,
+    "unitPrice": 440.0
+  },
+  {
+    "id": "ing_260",
+    "name": "OJO DE BIFE",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4800.0,
+    "unitPrice": 480.0
+  },
+  {
+    "id": "ing_261",
+    "name": "LOMO DE NOVILLO",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 5400.0,
+    "unitPrice": 540.0
+  },
+  {
+    "id": "ing_262",
+    "name": "MILANESAS DE BOLA DE LOMO",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 3600.0,
+    "unitPrice": 360.0
+  },
+  {
+    "id": "ing_263",
+    "name": "BOLA DE LOMO PIEZA ENTERA 4,5 a 6 KG",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4000.0,
+    "unitPrice": 400.0
+  },
+  {
+    "id": "ing_264",
+    "name": "PECETO DE NOVILLO",
+    "category": "VACUNO",
+    "quantity": 10.0,
+    "unit": "KG",
+    "purchasePrice": 4800.0,
+    "unitPrice": 480.0
+  },
+  {
+    "id": "ing_265",
+    "name": "PALETA PIEZA ENTERA DE 7,5 KG",
+    "category": "VACUNO",
+    "quantity": 7.5,
+    "unit": "KG",
+    "purchasePrice": 2775.0,
+    "unitPrice": 370.0
+  },
+  {
+    "id": "ing_266",
+    "name": "ROAST BEEF",
+    "category": "VACUNO",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 690.0,
+    "unitPrice": 690.0
+  },
+  {
+    "id": "ing_267",
+    "name": "MATAMBRE",
+    "category": "VACUNO",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 680.0,
+    "unitPrice": 680.0
+  },
+  {
+    "id": "ing_268",
+    "name": "TAPA DE NALGA",
+    "category": "VACUNO",
+    "quantity": 1.5,
+    "unit": "KG",
+    "purchasePrice": 765.0,
+    "unitPrice": 510.0
+  },
+  {
+    "id": "ing_269",
+    "name": "ENTRAÑA",
+    "category": "VACUNO",
+    "quantity": 0.5,
+    "unit": "KG",
+    "purchasePrice": 370.0,
+    "unitPrice": 740.0
+  },
+  {
+    "id": "ing_270",
+    "name": "MOLLEJA DE CORAZN",
+    "category": "VACUNO",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 595.0,
+    "unitPrice": 595.0
+  },
+  {
+    "id": "ing_271",
+    "name": "HIGADO",
+    "category": "VACUNO",
+    "quantity": 1.0,
+    "unit": "KG",
+    "purchasePrice": 140.0,
+    "unitPrice": 140.0
+  }
+]
