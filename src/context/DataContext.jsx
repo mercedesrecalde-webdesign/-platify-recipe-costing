@@ -47,6 +47,18 @@ export function DataProvider({ children }) {
                         (typeof i.name === 'string' && i.name.toLowerCase().includes(ing.name.toLowerCase()))
                     );
                     
+                    // Precios de contingencia base (por KG o Litro)
+                    const fallbackPrices = {
+                        "leche": 1200, "polenta": 1500, "carne picada": 7000, "pure de tomate": 1800,
+                        "banana": 2000, "yogur": 2500, "cereales": 4000, "mandarina": 1500, "pan": 2000,
+                        "pan de miga": 2500, "queso crema": 8000, "dulce de leche": 3500, "lentejas": 3000,
+                        "arroz": 1800, "zanahoria": 1000, "papa": 800, "naranja": 1500, "cacao": 8000,
+                        "galletitas": 3500, "queso fresco": 6500, "huevo": 4000, "carne": 8500,
+                        "batata": 1200, "cebolla": 1000, "manzana": 2200, "pollo": 3000, "lechuga": 2500,
+                        "tomate": 2000, "jamon": 9000, "queso": 6500, "gelatina": 6000, 
+                        "tapas de empanada": 3000, "choclo": 2500, "azucar": 1200, "pan rallado": 2000
+                    };
+
                     let unitPrice = 0;
                     if (dbIng) {
                         const amount = dbIng.quantity || 1;
@@ -59,6 +71,10 @@ export function DataProvider({ children }) {
                         if (dbUnit === 'L' && ing.unit === 'cc') baseAmount = amount * 1000;
                         
                         unitPrice = price / baseAmount;
+                    } else {
+                        // Utiliza un listado base pre-costeado si el usuario no tiene el ingrediente en su BD (evita $0)
+                        const fallbackKgPrice = fallbackPrices[ing.name.toLowerCase()] || 2000; 
+                        unitPrice = fallbackKgPrice / 1000; // Recetas están en grs/cc, los bases en KG
                     }
                     
                     const gross = ing.netQuantity * (ing.correctionFactor || 1);
