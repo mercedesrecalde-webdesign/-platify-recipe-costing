@@ -17,7 +17,7 @@ function App() {
           <NotificationProvider>
             <div className="app-container">
               <Header />
-              <main className="main-content" style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+              <main className="main-content" style={{ padding: '2rem', maxWidth: '100%', margin: '0 auto', width: '100%' }}>
                 <Dashboard />
               </main>
             </div>

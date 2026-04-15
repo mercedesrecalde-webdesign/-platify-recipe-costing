@@ -83,15 +83,24 @@ export default function SupplierQA() {
                     
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                         <div>
-                            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Proveedor</label>
+                            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Proveedor (Escribí o Seleccioná)</label>
                             <input 
+                                list="proveedores-list"
                                 type="text" 
                                 required
                                 value={formData.provider}
                                 onChange={e => setFormData({...formData, provider: e.target.value})}
-                                placeholder="Ej: Lácteos Misiones S.A."
+                                placeholder="Escribí un nombre o seleccioná..."
                                 style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }} 
                             />
+                            <datalist id="proveedores-list">
+                                <option value="Lácteos Misiones S.A." />
+                                <option value="EcoGranjas del Sol" />
+                                <option value="Frigorífico El Amanecer" />
+                                <option value="Mercado Central Posadas" />
+                                <option value="Distribuidora Mayorista Ruiz" />
+                                <option value="Panificadora La Espiga" />
+                            </datalist>
                         </div>
                         <div>
                             <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Categoría de Producto</label>
