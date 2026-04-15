@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle, XCircle, AlertCircle, Thermometer, Box, Truck, FileText, Scale } from 'lucide-react';
+import { CheckCircle, XCircle, AlertCircle, Thermometer, Box, Truck, FileText, Scale, Plus, Trash2 } from 'lucide-react';
 
 export default function SupplierQA() {
     const { t } = useTranslation();
@@ -11,8 +11,7 @@ export default function SupplierQA() {
         provider: '',
         date: new Date().toISOString().split('T')[0],
         category: 'lacteos', // lacteos, carnes, secos, frutas
-        expectedWeight: '',
-        actualWeight: '',
+        items: [{ id: Date.now(), name: '', expected: '', actual: '' }],
         temperature: '',
         packagingPrimary: true,
         packagingSecondary: true,
@@ -26,21 +25,48 @@ export default function SupplierQA() {
         return ((actual - expected) / expected) * 100;
     };
 
+    const handleItemChange = (id, field, value) => {
+        setFormData(prev => ({
+            ...prev,
+            items: prev.items.map(item => item.id === id ? { ...item, [field]: value } : item)
+        }));
+    };
+
+    const addItem = () => {
+        setFormData(prev => ({
+            ...prev,
+            items: [...prev.items, { id: Date.now(), name: '', expected: '', actual: '' }]
+        }));
+    };
+
+    const removeItem = (id) => {
+        if (formData.items.length === 1) return; // keep at least one
+        setFormData(prev => ({
+            ...prev,
+            items: prev.items.filter(item => item.id !== id)
+        }));
+    };
+
     const handleSave = (e) => {
         e.preventDefault();
+        
+        const totalExpected = formData.items.reduce((sum, item) => sum + Number(item.expected || 0), 0);
+        const totalActual = formData.items.reduce((sum, item) => sum + Number(item.actual || 0), 0);
+        
         const newReception = {
             ...formData,
             id: `audit_${Date.now()}`,
             timestamp: new Date().toISOString(),
-            variance: calculateVariance(Number(formData.expectedWeight), Number(formData.actualWeight))
+            totalExpected,
+            totalActual,
+            variance: calculateVariance(totalExpected, totalActual)
         };
         setReceptions([newReception, ...receptions]);
         
         // Reset specific fields but keep provider and date
         setFormData(prev => ({
             ...prev,
-            expectedWeight: '',
-            actualWeight: '',
+            items: [{ id: Date.now(), name: '', expected: '', actual: '' }],
             temperature: '',
             packagingPrimary: true,
             packagingSecondary: true,
@@ -54,6 +80,10 @@ export default function SupplierQA() {
         window.print();
     };
 
+    const totalExpected = formData.items.reduce((sum, item) => sum + Number(item.expected || 0), 0);
+    const totalActual = formData.items.reduce((sum, item) => sum + Number(item.actual || 0), 0);
+    const currentVariance = calculateVariance(totalExpected, totalActual);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '3rem' }}>
             {/* Header */}
@@ -64,7 +94,7 @@ export default function SupplierQA() {
                         Auditoría de Recepción (BPM / HACCP)
                     </h2>
                     <p style={{ margin: 0, color: 'var(--text-secondary)' }}>
-                        Control de calidad cruzado para proveedores de comedores London Supply
+                        Control detallado de remitos y calidad para comedores London Supply
                     </p>
                 </div>
                 <button 
@@ -103,7 +133,7 @@ export default function SupplierQA() {
                             </datalist>
                         </div>
                         <div>
-                            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Categoría de Producto</label>
+                            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>Categoría Principal</label>
                             <select 
                                 value={formData.category}
                                 onChange={e => setFormData({...formData, category: e.target.value})}
@@ -129,47 +159,63 @@ export default function SupplierQA() {
 
                     <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: '0.5rem 0' }} />
 
-                    <h3 style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>Métricas de Calidad</h3>
+                    <h3 style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>Detalle del Remito (Cotejo de Pesos)</h3>
                     
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-                        
-                        {/* Control de Pesos */}
-                        <div style={{ background: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: '8px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--primary)' }}>
-                                <Scale size={20} />
-                                <strong style={{color: 'var(--text-primary)'}}>Control de Peso</strong>
-                            </div>
-                            <div style={{ display: 'flex', gap: '1rem' }}>
-                                <div>
-                                    <label style={{ display: 'block', fontSize: '0.75rem', marginBottom: '0.25rem' }}>Remito (KG)</label>
-                                    <input 
-                                        type="number" step="0.01" required
-                                        value={formData.expectedWeight}
-                                        onChange={e => setFormData({...formData, expectedWeight: e.target.value})}
-                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', fontSize: '0.75rem', marginBottom: '0.25rem' }}>Báscula Real (KG)</label>
-                                    <input 
-                                        type="number" step="0.01" required
-                                        value={formData.actualWeight}
-                                        onChange={e => setFormData({...formData, actualWeight: e.target.value})}
-                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
-                                    />
-                                </div>
-                            </div>
-                            {formData.expectedWeight && formData.actualWeight && (
-                                <div style={{ 
-                                    marginTop: '0.5rem', 
-                                    fontSize: '0.8rem', 
-                                    color: Math.abs(calculateVariance(formData.expectedWeight, formData.actualWeight)) > 2 ? 'var(--danger)' : 'var(--success)' 
-                                }}>
-                                    Desvío: {calculateVariance(formData.expectedWeight, formData.actualWeight).toFixed(2)}%
-                                </div>
-                            )}
+                    {/* Lista Dinámica de Items */}
+                    <div style={{ background: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: '8px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 40px', gap: '1rem', marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '0.875rem' }}>
+                            <div>Producto detallado</div>
+                            <div>Peso Remito (KG)</div>
+                            <div>Peso Báscula (KG)</div>
+                            <div></div>
                         </div>
+                        
+                        {formData.items.map((item, idx) => (
+                            <div key={item.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 40px', gap: '1rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+                                <input 
+                                    type="text" required
+                                    placeholder="Ej: Pollo entero crudo"
+                                    value={item.name}
+                                    onChange={e => handleItemChange(item.id, 'name', e.target.value)}
+                                    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
+                                />
+                                <input 
+                                    type="number" step="0.01" required
+                                    value={item.expected}
+                                    onChange={e => handleItemChange(item.id, 'expected', e.target.value)}
+                                    placeholder="0.00"
+                                    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
+                                />
+                                <input 
+                                    type="number" step="0.01" required
+                                    value={item.actual}
+                                    onChange={e => handleItemChange(item.id, 'actual', e.target.value)}
+                                    placeholder="0.00"
+                                    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
+                                />
+                                <button type="button" onClick={() => removeItem(item.id)} disabled={formData.items.length === 1} style={{ padding: '0.5rem', background: 'transparent', border: 'none', color: formData.items.length === 1 ? 'var(--text-tertiary)' : 'var(--danger)', cursor: formData.items.length === 1 ? 'default' : 'pointer' }}>
+                                    <Trash2 size={16} />
+                                </button>
+                            </div>
+                        ))}
 
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
+                            <button type="button" onClick={addItem} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', color: 'var(--primary)', border: '1px solid var(--primary)', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                                <Plus size={16} /> Añadir Ítem
+                            </button>
+                            <div style={{ display: 'flex', gap: '2rem', fontSize: '0.875rem' }}>
+                                <div>Total Remito: <strong>{totalExpected.toFixed(2)} KG</strong></div>
+                                <div>Total Báscula: <strong>{totalActual.toFixed(2)} KG</strong></div>
+                                <div style={{ color: Math.abs(currentVariance) > 2 ? 'var(--danger)' : 'var(--success)', fontWeight: 'bold' }}>
+                                    Desvío Total: {currentVariance.toFixed(2)}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: '0.5rem 0' }} />
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
                         {/* Control de Temperatura */}
                         <div style={{ background: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: '8px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--info)' }}>
@@ -286,7 +332,7 @@ export default function SupplierQA() {
                                 <tr style={{ background: 'var(--bg-secondary)', textAlign: 'left' }}>
                                     <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Fecha/ID</th>
                                     <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Proveedor</th>
-                                    <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Cat. / Temp.</th>
+                                    <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Ítems Auditados</th>
                                     <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Pesos (Desvío)</th>
                                     <th style={{ padding: '0.75rem', borderBottom: '2px solid var(--border-color)' }}>Dictamen</th>
                                 </tr>
@@ -300,27 +346,32 @@ export default function SupplierQA() {
                                         </td>
                                         <td style={{ padding: '0.75rem', fontWeight: '500' }}>{rec.provider}</td>
                                         <td style={{ padding: '0.75rem' }}>
-                                            <div style={{ textTransform: 'capitalize' }}>{rec.category}</div>
-                                            {rec.temperature && <div style={{ fontSize: '0.8rem', color: 'var(--info)' }}>{rec.temperature}°C</div>}
+                                            <ul style={{ margin: 0, paddingLeft: '1rem', color: 'var(--text-secondary)' }}>
+                                                {rec.items.map(item => (
+                                                    <li key={item.id}>{item.name}: Remito {item.expected}kg → Real {item.actual}kg</li>
+                                                ))}
+                                            </ul>
+                                            {rec.temperature && <div style={{ fontSize: '0.8rem', color: 'var(--info)', marginTop: '0.5rem' }}>Temp: {rec.temperature}°C</div>}
                                         </td>
-                                        <td style={{ padding: '0.75rem' }}>
-                                            Espe: {rec.expectedWeight}kg | Real: {rec.actualWeight}kg
+                                        <td style={{ padding: '0.75rem', verticalAlign: 'top' }}>
+                                            Total Espe: {rec.totalExpected.toFixed(2)}kg <br/>
+                                            Total Real: {rec.totalActual.toFixed(2)}kg
                                             {rec.variance !== 0 && (
-                                                <div style={{ fontSize: '0.75rem', color: Math.abs(rec.variance) > 2 ? 'var(--danger)' : 'var(--warning)' }}>
-                                                    ({rec.variance > 0 ? '+' : ''}{rec.variance.toFixed(1)}%)
+                                                <div style={{ fontSize: '0.75rem', color: Math.abs(rec.variance) > 2 ? 'var(--danger)' : 'var(--warning)', marginTop: '0.25rem' }}>
+                                                    Desvío: {rec.variance > 0 ? '+' : ''}{rec.variance.toFixed(2)}%
                                                 </div>
                                             )}
                                         </td>
-                                        <td style={{ padding: '0.75rem' }}>
+                                        <td style={{ padding: '0.75rem', verticalAlign: 'top' }}>
                                             <span style={{
                                                 padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold',
                                                 background: rec.verdict === 'aprobado' ? 'var(--success)' : rec.verdict === 'rechazado' ? 'var(--danger)' : 'var(--warning)',
-                                                color: '#fff'
+                                                color: '#fff', display: 'inline-block', marginBottom: '0.5rem'
                                             }}>
                                                 {rec.verdict.toUpperCase()}
                                             </span>
                                             {rec.observations && (
-                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', maxWidth: '200px' }}>
                                                     {rec.observations}
                                                 </div>
                                             )}
