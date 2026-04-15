@@ -37,56 +37,50 @@ export function DataProvider({ children }) {
         localStorage.setItem('recipes', JSON.stringify(recipes));
     }, [recipes]);
 
-    // Inject GAPA model recipes automatically if not present
+    // Inject GAPA model recipes automatically, always refreshing them to reflect latest models and prices
     useEffect(() => {
-        setRecipes(prev => {
-            const hasGapa = prev.some(r => r.id && String(r.id).startsWith('gapa_'));
-            if (hasGapa) return prev;
-            
-            import('../data/gapaModelRecipes').then(m => {
-                const costedGapa = m.gapaModelRecipes.map(recipe => {
-                    const costedIngredients = recipe.ingredients.map(ing => {
-                        const dbIng = ingredients.find(i => 
-                            (i.name || '').toLowerCase() === ing.name.toLowerCase() ||
-                            (typeof i.name === 'string' && i.name.toLowerCase().includes(ing.name.toLowerCase()))
-                        );
-                        
-                        let unitPrice = 0;
-                        if (dbIng) {
-                            const amount = dbIng.quantity || 1;
-                            const price = dbIng.purchasePrice || 0;
-                            const dbUnit = (dbIng.unit || '').toUpperCase();
-                            
-                            let baseAmount = amount;
-                            if (dbUnit === 'KG' && ing.unit === 'grs') baseAmount = amount * 1000;
-                            if (dbUnit === 'LTS' && ing.unit === 'cc') baseAmount = amount * 1000;
-                            if (dbUnit === 'L' && ing.unit === 'cc') baseAmount = amount * 1000;
-                            
-                            unitPrice = price / baseAmount;
-                        }
-                        
-                        const gross = ing.netQuantity * (ing.correctionFactor || 1);
-                        return {
-                            ...ing,
-                            grossQuantity: gross,
-                            cost: gross * unitPrice
-                        };
-                    });
+        import('../data/gapaModelRecipes').then(m => {
+            const costedGapa = m.gapaModelRecipes.map(recipe => {
+                const costedIngredients = recipe.ingredients.map(ing => {
+                    const dbIng = ingredients.find(i => 
+                        (i.name || '').toLowerCase() === ing.name.toLowerCase() ||
+                        (typeof i.name === 'string' && i.name.toLowerCase().includes(ing.name.toLowerCase()))
+                    );
                     
+                    let unitPrice = 0;
+                    if (dbIng) {
+                        const amount = dbIng.quantity || 1;
+                        const price = dbIng.purchasePrice || 0;
+                        const dbUnit = (dbIng.unit || '').toUpperCase();
+                        
+                        let baseAmount = amount;
+                        if (dbUnit === 'KG' && ing.unit === 'grs') baseAmount = amount * 1000;
+                        if (dbUnit === 'LTS' && ing.unit === 'cc') baseAmount = amount * 1000;
+                        if (dbUnit === 'L' && ing.unit === 'cc') baseAmount = amount * 1000;
+                        
+                        unitPrice = price / baseAmount;
+                    }
+                    
+                    const gross = ing.netQuantity * (ing.correctionFactor || 1);
                     return {
-                        ...recipe,
-                        ingredients: costedIngredients,
-                        fromExcel: true
+                        ...ing,
+                        grossQuantity: gross,
+                        cost: gross * unitPrice
                     };
                 });
                 
-                setRecipes(currentRecipes => {
-                    const stillHasGapa = currentRecipes.some(r => r.id && String(r.id).startsWith('gapa_'));
-                    return stillHasGapa ? currentRecipes : [...costedGapa, ...currentRecipes];
-                });
-            }).catch(e => console.error("Error loading GAPA recipes", e));
-            return prev;
-        });
+                return {
+                    ...recipe,
+                    ingredients: costedIngredients,
+                    fromExcel: true
+                };
+            });
+            
+            setRecipes(currentRecipes => {
+                const nonGapa = currentRecipes.filter(r => !(r.id && String(r.id).startsWith('gapa_')));
+                return [...costedGapa, ...nonGapa];
+            });
+        }).catch(e => console.error("Error loading GAPA recipes", e));
     }, []);
 
     // Ingredient operations
