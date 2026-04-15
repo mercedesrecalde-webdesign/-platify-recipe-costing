@@ -348,9 +348,10 @@
         "prices": "LISTA DE PRECIOS MAYORISTAS",
         "recipes": "MIS RECETAS",
         "correction": "FACTOR DE CORRECCIÓN",
-        "chemistry": "TABLA QUÍMICA DE ALIMENTOS",
-        "school": "COMEDOR ESCOLAR",
-        "monitor": "MONITOR"
+        "chemistry": "Tabla Química de Alimentos",
+        "school": "Comedor Escolar",
+        "planner": "Planificador Semanal",
+        "qa": "Auditoría QA",
+        "monitor": "Monitor"
     }
 }
-

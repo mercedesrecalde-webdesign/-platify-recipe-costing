@@ -8,7 +8,9 @@ import TablaQuimica from '../Excel/TablaQuimica';
 import Monitor from '../Excel/Monitor';
 import RecipesList from '../Recipes/RecipesList';
 import SchoolNutrition from '../Excel/SchoolNutrition';
-import { FileSpreadsheet, Scale, Apple, BarChart3, BookOpen, GraduationCap } from 'lucide-react';
+import WeeklyPlanner from '../Excel/WeeklyPlanner';
+import SupplierQA from '../Excel/SupplierQA';
+import { FileSpreadsheet, Scale, Apple, BarChart3, BookOpen, GraduationCap, CalendarDays, ShieldCheck } from 'lucide-react';
 
 function ExcelWorkbook() {
     const { t, i18n } = useTranslation();
@@ -20,6 +22,8 @@ function ExcelWorkbook() {
         { id: 'factor', nameKey: 'tabs.correction', icon: Scale, component: FactorCorreccion },
         { id: 'nutricion', nameKey: 'tabs.chemistry', icon: Apple, component: TablaQuimica },
         { id: 'comedor', nameKey: 'tabs.school', icon: GraduationCap, component: SchoolNutrition },
+        { id: 'planner', nameKey: 'tabs.planner', icon: CalendarDays, component: WeeklyPlanner },
+        { id: 'qa', nameKey: 'tabs.qa', icon: ShieldCheck, component: SupplierQA },
         { id: 'monitor', nameKey: 'tabs.monitor', icon: BarChart3, component: Monitor }
     ];
 
