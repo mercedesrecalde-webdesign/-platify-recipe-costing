@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Sparkles, ChefHat, Coffee, UtensilsCrossed, Cookie, Moon } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useNotifications } from '../UI/Notifications';
 import { generateRecipeFromTemplate } from '../../data/recipeTemplates';
 import { calculateRecipeMacros } from '../../data/dietaryData';
 
-const dietOptions = [
-    { id: 'keto', name: 'Keto', icon: '🥑', description: 'Bajo en carbohidratos' },
-    { id: 'diabetic', name: 'Diabético', icon: '🍬', description: 'Control de azúcar' },
-    { id: 'gluten-free', name: 'Sin Gluten', icon: '🌾', description: 'Celíaco friendly' },
-    { id: 'lactose-free', name: 'Sin Lactosa', icon: '🥛', description: 'Sin lácteos' },
-    { id: 'egg-free', name: 'Sin Huevos', icon: '🥚', description: 'Sin huevo' },
-    { id: 'nut-free', name: 'Sin Frutos Secos', icon: '🥜', description: 'Sin nueces' },
-    { id: 'vegetarian', name: 'Vegetariano', icon: '🌱', description: 'Sin carne' },
-    { id: 'vegan', name: 'Vegano', icon: '🌿', description: 'Sin productos animales' }
-];
-
-const mealTimes = [
-    { id: 'breakfast', name: 'Desayuno', icon: Coffee, color: '#F59E0B' },
-    { id: 'lunch', name: 'Almuerzo', icon: UtensilsCrossed, color: '#10B981' },
-    { id: 'snack', name: 'Merienda', icon: Cookie, color: '#8B5CF6' },
-    { id: 'dinner', name: 'Cena', icon: Moon, color: '#3B82F6' }
-];
-
 export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, ingredients }) {
+    const { t } = useTranslation();
     const { correctionFactors, nutritionalInfo } = useData();
     const { success, error: showError } = useNotifications();
 
     const [selectedDiet, setSelectedDiet] = useState('keto');
     const [selectedMeal, setSelectedMeal] = useState('lunch');
     const [isGenerating, setIsGenerating] = useState(false);
+
+    const dietOptions = [
+        { id: 'keto', name: t('dietAssistant.keto'), icon: '🥑', description: t('dietAssistant.ketoDesc') },
+        { id: 'diabetic', name: t('dietAssistant.diabetic'), icon: '🍬', description: t('dietAssistant.diabeticDesc') },
+        { id: 'gluten-free', name: t('dietAssistant.glutenFree'), icon: '🌾', description: t('dietAssistant.glutenFreeDesc') },
+        { id: 'lactose-free', name: t('dietAssistant.lactoseFree'), icon: '🥛', description: t('dietAssistant.lactoseFreeDesc') },
+        { id: 'egg-free', name: t('dietAssistant.eggFree'), icon: '🥚', description: t('dietAssistant.eggFreeDesc') },
+        { id: 'nut-free', name: t('dietAssistant.nutFree'), icon: '🥜', description: t('dietAssistant.nutFreeDesc') },
+        { id: 'vegetarian', name: t('dietAssistant.vegetarian'), icon: '🌱', description: t('dietAssistant.vegetarianDesc') },
+        { id: 'vegan', name: t('dietAssistant.vegan'), icon: '🌿', description: t('dietAssistant.veganDesc') }
+    ];
+
+    const mealTimes = [
+        { id: 'breakfast', name: t('dietAssistant.breakfast'), icon: Coffee, color: '#F59E0B' },
+        { id: 'lunch', name: t('dietAssistant.lunch'), icon: UtensilsCrossed, color: '#10B981' },
+        { id: 'snack', name: t('dietAssistant.snack'), icon: Cookie, color: '#8B5CF6' },
+        { id: 'dinner', name: t('dietAssistant.dinner'), icon: Moon, color: '#3B82F6' }
+    ];
 
     const handleGenerate = () => {
         setIsGenerating(true);
@@ -39,7 +41,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             const result = generateRecipeFromTemplate(selectedDiet, selectedMeal, ingredients);
 
             if (result.error) {
-                showError(result.error + ". Ingredientes faltantes: " + result.missing.join(', '));
+                showError(result.error + ". " + result.missing.join(', '));
                 setIsGenerating(false);
                 return;
             }
@@ -47,7 +49,10 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             // Calculate costs and nutrition
             const recipeMacros = calculateRecipeMacros(result.ingredients);
             const totalCost = result.ingredients.reduce((sum, ing) => {
-                const cost = (ing.quantity / 1000) * ing.unitPrice;
+                // Calculate bruto weight using correction factor
+                const fc = 1; // Could improve by getting actual FC
+                const bruto = ing.quantity * fc;
+                const cost = (bruto / 1000) * ing.unitPrice;
                 return sum + cost;
             }, 0);
 
@@ -60,19 +65,26 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             const recipeData = {
                 name: result.name,
                 portions: result.portions,
-                ingredients: result.ingredients.map(ing => ({
-                    id: `recipe_ing_${Date.now()}_${Math.random()}`,
-                    ingredientId: ing.ingredientId,
-                    name: ing.name,
-                    neto: ing.quantity,
-                    unit: ing.unit,
-                    fc: 1, // Default correction factor
-                    bruto: ing.quantity,
-                    costoTotal: (ing.quantity / 1000) * ing.unitPrice,
-                    costoPorcion: ((ing.quantity / 1000) * ing.unitPrice) / result.portions,
-                    calories: (ing.quantity / 100) * (recipeMacros.calories / result.ingredients.reduce((sum, i) => sum + i.quantity, 0) * 100),
-                    caloriasPorcion: 0
-                })),
+                ingredients: result.ingredients.map(ing => {
+                    const fc = 1; // Default correction factor
+                    const neto = ing.quantity;
+                    const bruto = neto * fc;
+                    const costoTotal = (bruto / 1000) * ing.unitPrice; // Use BRUTO for cost
+
+                    return {
+                        id: `recipe_ing_${Date.now()}_${Math.random()}`,
+                        ingredientId: ing.ingredientId,
+                        name: ing.name,
+                        neto: neto,
+                        unit: ing.unit,
+                        fc: fc,
+                        bruto: bruto,
+                        costoTotal: costoTotal,
+                        costoPorcion: costoTotal / result.portions,
+                        calories: (neto / 100) * (recipeMacros.calories / result.ingredients.reduce((sum, i) => sum + i.quantity, 0) * 100),
+                        caloriasPorcion: 0
+                    };
+                }),
                 dietType: selectedDiet,
                 mealTime: selectedMeal,
                 generatedByAI: true,
@@ -84,7 +96,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             };
 
             // Show success message
-            success(`¡Receta "${result.name}" generada! Costo: $${costPerPortion.toFixed(2)}/porción, Precio sugerido: $${suggestedPrice.toFixed(2)}`);
+            success(`✨ "${result.name}" — $${costPerPortion.toFixed(2)}/porción`);
 
             onGenerateRecipe(recipeData);
             setIsGenerating(false);
@@ -132,10 +144,10 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                         </div>
                         <div>
                             <h2 style={{ margin: 0, color: 'var(--primary)', fontSize: '1.5rem' }}>
-                                Asistente Inteligente
+                                {t('dietAssistant.title')}
                             </h2>
                             <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
-                                Genera recetas automáticamente
+                                {t('dietAssistant.subtitle')}
                             </p>
                         </div>
                     </div>
@@ -162,7 +174,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                         fontSize: '0.875rem',
                         color: 'var(--text-primary)'
                     }}>
-                        🎯 Tipo de Dieta
+                        🎯 {t('dietAssistant.dietType')}
                     </label>
                     <div style={{
                         display: 'grid',
@@ -209,7 +221,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                         fontSize: '0.875rem',
                         color: 'var(--text-primary)'
                     }}>
-                        🕐 Momento del Día
+                        🕐 {t('dietAssistant.mealTime')}
                     </label>
                     <div style={{
                         display: 'grid',
@@ -274,7 +286,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                     }}
                 >
                     <ChefHat size={24} />
-                    {isGenerating ? 'Generando receta mágica...' : '✨ Generar Receta Inteligente'}
+                    {isGenerating ? t('dietAssistant.generating') : `✨ ${t('dietAssistant.generate')}`}
                 </button>
 
                 {/* Info */}
@@ -287,7 +299,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                     color: 'var(--text-tertiary)',
                     textAlign: 'center'
                 }}>
-                    💡 El asistente seleccionará ingredientes de tu inventario y calculará costos + nutrición automáticamente
+                    💡 {t('dietAssistant.info')}
                 </div>
             </div>
         </div>

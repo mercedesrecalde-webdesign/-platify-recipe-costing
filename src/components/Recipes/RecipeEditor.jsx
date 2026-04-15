@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Save, Plus, Trash2, Calculator } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useSettings } from '../../context/SettingsContext';
@@ -10,6 +11,7 @@ export default function RecipeEditor({
     onClose,
     onSave
 }) {
+    const { t } = useTranslation();
     const { ingredients, correctionFactors, nutritionalInfo } = useData();
     const { currency } = useSettings();
 
@@ -26,10 +28,25 @@ export default function RecipeEditor({
     // Sync formData with recipe prop
     useEffect(() => {
         if (recipe) {
+            // Normalize ingredients from both AI and manual recipes
+            const normalizedIngredients = (recipe.ingredients || []).map(ing => ({
+                id: ing.id || `recipe_ing_${Date.now()}_${Math.random()}`,
+                ingredientId: ing.ingredientId,
+                name: ing.name || ing.nombre,
+                neto: ing.neto || ing.quantity || 0,
+                unit: ing.unit,
+                fc: ing.fc || 1,
+                bruto: ing.bruto || ((ing.neto || ing.quantity || 0) * (ing.fc || 1)),
+                costoTotal: ing.costoTotal || 0,
+                costoPorcion: ing.costoPorcion || 0,
+                calories: ing.calories || 0,
+                caloriasPorcion: ing.caloriasPorcion || 0
+            }));
+
             setFormData({
                 name: recipe.name || recipe.nombre || '',
                 portions: recipe.portions || recipe.porciones || 4,
-                ingredients: recipe.ingredients || []
+                ingredients: normalizedIngredients
             });
         } else {
             setFormData({
@@ -61,7 +78,7 @@ export default function RecipeEditor({
     // Add ingredient to recipe
     const handleAddIngredient = () => {
         if (!selectedIngredient || !netQuantity || parseFloat(netQuantity) <= 0) {
-            setErrors({ ingredient: 'Selecciona un ingrediente y cantidad válida' });
+            setErrors({ ingredient: t('recipeEditor.selectAndQuantity') });
             return;
         }
 
@@ -71,7 +88,8 @@ export default function RecipeEditor({
         const neto = parseFloat(netQuantity);
         const fc = getCorrectionFactor(ingredient.name);
         const bruto = neto * fc;
-        const costoTotal = (neto / 1000) * ingredient.unitPrice; // Convert to kg if needed
+        // FIXED: Calculate cost based on BRUTO weight (what you actually buy)
+        const costoTotal = (bruto / 1000) * ingredient.unitPrice;
         const nutritional = getNutritionalData(ingredient.name);
         const calories = (neto / 100) * (nutritional.calories || 0);
 
@@ -156,15 +174,15 @@ export default function RecipeEditor({
         const newErrors = {};
 
         if (!formData.name || formData.name.trim() === '') {
-            newErrors.name = 'El nombre es requerido';
+            newErrors.name = t('recipeEditor.nameRequired');
         }
 
         if (!formData.portions || formData.portions <= 0) {
-            newErrors.portions = 'Las porciones deben ser mayor a 0';
+            newErrors.portions = t('recipeEditor.portionsRequired');
         }
 
         if (formData.ingredients.length === 0) {
-            newErrors.ingredients = 'Debes agregar al menos un ingrediente';
+            newErrors.ingredients = t('recipeEditor.ingredientsRequired');
         }
 
         setErrors(newErrors);
@@ -227,7 +245,7 @@ export default function RecipeEditor({
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <h2 style={{ margin: 0, color: 'var(--primary)' }}>
-                        {recipe ? 'Editar Receta' : 'Nueva Receta'}
+                        {recipe ? t('recipeEditor.editRecipe') : t('recipeEditor.newRecipe')}
                     </h2>
                     <button
                         onClick={onClose}
@@ -250,21 +268,20 @@ export default function RecipeEditor({
                     <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
                         <div>
                             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                Nombre de la Receta *
+                                {t('recipeEditor.recipeName')} *
                             </label>
                             <input
                                 type="text"
                                 className="input"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                placeholder="Ej: Ensalada César"
                                 style={{ width: '100%' }}
                             />
                             {errors.name && <span style={{ color: 'var(--error)', fontSize: '0.75rem', marginTop: '0.25rem', display: 'block' }}>{errors.name}</span>}
                         </div>
                         <div>
                             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                Porciones *
+                                {t('recipeEditor.portions')} *
                             </label>
                             <input
                                 type="number"
@@ -281,12 +298,12 @@ export default function RecipeEditor({
                     {/* Add Ingredient Section */}
                     <div style={{ background: 'var(--bg-tertiary)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
                         <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: 'var(--text-primary)' }}>
-                            Agregar Ingrediente
+                            {t('recipeEditor.addIngredient')}
                         </h3>
                         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr auto', gap: '0.75rem', alignItems: 'end' }}>
                             <div>
                                 <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                    Ingrediente
+                                    {t('recipeEditor.ingredient')}
                                 </label>
                                 <select
                                     className="input"
@@ -294,7 +311,7 @@ export default function RecipeEditor({
                                     onChange={(e) => setSelectedIngredient(e.target.value)}
                                     style={{ width: '100%' }}
                                 >
-                                    <option value="">Seleccionar...</option>
+                                    <option value="">{t('recipeEditor.selectIngredient')}</option>
                                     {ingredients.map(ing => (
                                         <option key={ing.id} value={ing.id}>
                                             {ing.name} ({formatCurrency(ing.unitPrice, currency)}/{ing.unit})
@@ -304,14 +321,13 @@ export default function RecipeEditor({
                             </div>
                             <div>
                                 <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                    Cantidad Neta (gr/ml)
+                                    {t('recipeEditor.netQuantity')}
                                 </label>
                                 <input
                                     type="number"
                                     className="input"
                                     value={netQuantity}
                                     onChange={(e) => setNetQuantity(e.target.value)}
-                                    placeholder="Ej: 100"
                                     step="0.01"
                                     min="0"
                                     style={{ width: '100%' }}
@@ -324,7 +340,7 @@ export default function RecipeEditor({
                                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                             >
                                 <Plus size={16} />
-                                Agregar
+                                {t('recipeEditor.addIngredient')}
                             </button>
                         </div>
                         {errors.ingredient && <span style={{ color: 'var(--error)', fontSize: '0.75rem', marginTop: '0.5rem', display: 'block' }}>{errors.ingredient}</span>}
@@ -334,19 +350,19 @@ export default function RecipeEditor({
                     {formData.ingredients.length > 0 && (
                         <div style={{ marginBottom: '1.5rem' }}>
                             <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: 'var(--text-primary)' }}>
-                                Ingredientes de la Receta
+                                {t('recipeEditor.recipeIngredients')}
                             </h3>
                             <div style={{ overflow: 'auto', maxHeight: '300px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
                                 <table className="table" style={{ marginBottom: 0, fontSize: '0.875rem' }}>
                                     <thead style={{ position: 'sticky', top: 0, background: 'var(--primary)', zIndex: 1 }}>
                                         <tr>
-                                            <th style={{ color: 'white' }}>INGREDIENTE</th>
-                                            <th style={{ color: 'white', textAlign: 'right' }}>NETO</th>
-                                            <th style={{ color: 'white', textAlign: 'center' }}>FC</th>
-                                            <th style={{ color: 'white', textAlign: 'right' }}>BRUTO</th>
-                                            <th style={{ color: 'white', textAlign: 'right' }}>COSTO</th>
-                                            <th style={{ color: 'white', textAlign: 'right' }}>CALORÍAS</th>
-                                            <th style={{ color: 'white', textAlign: 'center', width: '60px' }}>ACCIÓN</th>
+                                            <th style={{ color: 'white' }}>{t('recipeEditor.ingredientCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'right' }}>{t('recipeEditor.netCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'center' }}>{t('recipeEditor.fcCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'right' }}>{t('recipeEditor.grossCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'right' }}>{t('recipeEditor.costCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'right' }}>{t('recipeEditor.caloriesCol')}</th>
+                                            <th style={{ color: 'white', textAlign: 'center', width: '60px' }}>{t('recipeEditor.actionCol')}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -392,29 +408,29 @@ export default function RecipeEditor({
                     <div style={{ background: 'linear-gradient(135deg, var(--primary-light) 0%, var(--bg-tertiary) 100%)', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                             <Calculator size={20} color="var(--primary)" />
-                            <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--primary)' }}>Resumen de Costos y Nutrición</h3>
+                            <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--primary)' }}>{t('recipeEditor.costNutritionSummary')}</h3>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
                             <div>
-                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>Costo Total</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>{t('recipeEditor.totalCost')}</div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--success)' }}>
                                     {formatCurrency(totals.totalCosto, currency)}
                                 </div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>Costo/Porción</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>{t('recipeEditor.costPerPortion')}</div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--primary)' }}>
                                     {formatCurrency(totals.costoPorPorcion, currency)}
                                 </div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>Calorías Totales</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>{t('recipeEditor.totalCalories')}</div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                                     {totals.totalCalorias.toFixed(0)} kcal
                                 </div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>Calorías/Porción</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>{t('recipeEditor.caloriesPerPortion')}</div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                                     {totals.caloriasPorPorcion.toFixed(0)} kcal
                                 </div>
@@ -429,7 +445,7 @@ export default function RecipeEditor({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancelar
+                            {t('recipeEditor.cancel')}
                         </button>
                         <button
                             type="submit"
@@ -437,7 +453,7 @@ export default function RecipeEditor({
                             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                         >
                             <Save size={16} />
-                            {recipe ? 'Actualizar Receta' : 'Guardar Receta'}
+                            {recipe ? t('recipeEditor.updateRecipe') : t('recipeEditor.saveRecipe')}
                         </button>
                     </div>
                 </form>
