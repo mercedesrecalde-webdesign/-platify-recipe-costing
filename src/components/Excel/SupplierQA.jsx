@@ -146,7 +146,7 @@ export default function SupplierQA() {
                                         type="number" step="0.01" required
                                         value={formData.expectedWeight}
                                         onChange={e => setFormData({...formData, expectedWeight: e.target.value})}
-                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)'}} 
+                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
                                     />
                                 </div>
                                 <div>
@@ -155,7 +155,7 @@ export default function SupplierQA() {
                                         type="number" step="0.01" required
                                         value={formData.actualWeight}
                                         onChange={e => setFormData({...formData, actualWeight: e.target.value})}
-                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)'}} 
+                                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
                                     />
                                 </div>
                             </div>
@@ -183,7 +183,7 @@ export default function SupplierQA() {
                                     value={formData.temperature}
                                     onChange={e => setFormData({...formData, temperature: e.target.value})}
                                     placeholder="Ej: 4.5"
-                                    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)'}} 
+                                    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)'}} 
                                 />
                             </div>
                             <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
