@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../context/SettingsContext';
 import { useNotifications } from '../UI/Notifications';
 import { formatCurrency } from '../../utils/currencyConverter';
@@ -6,6 +7,7 @@ import excelData from '../../data/excel_full_data.json';
 import { BarChart3, TrendingUp, DollarSign, AlertTriangle, CheckCircle, Save } from 'lucide-react';
 
 function Monitor() {
+    const { t } = useTranslation();
     const { currency } = useSettings();
     const { success, info } = useNotifications();
 
@@ -130,7 +132,7 @@ function Monitor() {
         const receta = monitorData.recetas.find(r => r.numero === recetaNum);
         if (receta) {
             handlePriceChange(recetaNum, receta.suggestedPrice);
-            info('Precio restaurado al valor sugerido');
+            info(t('monitorView.priceRestored'));
         }
     };
 
@@ -138,11 +140,11 @@ function Monitor() {
         <div>
             {/* Header with target margin */}
             <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '8px', boxShadow: 'var(--shadow-md)' }}>
-                <h2 style={{ marginBottom: '1rem', color: 'var(--primary)' }}>MONITOR DE RECETAS Y RENTABILIDAD</h2>
+                <h2 style={{ marginBottom: '1rem', color: 'var(--primary)' }}>{t('monitorView.title')}</h2>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <label style={{ fontSize: '1rem', fontWeight: '600' }}>
-                        Margen de Ganancia Objetivo:
+                        {t('monitorView.targetMargin')}:
                     </label>
                     <input
                         type="number"
@@ -155,7 +157,7 @@ function Monitor() {
                     />
                     <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--primary)' }}>%</span>
                     <div style={{ marginLeft: 'auto', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                        💡 Si la ganancia está por debajo de este valor, se mostrará en <span style={{ color: 'var(--error)', fontWeight: '600' }}>ROJO</span>
+                        💡 {t('monitorView.belowWarning')} <span style={{ color: 'var(--error)', fontWeight: '600' }}>{t('monitorView.red')}</span>
                     </div>
                 </div>
             </div>
@@ -165,7 +167,7 @@ function Monitor() {
                 <div className="card" style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)', color: 'white', border: 'none' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <div>
-                            <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>Total Recetas</div>
+                            <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>{t('monitorView.totalRecipes')}</div>
                             <div style={{ fontSize: '2rem', fontWeight: '700' }}>{monitorData.stats.totalRecetas}</div>
                         </div>
                         <BarChart3 size={40} style={{ opacity: 0.5 }} />
@@ -175,7 +177,7 @@ function Monitor() {
                 <div className="card" style={{ background: 'rgba(16, 185, 129, 0.1)', border: 'none' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <div>
-                            <div style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem' }}>Costo Promedio/Porción</div>
+                            <div style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem' }}>{t('monitorView.avgCostPortion')}</div>
                             <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--success)' }}>
                                 {formatCurrency(monitorData.stats.costoPromedio, currency)}
                             </div>
@@ -187,7 +189,7 @@ function Monitor() {
                 <div className="card" style={{ background: 'rgba(239, 68, 68, 0.1)', border: 'none' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <div>
-                            <div style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem' }}>Margen Objetivo</div>
+                            <div style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem' }}>{t('monitorView.targetMarginLabel')}</div>
                             <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--primary)' }}>
                                 {targetMargin}%
                             </div>
@@ -200,19 +202,19 @@ function Monitor() {
             {/* Recipes Analysis Table */}
             <div style={{ background: 'var(--bg-secondary)', borderRadius: '8px', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
                 <h3 style={{ padding: '1rem', margin: 0, background: 'var(--bg-tertiary)', borderBottom: '2px solid var(--border-color)' }}>
-                    Análisis de Rentabilidad por Receta
+                    {t('monitorView.profitAnalysis')}
                 </h3>
                 <div style={{ overflow: 'auto' }}>
                     <table className="table" style={{ marginBottom: 0, minWidth: '900px' }}>
                         <thead>
                             <tr style={{ background: 'var(--primary)', color: 'white' }}>
-                                <th style={{ color: 'white' }}>RECETA</th>
-                                <th style={{ color: 'white', textAlign: 'right' }}>COSTO/PORCIÓN</th>
-                                <th style={{ color: 'white', textAlign: 'right' }}>PRECIO VENTA</th>
-                                <th style={{ color: 'white', textAlign: 'right' }}>GANANCIA</th>
-                                <th style={{ color: 'white', textAlign: 'right' }}>MARGEN %</th>
-                                <th style={{ color: 'white', textAlign: 'center' }}>ESTADO</th>
-                                <th style={{ color: 'white', textAlign: 'center', width: '100px' }}>ACCIÓN</th>
+                                <th style={{ color: 'white' }}>{t('monitorView.recipe')}</th>
+                                <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.costPortion')}</th>
+                                <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.salePrice')}</th>
+                                <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.profit')}</th>
+                                <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.marginPercent')}</th>
+                                <th style={{ color: 'white', textAlign: 'center' }}>{t('monitorView.status')}</th>
+                                <th style={{ color: 'white', textAlign: 'center', width: '100px' }}>{t('monitorView.action')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -285,12 +287,12 @@ function Monitor() {
                                                 {cumpleObjetivo ? (
                                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', color: 'var(--success)' }}>
                                                         <CheckCircle size={20} />
-                                                        <span style={{ fontWeight: '600' }}>OK</span>
+                                                        <span style={{ fontWeight: '600' }}>{t('monitorView.ok')}</span>
                                                     </div>
                                                 ) : (
                                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', color: 'var(--error)' }}>
                                                         <AlertTriangle size={20} />
-                                                        <span style={{ fontWeight: '600' }}>BAJO</span>
+                                                        <span style={{ fontWeight: '600' }}>{t('monitorView.low')}</span>
                                                     </div>
                                                 )}
                                             </td>
@@ -308,9 +310,9 @@ function Monitor() {
                                                             cursor: 'pointer',
                                                             whiteSpace: 'nowrap'
                                                         }}
-                                                        title="Restaurar precio sugerido"
+                                                        title={t('monitorView.restorePrice')}
                                                     >
-                                                        Reset
+                                                        {t('monitorView.reset')}
                                                     </button>
                                                 )}
                                             </td>
@@ -327,7 +329,7 @@ function Monitor() {
                 <div className="card" style={{ borderLeft: '4px solid var(--success)' }}>
                     <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <CheckCircle size={16} color="var(--success)" />
-                        Recetas con margen adecuado
+                        {t('monitorView.adequateMargin')}
                     </div>
                     <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--success)' }}>
                         {monitorData.recetas.filter(r => r.totalCosto > 0 && calculateProfitMargin(r.precioVenta, r.costoPorPorcion) >= targetMargin).length}
@@ -337,7 +339,7 @@ function Monitor() {
                 <div className="card" style={{ borderLeft: '4px solid var(--error)' }}>
                     <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <AlertTriangle size={16} color="var(--error)" />
-                        Recetas con margen bajo (REVISAR)
+                        {t('monitorView.lowMargin')}
                     </div>
                     <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--error)' }}>
                         {monitorData.recetas.filter(r => r.totalCosto > 0 && calculateProfitMargin(r.precioVenta, r.costoPorPorcion) < targetMargin).length}

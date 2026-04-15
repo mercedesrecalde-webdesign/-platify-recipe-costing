@@ -10,7 +10,7 @@ import ConfirmDialog from '../UI/ConfirmDialog';
 import { Edit2, Trash2, Plus, Search } from 'lucide-react';
 
 function PreciosMayoristas() {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { currency } = useSettings();
     const { ingredients, updateIngredient, deleteIngredient, addIngredient } = useData();
     const { success, error } = useNotifications();
@@ -52,11 +52,11 @@ function PreciosMayoristas() {
         if (selectedIngredient) {
             // Update existing
             updateIngredient(ingredientData.id, ingredientData);
-            success('Ingrediente actualizado correctamente');
+            success(t('prices.ingredientUpdated'));
         } else {
             // Add new
             addIngredient(ingredientData);
-            success('Ingrediente agregado correctamente');
+            success(t('prices.ingredientAdded'));
         }
     };
 
@@ -67,7 +67,7 @@ function PreciosMayoristas() {
     const handleDeleteConfirm = () => {
         if (confirmDelete) {
             deleteIngredient(confirmDelete.id);
-            success(`"${confirmDelete.nombre}" eliminado correctamente`);
+            success(`"${confirmDelete.nombre}" ${t('prices.ingredientDeleted')}`);
             setConfirmDelete(null);
         }
     };
@@ -76,14 +76,14 @@ function PreciosMayoristas() {
         <div>
             <div style={{ marginBottom: '1rem', background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
-                    <h2 style={{ margin: 0, color: 'var(--primary)' }}>PLANILLA DE COSTOS - LISTA DE PRECIOS MAYORISTAS</h2>
+                    <h2 style={{ margin: 0, color: 'var(--primary)' }}>{t('prices.title')}</h2>
                     <button
                         className="btn btn-primary"
                         onClick={handleAdd}
                         style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     >
                         <Plus size={18} />
-                        Nuevo Ingrediente
+                        {t('prices.newIngredient')}
                     </button>
                 </div>
 
@@ -101,14 +101,14 @@ function PreciosMayoristas() {
                     <input
                         type="text"
                         className="input"
-                        placeholder="Buscar ingrediente o categoría..."
+                        placeholder={t('prices.searchPlaceholder')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         style={{ width: '100%', paddingLeft: '2.5rem' }}
                     />
                 </div>
                 <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                    Mostrando {filteredItems.length} de {items.length} ingredientes
+                    {t('prices.showing')} {filteredItems.length} {t('prices.of')} {items.length} {t('prices.ingredientsCount')}
                 </div>
             </div>
 
@@ -116,20 +116,20 @@ function PreciosMayoristas() {
                 <table className="table" style={{ marginBottom: 0 }}>
                     <thead>
                         <tr style={{ background: 'var(--primary)', color: 'white' }}>
-                            <th style={{ color: 'white' }}>CATEGORÍA</th>
-                            <th style={{ color: 'white' }}>MATERIA PRIMA</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>CANTIDAD</th>
-                            <th style={{ color: 'white' }}>U.M.</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>PRECIO DE COMPRA</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>PRECIO UNITARIO</th>
-                            <th style={{ color: 'white', textAlign: 'center', width: '120px' }}>ACCIONES</th>
+                            <th style={{ color: 'white' }}>{t('prices.category')}</th>
+                            <th style={{ color: 'white' }}>{t('prices.rawMaterial')}</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('prices.quantity')}</th>
+                            <th style={{ color: 'white' }}>{t('prices.measureUnit')}</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('prices.purchasePrice')}</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('prices.unitPrice')}</th>
+                            <th style={{ color: 'white', textAlign: 'center', width: '120px' }}>{t('prices.actions')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredItems.length === 0 ? (
                             <tr>
                                 <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
-                                    No se encontraron resultados
+                                    {t('prices.noResults')}
                                 </td>
                             </tr>
                         ) : (
@@ -149,7 +149,7 @@ function PreciosMayoristas() {
                                         : 0;
 
                                     updateIngredient(item.id, updatedData);
-                                    success('Precio actualizado - Recálculo automático aplicado');
+                                    success(t('prices.priceUpdated'));
                                 };
 
                                 return (
@@ -221,7 +221,7 @@ function PreciosMayoristas() {
                                                         alignItems: 'center',
                                                         transition: 'all 0.2s'
                                                     }}
-                                                    title="Editar completo (nombre, categoría, etc.)"
+                                                    title={t('prices.editFull')}
                                                 >
                                                     <Edit2 size={14} />
                                                 </button>
@@ -238,7 +238,7 @@ function PreciosMayoristas() {
                                                         alignItems: 'center',
                                                         transition: 'all 0.2s'
                                                     }}
-                                                    title="Eliminar"
+                                                    title={t('common.delete')}
                                                 >
                                                     <Trash2 size={14} />
                                                 </button>
@@ -253,12 +253,12 @@ function PreciosMayoristas() {
             </div>
 
             <div style={{ marginTop: '1rem', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                <strong>💡 Cómo usar:</strong>
+                <strong>💡 {t('prices.howToUse')}:</strong>
                 <ul style={{ marginTop: '0.5rem', marginLeft: '1.5rem', marginBottom: 0 }}>
-                    <li><strong>Edición rápida:</strong> Click directamente en los campos de CANTIDAD o PRECIO DE COMPRA para editarlos. El PRECIO UNITARIO se recalcula automáticamente.</li>
-                    <li><strong>Edición completa:</strong> Click en el botón ✏️ para editar nombre, categoría y otros campos.</li>
-                    <li><strong>Fórmula:</strong> PRECIO UNITARIO = PRECIO DE COMPRA ÷ CANTIDAD</li>
-                    <li><strong>Ejemplo:</strong> Harina 50kg a $700 = $14/kg | Harina 25kg a $360 = $14.4/kg</li>
+                    <li><strong>{t('prices.quickEdit')}:</strong> {t('prices.quickEditDesc')}</li>
+                    <li><strong>{t('prices.fullEdit')}:</strong> {t('prices.fullEditDesc')}</li>
+                    <li><strong>{t('prices.formula')}:</strong> {t('prices.formulaDesc')}</li>
+                    <li><strong>{t('prices.example')}:</strong> {t('prices.exampleDesc')}</li>
                 </ul>
             </div>
 
@@ -278,10 +278,10 @@ function PreciosMayoristas() {
                 isOpen={!!confirmDelete}
                 onClose={() => setConfirmDelete(null)}
                 onConfirm={handleDeleteConfirm}
-                title="¿Eliminar ingrediente?"
-                message={`¿Estás seguro de que deseas eliminar "${confirmDelete?.nombre}"? Esta acción no se puede deshacer.`}
-                confirmText="Eliminar"
-                cancelText="Cancelar"
+                title={t('prices.deleteTitle')}
+                message={`${t('prices.deleteMessage')} "${confirmDelete?.nombre}"? ${t('prices.deleteWarning')}`}
+                confirmText={t('common.delete')}
+                cancelText={t('common.cancel')}
                 type="danger"
             />
         </div>

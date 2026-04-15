@@ -3,14 +3,15 @@
 const DEFAULT_RATES = {
     ARS: 1,      // Base currency
     USD: 0.0011, // ~900 ARS = 1 USD (approximate)
-    EUR: 0.001   // ~1000 ARS = 1 EUR (approximate)
+    EUR: 0.001,  // ~1000 ARS = 1 EUR (approximate)
+    BRL: 0.006   // ~170 ARS = 1 BRL (approximate)
 };
 
 /**
  * Convert amount from one currency to another
  * @param {number} amount - Amount to convert
- * @param {string} fromCurrency - Source currency (ARS, USD, EUR)
- * @param {string} toCurrency - Target currency (ARS, USD, EUR)
+ * @param {string} fromCurrency - Source currency (ARS, USD, EUR, BRL)
+ * @param {string} toCurrency - Target currency (ARS, USD, EUR, BRL)
  * @param {object} customRates - Optional custom exchange rates
  * @returns {number} Converted amount
  */
@@ -31,20 +32,21 @@ export function convertCurrency(amount, fromCurrency, toCurrency, customRates = 
 /**
  * Format currency value with proper symbol
  * @param {number} amount - Amount to format
- * @param {string} currency - Currency code (ARS, USD, EUR)
+ * @param {string} currency - Currency code (ARS, USD, EUR, BRL)
  * @returns {string} Formatted currency string
  */
 export function formatCurrency(amount, currency) {
     const symbols = {
         ARS: '$',
         USD: 'US$',
-        EUR: '€'
+        EUR: '€',
+        BRL: 'R$'
     };
 
-    const decimals = currency === 'ARS' ? 2 : 2;
+    const decimals = 2;
     const formatted = amount.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    return `${symbols[currency]} ${formatted}`;
+    return `${symbols[currency] || '$'} ${formatted}`;
 }
 
 /**
@@ -55,7 +57,8 @@ export function getAvailableCurrencies() {
     return [
         { code: 'ARS', name: 'Peso Argentino', symbol: '$' },
         { code: 'USD', name: 'Dólar Estadounidense', symbol: 'US$' },
-        { code: 'EUR', name: 'Euro', symbol: '€' }
+        { code: 'EUR', name: 'Euro', symbol: '€' },
+        { code: 'BRL', name: 'Real Brasileño', symbol: 'R$' }
     ];
 }
 
@@ -69,3 +72,4 @@ export function updateExchangeRates(newRates) {
 }
 
 export { DEFAULT_RATES };
+

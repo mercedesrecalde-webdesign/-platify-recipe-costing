@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import nutritionalData from '../../data/nutritionalInfo.json';
 
 function TablaQuimica() {
+    const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-
 
     // Use the extracted nutritional data directly
     const alimentos = useMemo(() => {
@@ -26,17 +27,17 @@ function TablaQuimica() {
     return (
         <div>
             <div style={{ marginBottom: '1rem', background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px' }}>
-                <h2 style={{ marginBottom: '1rem', color: 'var(--primary)' }}>TABLA QUÍMICA DE ALIMENTOS</h2>
+                <h2 style={{ marginBottom: '1rem', color: 'var(--primary)' }}>{t('chemical.title')}</h2>
                 <input
                     type="text"
                     className="input"
-                    placeholder="Buscar alimento..."
+                    placeholder={t('chemical.searchPlaceholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     style={{ maxWidth: '400px' }}
                 />
                 <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                    Mostrando {filteredAlimentos.length} de {alimentos.length} alimentos | Valores por 100g
+                    {t('chemical.showing')} {filteredAlimentos.length} {t('chemical.of')} {alimentos.length} {t('chemical.foods')} | {t('chemical.valuesPer100g')}
                 </div>
             </div>
 
@@ -44,20 +45,20 @@ function TablaQuimica() {
                 <table className="table" style={{ marginBottom: 0 }}>
                     <thead>
                         <tr style={{ background: 'var(--primary)', color: 'white' }}>
-                            <th style={{ color: 'white' }}>CATEGORÍA</th>
-                            <th style={{ color: 'white' }}>SUBCATEGORÍA</th>
-                            <th style={{ color: 'white' }}>ALIMENTO</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>CALORÍAS<br />(kcal/100g)</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>H.C.<br />(g)</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>PROTEÍNAS<br />(g)</th>
-                            <th style={{ color: 'white', textAlign: 'right' }}>LÍPIDOS<br />(g)</th>
+                            <th style={{ color: 'white' }}>{t('chemical.category')}</th>
+                            <th style={{ color: 'white' }}>{t('chemical.subcategory')}</th>
+                            <th style={{ color: 'white' }}>{t('chemical.food')}</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('chemical.calories')}<br />(kcal/100g)</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('chemical.carbs')}<br />(g)</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('chemical.protein')}<br />(g)</th>
+                            <th style={{ color: 'white', textAlign: 'right' }}>{t('chemical.fat')}<br />(g)</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredAlimentos.length === 0 ? (
                             <tr>
                                 <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
-                                    No se encontraron resultados
+                                    {t('chemical.noResults')}
                                 </td>
                             </tr>
                         ) : (

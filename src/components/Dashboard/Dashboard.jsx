@@ -7,18 +7,20 @@ import FactorCorreccion from '../Excel/FactorCorreccion';
 import TablaQuimica from '../Excel/TablaQuimica';
 import Monitor from '../Excel/Monitor';
 import RecipesList from '../Recipes/RecipesList';
-import { FileSpreadsheet, Scale, Apple, BarChart3, BookOpen } from 'lucide-react';
+import SchoolNutrition from '../Excel/SchoolNutrition';
+import { FileSpreadsheet, Scale, Apple, BarChart3, BookOpen, GraduationCap } from 'lucide-react';
 
 function ExcelWorkbook() {
     const { t, i18n } = useTranslation();
     const [activeSheet, setActiveSheet] = useState('precios');
 
     const sheets = [
-        { id: 'precios', name: 'LISTA DE PRECIOS MAYORISTAS', icon: FileSpreadsheet, component: PreciosMayoristas },
-        { id: 'misrecetas', name: 'MIS RECETAS', icon: BookOpen, component: RecipesList },
-        { id: 'factor', name: 'FACTOR DE CORRECCIÓN', icon: Scale, component: FactorCorreccion },
-        { id: 'nutricion', name: 'TABLA QUÍMICA DE ALIMENTOS', icon: Apple, component: TablaQuimica },
-        { id: 'monitor', name: 'MONITOR', icon: BarChart3, component: Monitor }
+        { id: 'precios', nameKey: 'tabs.prices', icon: FileSpreadsheet, component: PreciosMayoristas },
+        { id: 'misrecetas', nameKey: 'tabs.recipes', icon: BookOpen, component: RecipesList },
+        { id: 'factor', nameKey: 'tabs.correction', icon: Scale, component: FactorCorreccion },
+        { id: 'nutricion', nameKey: 'tabs.chemistry', icon: Apple, component: TablaQuimica },
+        { id: 'comedor', nameKey: 'tabs.school', icon: GraduationCap, component: SchoolNutrition },
+        { id: 'monitor', nameKey: 'tabs.monitor', icon: BarChart3, component: Monitor }
     ];
 
     const ActiveComponent = sheets.find(s => s.id === activeSheet)?.component;
@@ -55,11 +57,12 @@ function ExcelWorkbook() {
                                 alignItems: 'center',
                                 gap: '0.5rem',
                                 borderRadius: '4px 4px 0 0',
-                                transition: 'all 0.2s'
+                                transition: 'all 0.2s',
+                                fontFamily: 'inherit'
                             }}
                         >
                             <Icon size={14} />
-                            {sheet.name}
+                            {t(sheet.nameKey)}
                         </button>
                     );
                 })}
@@ -81,3 +84,4 @@ function ExcelWorkbook() {
 }
 
 export default ExcelWorkbook;
+

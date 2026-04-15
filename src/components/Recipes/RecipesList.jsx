@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useData } from '../../context/DataContext';
 import { useSettings } from '../../context/SettingsContext';
 import { useNotifications } from '../UI/Notifications';
@@ -11,6 +12,7 @@ import { Plus, Edit2, Trash2, Copy, ChefHat, Eye, FileText, Sparkles } from 'luc
 import excelData from '../../data/excel_full_data.json';
 
 export default function RecipesList() {
+    const { t } = useTranslation();
     const { recipes, addRecipe, updateRecipe, deleteRecipe, ingredients } = useData();
     const { currency } = useSettings();
     const { success } = useNotifications();
@@ -87,9 +89,9 @@ export default function RecipesList() {
         const clonedRecipe = {
             ...recipe,
             name: recipe.nombre ? `${recipe.nombre} (Copia)` : `${recipe.name} (Copia)`,
-            nombre: undefined, // Clear Excel name
-            numero: undefined, // Clear Excel number
-            fromExcel: undefined, // Make it editable
+            nombre: undefined,
+            numero: undefined,
+            fromExcel: undefined,
             id: undefined
         };
         setSelectedRecipe(clonedRecipe);
@@ -99,10 +101,10 @@ export default function RecipesList() {
     const handleSaveRecipe = (recipeData) => {
         if (selectedRecipe && selectedRecipe.id) {
             updateRecipe(selectedRecipe.id, recipeData);
-            success('Receta actualizada correctamente');
+            success(t('recipesList.recipeUpdated'));
         } else {
             addRecipe(recipeData);
-            success('Receta creada correctamente');
+            success(t('recipesList.recipeCreated'));
         }
     };
 
@@ -113,7 +115,7 @@ export default function RecipesList() {
     const handleDeleteConfirm = () => {
         if (confirmDelete) {
             deleteRecipe(confirmDelete.id);
-            success(`"${confirmDelete.name}" eliminada correctamente`);
+            success(`"${confirmDelete.name}" ${t('recipesList.recipeDeleted')}`);
             setConfirmDelete(null);
         }
     };
@@ -144,10 +146,10 @@ export default function RecipesList() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                         <h2 style={{ margin: 0, marginBottom: '0.5rem', color: 'var(--primary)' }}>
-                            Mis Recetas
+                            {t('recipesList.myRecipes')}
                         </h2>
                         <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                            {excelRecipes.length} recetas de ejemplo • {customRecipes.length} recetas personalizadas
+                            {excelRecipes.length} {t('recipesList.sampleRecipes')} • {customRecipes.length} {t('recipesList.customRecipes')}
                         </p>
                     </div>
                     <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -169,7 +171,7 @@ export default function RecipesList() {
                             }}
                         >
                             <Sparkles size={18} />
-                            Asistente IA
+                            {t('recipesList.aiAssistant')}
                         </button>
                         <button
                             className="btn btn-primary"
@@ -177,7 +179,7 @@ export default function RecipesList() {
                             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                         >
                             <Plus size={18} />
-                            Nueva Receta
+                            {t('recipesList.newRecipe')}
                         </button>
                     </div>
                 </div>
@@ -193,10 +195,10 @@ export default function RecipesList() {
                 }}>
                     <ChefHat size={48} style={{ color: 'var(--text-tertiary)', margin: '0 auto 1rem' }} />
                     <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-secondary)' }}>
-                        No hay recetas disponibles
+                        {t('recipesList.noRecipes')}
                     </h3>
                     <p style={{ margin: '0 0 1.5rem 0', color: 'var(--text-tertiary)', fontSize: '0.875rem' }}>
-                        Comienza creando tu primera receta con cálculos automáticos
+                        {t('recipesList.startCreating')}
                     </p>
                     <button
                         className="btn btn-primary"
@@ -204,7 +206,7 @@ export default function RecipesList() {
                         style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
                     >
                         <Plus size={18} />
-                        Crear Primera Receta
+                        {t('recipesList.createFirst')}
                     </button>
                 </div>
             ) : (
@@ -240,12 +242,12 @@ export default function RecipesList() {
                                     {recipe.fromExcel ? (
                                         <>
                                             <FileText size={12} />
-                                            Receta de Ejemplo
+                                            {t('recipesList.sampleBadge')}
                                         </>
                                     ) : (
                                         <>
                                             <ChefHat size={12} />
-                                            Personalizada
+                                            {t('recipesList.customBadge')}
                                         </>
                                     )}
                                 </span>
@@ -256,7 +258,7 @@ export default function RecipesList() {
                                     {recipe.nombre || recipe.name}
                                 </h3>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                                    {recipe.porciones || recipe.portions} porciones
+                                    {recipe.porciones || recipe.portions} {t('recipesList.portions')}
                                 </div>
                             </div>
 
@@ -271,7 +273,7 @@ export default function RecipesList() {
                             }}>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                                        Costo/Porción
+                                        {t('recipesList.costPerPortion')}
                                     </div>
                                     <div style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--success)' }}>
                                         {formatCurrency(recipe.costoPorPorcion || 0, currency)}
@@ -279,7 +281,7 @@ export default function RecipesList() {
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                                        Calorías/Porción
+                                        {t('recipesList.caloriesPerPortion')}
                                     </div>
                                     <div style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--primary)' }}>
                                         {(recipe.caloriasPorPorcion || 0).toFixed(0)} kcal
@@ -303,7 +305,7 @@ export default function RecipesList() {
                                     }}
                                 >
                                     {recipe.fromExcel ? <Eye size={14} /> : <Edit2 size={14} />}
-                                    <span>{recipe.fromExcel ? 'Ver' : 'Editar'}</span>
+                                    <span>{recipe.fromExcel ? t('recipesList.view') : t('recipesList.edit')}</span>
                                 </button>
 
                                 <button
@@ -318,10 +320,10 @@ export default function RecipesList() {
                                         fontSize: '0.875rem',
                                         padding: '0.5rem'
                                     }}
-                                    title="Clonar receta"
+                                    title={t('recipesList.clone')}
                                 >
                                     <Copy size={14} />
-                                    <span>Clonar</span>
+                                    <span>{t('recipesList.clone')}</span>
                                 </button>
 
                                 {!recipe.fromExcel && (
@@ -340,7 +342,7 @@ export default function RecipesList() {
                                             justifyContent: 'center',
                                             fontSize: '0.875rem'
                                         }}
-                                        title="Eliminar receta"
+                                        title={t('common.delete')}
                                     >
                                         <Trash2 size={14} />
                                     </button>
@@ -405,7 +407,7 @@ export default function RecipesList() {
                                 className="btn btn-secondary"
                                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                             >
-                                Cerrar
+                                {t('common.close')}
                             </button>
                         </div>
                         <Receta recetaNum={viewingExcelRecipe} />
@@ -418,10 +420,10 @@ export default function RecipesList() {
                 isOpen={!!confirmDelete}
                 onClose={() => setConfirmDelete(null)}
                 onConfirm={handleDeleteConfirm}
-                title="¿Eliminar receta?"
-                message={`¿Estás seguro de que deseas eliminar "${confirmDelete?.name}"? Esta acción no se puede deshacer.`}
-                confirmText="Eliminar"
-                cancelText="Cancelar"
+                title={t('recipesList.deleteTitle')}
+                message={`${t('recipesList.deleteConfirm')} "${confirmDelete?.name}"? ${t('recipesList.deleteWarning')}`}
+                confirmText={t('common.delete')}
+                cancelText={t('common.cancel')}
                 type="danger"
             />
         </div>

@@ -57,6 +57,7 @@ function Header() {
                         <option value="en">🇬🇧 EN</option>
                         <option value="fr">🇫🇷 FR</option>
                         <option value="it">🇮🇹 IT</option>
+                        <option value="pt">🇧🇷 PT</option>
                     </select>
 
                     {/* Currency Selector */}
@@ -69,6 +70,7 @@ function Header() {
                         <option value="ARS">$ ARS</option>
                         <option value="USD">US$ USD</option>
                         <option value="EUR">€ EUR</option>
+                        <option value="BRL">R$ BRL</option>
                     </select>
 
                     {/* Unit System Toggle */}
