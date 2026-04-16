@@ -1,8 +1,8 @@
 {
     "app": {
-        "name": "Sistema de Costeo de Recetas",
-        "shortName": "Costeo Recetas",
-        "description": "Calcule costos de recetas gastronómicas con precisión"
+        "name": "Platify",
+        "shortName": "Platify",
+        "description": "Plataforma integral de gestión, menú y costeo gastronómico"
     },
     "nav": {
         "dashboard": "Panel",

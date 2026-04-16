@@ -1,8 +1,8 @@
 {
     "app": {
-        "name": "Recipe Costing System",
-        "shortName": "Recipe Costing",
-        "description": "Calculate gastronomic recipe costs with precision"
+        "name": "Platify",
+        "shortName": "Platify",
+        "description": "Comprehensive platform for menu planning and recipe costing"
     },
     "nav": {
         "dashboard": "Dashboard",
