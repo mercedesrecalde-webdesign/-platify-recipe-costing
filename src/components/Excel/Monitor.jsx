@@ -11,8 +11,15 @@ function Monitor() {
     const { currency } = useSettings();
     const { success, info } = useNotifications();
 
-    // Target profit margin (can be edited)
-    const [targetMargin, setTargetMargin] = useState(55); // 55% default
+    // Target profit margin (persisted)
+    const [targetMargin, setTargetMargin] = useState(() => {
+        const saved = localStorage.getItem('targetMargin');
+        return saved ? parseFloat(saved) : 55;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('targetMargin', targetMargin.toString());
+    }, [targetMargin]);
 
     // Sale prices storage (editable)
     const [salePrices, setSalePrices] = useState(() => {

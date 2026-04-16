@@ -175,11 +175,11 @@ export default function DiningReports() {
           {hasPie ? (
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={categoryData} cx="50%" cy="45%" outerRadius={90} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
+                <Pie data={categoryData} cx="50%" cy="45%" outerRadius={80} dataKey="value">
                   {categoryData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip contentStyle={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '0.8rem' }} />
-                <Legend wrapperStyle={{ fontSize: '0.78rem' }} />
+                <Legend wrapperStyle={{ fontSize: '0.72rem', paddingTop: '10px' }} />
               </PieChart>
             </ResponsiveContainer>
           ) : <EmptyChart text="No hay datos de categorías disponibles" />}

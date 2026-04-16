@@ -60,7 +60,10 @@ function ChartCard({ title, children, height = 280 }) {
 export default function TechReports() {
   const { currency } = useSettings();
   const { recipes = [], ingredients = [] } = useData();
-  const [targetMargin] = useState(55);
+  const [targetMargin] = useState(() => {
+    const saved = localStorage.getItem('targetMargin');
+    return saved ? parseFloat(saved) : 55;
+  });
 
   // Parse excel recipes for profitability data
   const profitData = useMemo(() => {
@@ -160,12 +163,12 @@ export default function TechReports() {
         <ChartCard title="💰 Costo vs. Precio de Venta por Receta" height={280}>
           {profitData.length ? (
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={profitData} margin={{ top: 4, right: 16, left: 0, bottom: 40 }}>
+              <BarChart data={profitData} margin={{ top: 5, right: 10, left: -20, bottom: 45 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
                 <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'var(--text-secondary)' }} angle={-25} textAnchor="end" />
                 <YAxis tick={{ fontSize: 11, fill: 'var(--text-secondary)' }} />
                 <Tooltip contentStyle={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '0.8rem' }} />
-                <Legend wrapperStyle={{ fontSize: '0.78rem' }} />
+                <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '0.78rem' }} />
                 <Bar dataKey="costo" name="Costo/porción" fill="var(--primary)" radius={[6, 6, 0, 0]} />
                 <Bar dataKey="venta" name="Precio venta" fill="var(--accent)" radius={[6, 6, 0, 0]} opacity={0.85} />
               </BarChart>
@@ -178,12 +181,11 @@ export default function TechReports() {
           {catData.length ? (
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={catData} cx="50%" cy="55%" outerRadius={75} dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
+                <Pie data={catData} cx="50%" cy="45%" outerRadius={80} dataKey="value">
                   {catData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip contentStyle={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '0.8rem' }} />
-                <Legend wrapperStyle={{ fontSize: '0.78rem' }} />
+                <Legend wrapperStyle={{ fontSize: '0.72rem', paddingTop: '10px' }} />
               </PieChart>
             </ResponsiveContainer>
           ) : <EmptyChart text="No hay ingredientes en el inventario" />}
