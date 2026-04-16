@@ -217,6 +217,7 @@ function Monitor() {
                             <tr style={{ background: 'var(--primary)', color: 'white' }}>
                                 <th style={{ color: 'white' }}>{t('monitorView.recipe')}</th>
                                 <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.costPortion')}</th>
+                                <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.breakEven', 'Pto. Equilibrio')}</th>
                                 <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.salePrice')}</th>
                                 <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.profit')}</th>
                                 <th style={{ color: 'white', textAlign: 'right' }}>{t('monitorView.marginPercent')}</th>
@@ -261,6 +262,9 @@ function Monitor() {
                                                 </div>
                                             </td>
                                             <td style={{ textAlign: 'right', fontFamily: 'monospace', fontWeight: '600' }}>
+                                                {formatCurrency(receta.costoPorPorcion, currency)}
+                                            </td>
+                                            <td style={{ textAlign: 'right', fontFamily: 'monospace', fontSize: '0.9em', color: 'var(--text-tertiary)' }}>
                                                 {formatCurrency(receta.costoPorPorcion, currency)}
                                             </td>
                                             <td style={{ textAlign: 'right' }}>
