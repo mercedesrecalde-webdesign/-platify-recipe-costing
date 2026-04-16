@@ -40,7 +40,8 @@ function Header() {
                         style={{
                             height: '110px',
                             width: 'auto',
-                            filter: theme === 'dark' ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.8)) drop-shadow(0px 0px 2px #fff)' : 'none',
+                            filter: theme === 'dark' ? 'invert(1)' : 'none',
+                            mixBlendMode: theme === 'dark' ? 'screen' : 'normal',
                             transition: 'all 0.3s ease'
                         }}
                     />
