@@ -39,7 +39,11 @@ function Header() {
                         alt="PLATIFY Logo"
                         style={{
                             height: '50px',
-                            width: 'auto'
+                            width: 'auto',
+                            background: '#ffffff',
+                            padding: '4px 10px',
+                            borderRadius: '12px',
+                            boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
                         }}
                     />
                 </div>
