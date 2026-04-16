@@ -138,36 +138,36 @@ export default function RecipesList() {
         
         // CSS for A4 Print
         const printStyles = `
-            @page { size: A4; margin: 20mm; }
-            body { font-family: 'Inter', -apple-system, sans-serif; color: #333; line-height: 1.6; padding: 0; margin: 0; background: white !important; }
-            .print-container { max-width: 800px; margin: 0 auto; }
-            .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
-            .title { font-size: 24pt; font-weight: bold; margin: 0; color: #1a1a1a; }
-            .meta { font-size: 10pt; color: #666; }
-            .section { margin-bottom: 2rem; page-break-inside: avoid; }
-            .section-title { font-size: 14pt; font-weight: bold; border-left: 4px solid #000; padding-left: 10px; margin-bottom: 1rem; background: #f9f9f9; padding: 5px 10px; }
+            @page { size: A4; margin: 10mm; }
+            body { font-family: 'Inter', -apple-system, sans-serif; color: #333; line-height: 1.4; padding: 0; margin: 0; background: white !important; }
+            .print-container { max-width: 100%; margin: 0 auto; }
+            .header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+            .title { font-size: 20pt; font-weight: 800; margin: 0; color: #000; text-transform: uppercase; }
+            .meta { font-size: 11pt; font-weight: 600; color: #444; }
+            .section { margin-bottom: 1.5rem; }
+            .section-title { font-size: 12pt; font-weight: 800; border-bottom: 1px solid #000; margin-bottom: 0.5rem; padding-bottom: 2px; text-transform: uppercase; }
             .table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-            .table th { background: #f2f2f2; text-align: left; padding: 8px; border: 1px solid #ddd; font-size: 10pt; }
-            .table td { padding: 8px; border: 1px solid #ddd; font-size: 10pt; }
-            .totals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; background: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 2rem; }
-            .total-item { text-align: center; }
-            .total-label { font-size: 8pt; color: #666; display: block; }
-            .total-value { font-size: 12pt; font-weight: bold; }
-            .haccp { border: 2px solid #ff4444; padding: 1rem; border-radius: 4px; background: #fff5f5; }
-            .photo-container { width: 100%; height: 300px; overflow: hidden; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #ddd; }
+            .table th { background: #eee; text-align: left; padding: 6px; border: 1px solid #333; font-size: 10pt; font-weight: 800; }
+            .table td { padding: 6px; border: 1px solid #333; font-size: 10pt; }
+            .haccp { border: 2px solid #000; padding: 0.75rem; border-radius: 0; background: #fff; font-weight: 700; color: #d00; }
+            .photo-container { width: 100%; height: 240px; overflow: hidden; border: 1px solid #000; margin-bottom: 1rem; }
             .photo-container img { width: 100%; height: 100%; object-fit: cover; }
-            .footer { margin-top: 3rem; font-size: 8pt; color: #999; text-align: center; border-top: 1px solid #eee; padding-top: 1rem; }
+            .procedure-text { white-space: pre-wrap; font-size: 10pt; line-height: 1.5; }
         `;
 
-        const ingredientsHtml = (recipe.ingredients || []).map(ing => `
-            <tr>
-                <td>${ing.name || ing.nombre}</td>
-                <td style="text-align: right;">${(ing.neto || ing.quantity || 0).toFixed(1)} ${ing.unit || 'g'}</td>
-                <td style="text-align: center;">${(ing.fc || 1).toFixed(2)}</td>
-                <td style="text-align: right;">${(ing.bruto || 0).toFixed(1)} ${ing.unit || 'g'}</td>
-                <td style="text-align: right;">${formatCurrency(ing.costoTotal || ing.cost || 0, currency)}</td>
-            </tr>
-        `).join('');
+        const ingredientsHtml = (recipe.ingredients || []).map(ing => {
+            const neto = ing.net_quantity || ing.neto || 0;
+            const fc = ing.fc || 1;
+            const bruto = ing.bruto || (neto * fc);
+            return `
+                <tr>
+                    <td style="font-weight: 600;">${ing.ingredient?.name || ing.name || ing.nombre}</td>
+                    <td style="text-align: right;">${parseFloat(neto).toFixed(1)} ${ing.unit || 'g'}</td>
+                    <td style="text-align: center;">${parseFloat(fc).toFixed(2)}</td>
+                    <td style="text-align: right; font-weight: 700;">${parseFloat(bruto).toFixed(1)} ${ing.unit || 'g'}</td>
+                </tr>
+            `;
+        }).join('');
 
         const photoHtml = (recipe.photo_url || recipe.photoUrl) 
             ? `<div class="photo-container"><img src="${recipe.photo_url || recipe.photoUrl}" alt="Emplatado" /></div>` 
@@ -176,7 +176,7 @@ export default function RecipesList() {
         printWindow.document.write(`
             <html>
                 <head>
-                    <title>Platify - ${recipe.name || recipe.nombre}</title>
+                    <title>FICHA TÉCNICA - ${recipe.name || recipe.nombre}</title>
                     <style>${printStyles}</style>
                 </head>
                 <body>
@@ -185,63 +185,42 @@ export default function RecipesList() {
                             <div>
                                 <h1 class="title">${recipe.name || recipe.nombre}</h1>
                                 <div class="meta">
-                                    <span>${new Date().toLocaleDateString()}</span> • 
-                                    <span>${recipe.portions || recipe.porciones} ${t('recipesList.portions')}</span>
+                                    <span>PORCIONES: <strong>${recipe.portions || recipe.porciones}</strong></span>
                                 </div>
                             </div>
-                            <div style="text-align: right; color: #999; font-size: 12pt; font-weight: 900;">PLATIFY</div>
+                            <div style="text-align: right; font-weight: 900; font-size: 14pt;">PROTOCOLO DE COCINA</div>
                         </div>
 
                         ${photoHtml}
 
                         <div class="section">
-                            <h2 class="section-title">${t('recipeEditor.recipeIngredients')}</h2>
+                            <h2 class="section-title">INGREDIENTES Y PESOS</h2>
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Ingrediente</th>
                                         <th style="text-align: right;">Peso Neto</th>
                                         <th style="text-align: center;">FC</th>
-                                        <th style="text-align: right;">Peso Bruto</th>
-                                        <th style="text-align: right;">Costo</th>
+                                        <th style="text-align: right;">Peso Bruto (A COMPRAR)</th>
                                     </tr>
                                 </thead>
                                 <tbody>${ingredientsHtml}</tbody>
                             </table>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem;">
                             <div class="section">
-                                <h2 class="section-title">${t('recipeEditor.procedure')}</h2>
-                                <div style="white-space: pre-wrap; font-size: 10pt;">${recipe.procedure || 'No se especificó procedimiento.'}</div>
+                                <h2 class="section-title">PROCEDIMIENTO DE ELABORACIÓN</h2>
+                                <div class="procedure-text">${recipe.procedure || 'No se especificó procedimiento.'}</div>
                             </div>
                             <div class="section">
-                                <h2 class="section-title" style="border-left-color: #ff4444; color: #cc0000;">${t('recipeEditor.haccp')}</h2>
-                                <div class="haccp">${recipe.haccp_notes || recipe.haccpNotes || 'No hay notas críticas de seguridad.'}</div>
+                                <h2 class="section-title" style="color: #d00;">SEGURIDAD ALIMENTARIA (HACCP)</h2>
+                                <div class="haccp">${recipe.haccp_notes || recipe.haccpNotes || 'Mantener buenas prácticas de manufactura.'}</div>
                             </div>
                         </div>
 
-                        <div class="totals">
-                            <div class="total-item">
-                                <span class="total-label">COSTO TOTAL</span>
-                                <span class="total-value">${formatCurrency(recipe.total_cost || recipe.totalCosto || 0, currency)}</span>
-                            </div>
-                            <div class="total-item">
-                                <span class="total-label">COSTO / PORCIÓN</span>
-                                <span class="total-value">${formatCurrency(recipe.costo_por_porcion || recipe.costoPorPorcion || 0, currency)}</span>
-                            </div>
-                            <div class="total-item">
-                                <span class="total-label">CALORÍAS TOTALES</span>
-                                <span class="total-value">${(recipe.total_calories || recipe.totalCalorias || 0).toFixed(0)} kcal</span>
-                            </div>
-                            <div class="total-item">
-                                <span class="total-label">CALORÍAS / PORCIÓN</span>
-                                <span class="total-value">${(recipe.calorias_por_porcion || recipe.caloriasPorPorcion || 0).toFixed(0)} kcal</span>
-                            </div>
-                        </div>
-
-                        <div class="footer">
-                            Desarrollado por Mercedes Recalde - Platify Recipe Costing App &copy; ${new Date().getFullYear()}
+                        <div style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 0.5rem; font-size: 8pt; color: #999; text-align: center;">
+                            PLATIFY Gastronomic Ecosystem - Ficha Técnica de Elaboración
                         </div>
                     </div>
                     <script>
