@@ -38,12 +38,10 @@ function Header() {
                         src="/platify-logo.png"
                         alt="PLATIFY Logo"
                         style={{
-                            height: '50px',
+                            height: '70px',
                             width: 'auto',
-                            background: '#ffffff',
-                            padding: '4px 10px',
-                            borderRadius: '12px',
-                            boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+                            filter: theme === 'dark' ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.8)) drop-shadow(0px 0px 2px #fff)' : 'none',
+                            transition: 'all 0.3s ease'
                         }}
                     />
                 </div>
