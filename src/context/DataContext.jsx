@@ -30,6 +30,34 @@ export function DataProvider({ children }) {
     const [correctionFactors] = useState(correctionFactorsData);
     const [nutritionalInfo] = useState(nutritionalInfoData);
 
+    // Helper functions for data lookup
+    const getCorrectionFactor = (name) => {
+        const searchName = (name || '').toLowerCase().trim();
+        // 1. Try exact match
+        let match = correctionFactors.find(cf => cf.name.toLowerCase() === searchName);
+        if (match) return match.correctionFactor;
+
+        // 2. Try fuzzy match (if searchName is contained in the factor name or vice versa)
+        match = correctionFactors.find(cf => {
+            const cfName = cf.name.toLowerCase();
+            return cfName.includes(searchName) || searchName.includes(cfName);
+        });
+        
+        return match ? match.correctionFactor : 1;
+    };
+
+    const getNutritionalInfo = (name) => {
+        const searchName = (name || '').toLowerCase().trim();
+        let match = nutritionalInfo.find(ni => ni.name.toLowerCase() === searchName);
+        if (match) return match;
+
+        match = nutritionalInfo.find(ni => {
+            const niName = ni.name.toLowerCase();
+            return niName.includes(searchName) || searchName.includes(niName);
+        });
+        return match;
+    };
+
     const fetchRecipes = async () => {
         try {
             console.log('Fetching recipes from Supabase...');
@@ -433,31 +461,8 @@ export function DataProvider({ children }) {
             updateRecipe,
             deleteRecipe,
             fetchRecipes,
-            getCorrectionFactor: (name) => {
-                const searchName = (name || '').toLowerCase().trim();
-                // 1. Try exact match
-                let match = correctionFactors.find(cf => cf.name.toLowerCase() === searchName);
-                if (match) return match.correctionFactor;
-
-                // 2. Try fuzzy match (if searchName is contained in the factor name or vice versa)
-                match = correctionFactors.find(cf => {
-                    const cfName = cf.name.toLowerCase();
-                    return cfName.includes(searchName) || searchName.includes(cfName);
-                });
-                
-                return match ? match.correctionFactor : 1;
-            },
-            getNutritionalInfo: (name) => {
-                const searchName = (name || '').toLowerCase().trim();
-                let match = nutritionalInfo.find(ni => ni.name.toLowerCase() === searchName);
-                if (match) return match;
-
-                match = nutritionalInfo.find(ni => {
-                    const niName = ni.name.toLowerCase();
-                    return niName.includes(searchName) || searchName.includes(niName);
-                });
-                return match;
-            }
+            getCorrectionFactor,
+            getNutritionalInfo
         }}>
             {children}
         </DataContext.Provider>
