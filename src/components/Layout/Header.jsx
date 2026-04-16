@@ -38,7 +38,7 @@ function Header() {
                         src="/platify-logo.png"
                         alt="PLATIFY Logo"
                         style={{
-                            height: '70px',
+                            height: '110px',
                             width: 'auto',
                             filter: theme === 'dark' ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.8)) drop-shadow(0px 0px 2px #fff)' : 'none',
                             transition: 'all 0.3s ease'
