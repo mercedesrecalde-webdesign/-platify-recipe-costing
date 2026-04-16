@@ -40,8 +40,9 @@ function Header() {
                         style={{
                             height: '110px',
                             width: 'auto',
-                            filter: theme === 'dark' ? 'invert(1)' : 'none',
-                            mixBlendMode: theme === 'dark' ? 'screen' : 'normal',
+                            background: theme === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
+                            borderRadius: '8px',
+                            padding: theme === 'dark' ? '8px' : '0',
                             transition: 'all 0.3s ease'
                         }}
                     />

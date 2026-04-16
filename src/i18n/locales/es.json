@@ -289,7 +289,12 @@
         "nameRequired": "El nombre es requerido",
         "portionsRequired": "Las porciones deben ser mayor a 0",
         "ingredientsRequired": "Debes agregar al menos un ingrediente",
-        "selectAndQuantity": "Selecciona un ingrediente y cantidad válida"
+        "selectAndQuantity": "Selecciona un ingrediente y cantidad válida",
+        "procedure": "Procedimiento / Elaboración",
+        "haccp": "Seguridad Alimentaria (HACCP)",
+        "imageUrl": "URL de la Imagen (Emplatado)",
+        "imagePreview": "Vista Previa",
+        "platingInstructions": "Instrucciones de Emplatado y Estética"
     },
     "recipesList": {
         "myRecipes": "Mis Recetas",
@@ -313,7 +318,11 @@
         "deleteWarning": "Esta acción no se puede deshacer.",
         "recipeUpdated": "Receta actualizada correctamente",
         "recipeCreated": "Receta creada correctamente",
-        "recipeDeleted": "eliminada correctamente"
+        "recipeDeleted": "eliminada correctamente",
+        "print": "Imprimir",
+        "procedureTab": "Procedimiento",
+        "ingredientsTab": "Ingredientes",
+        "safetyTab": "HACCP / Seguridad"
     },
     "dietAssistant": {
         "title": "Asistente Inteligente",

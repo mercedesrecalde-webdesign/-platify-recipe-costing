@@ -8,7 +8,7 @@ import RecipeEditor from './RecipeEditor';
 import DietaryAssistant from './DietaryAssistant';
 import Receta from '../Excel/Receta';
 import ConfirmDialog from '../UI/ConfirmDialog';
-import { Plus, Edit2, Trash2, Copy, ChefHat, Eye, FileText, Sparkles } from 'lucide-react';
+import { Plus, Edit2, Trash2, Copy, ChefHat, Eye, FileText, Sparkles, Printer } from 'lucide-react';
 import excelData from '../../data/excel_full_data.json';
 
 export default function RecipesList() {
@@ -133,6 +133,128 @@ export default function RecipesList() {
         setAssistantOpen(false);
     };
 
+    const handlePrint = (recipe) => {
+        const printWindow = window.open('', '_blank');
+        
+        // CSS for A4 Print
+        const printStyles = `
+            @page { size: A4; margin: 20mm; }
+            body { font-family: 'Inter', -apple-system, sans-serif; color: #333; line-height: 1.6; padding: 0; margin: 0; background: white !important; }
+            .print-container { max-width: 800px; margin: 0 auto; }
+            .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+            .title { font-size: 24pt; font-weight: bold; margin: 0; color: #1a1a1a; }
+            .meta { font-size: 10pt; color: #666; }
+            .section { margin-bottom: 2rem; page-break-inside: avoid; }
+            .section-title { font-size: 14pt; font-weight: bold; border-left: 4px solid #000; padding-left: 10px; margin-bottom: 1rem; background: #f9f9f9; padding: 5px 10px; }
+            .table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+            .table th { background: #f2f2f2; text-align: left; padding: 8px; border: 1px solid #ddd; font-size: 10pt; }
+            .table td { padding: 8px; border: 1px solid #ddd; font-size: 10pt; }
+            .totals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; background: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 2rem; }
+            .total-item { text-align: center; }
+            .total-label { font-size: 8pt; color: #666; display: block; }
+            .total-value { font-size: 12pt; font-weight: bold; }
+            .haccp { border: 2px solid #ff4444; padding: 1rem; border-radius: 4px; background: #fff5f5; }
+            .photo-container { width: 100%; height: 300px; overflow: hidden; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #ddd; }
+            .photo-container img { width: 100%; height: 100%; object-fit: cover; }
+            .footer { margin-top: 3rem; font-size: 8pt; color: #999; text-align: center; border-top: 1px solid #eee; padding-top: 1rem; }
+        `;
+
+        const ingredientsHtml = (recipe.ingredients || []).map(ing => `
+            <tr>
+                <td>${ing.name || ing.nombre}</td>
+                <td style="text-align: right;">${(ing.neto || ing.quantity || 0).toFixed(1)} ${ing.unit || 'g'}</td>
+                <td style="text-align: center;">${(ing.fc || 1).toFixed(2)}</td>
+                <td style="text-align: right;">${(ing.bruto || 0).toFixed(1)} ${ing.unit || 'g'}</td>
+                <td style="text-align: right;">${formatCurrency(ing.costoTotal || ing.cost || 0, currency)}</td>
+            </tr>
+        `).join('');
+
+        const photoHtml = (recipe.photo_url || recipe.photoUrl) 
+            ? `<div class="photo-container"><img src="${recipe.photo_url || recipe.photoUrl}" alt="Emplatado" /></div>` 
+            : '';
+
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Platify - ${recipe.name || recipe.nombre}</title>
+                    <style>${printStyles}</style>
+                </head>
+                <body>
+                    <div class="print-container">
+                        <div class="header">
+                            <div>
+                                <h1 class="title">${recipe.name || recipe.nombre}</h1>
+                                <div class="meta">
+                                    <span>${new Date().toLocaleDateString()}</span> • 
+                                    <span>${recipe.portions || recipe.porciones} ${t('recipesList.portions')}</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; color: #999; font-size: 12pt; font-weight: 900;">PLATIFY</div>
+                        </div>
+
+                        ${photoHtml}
+
+                        <div class="section">
+                            <h2 class="section-title">${t('recipeEditor.recipeIngredients')}</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Ingrediente</th>
+                                        <th style="text-align: right;">Peso Neto</th>
+                                        <th style="text-align: center;">FC</th>
+                                        <th style="text-align: right;">Peso Bruto</th>
+                                        <th style="text-align: right;">Costo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${ingredientsHtml}</tbody>
+                            </table>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                            <div class="section">
+                                <h2 class="section-title">${t('recipeEditor.procedure')}</h2>
+                                <div style="white-space: pre-wrap; font-size: 10pt;">${recipe.procedure || 'No se especificó procedimiento.'}</div>
+                            </div>
+                            <div class="section">
+                                <h2 class="section-title" style="border-left-color: #ff4444; color: #cc0000;">${t('recipeEditor.haccp')}</h2>
+                                <div class="haccp">${recipe.haccp_notes || recipe.haccpNotes || 'No hay notas críticas de seguridad.'}</div>
+                            </div>
+                        </div>
+
+                        <div class="totals">
+                            <div class="total-item">
+                                <span class="total-label">COSTO TOTAL</span>
+                                <span class="total-value">${formatCurrency(recipe.total_cost || recipe.totalCosto || 0, currency)}</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="total-label">COSTO / PORCIÓN</span>
+                                <span class="total-value">${formatCurrency(recipe.costo_por_porcion || recipe.costoPorPorcion || 0, currency)}</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="total-label">CALORÍAS TOTALES</span>
+                                <span class="total-value">${(recipe.total_calories || recipe.totalCalorias || 0).toFixed(0)} kcal</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="total-label">CALORÍAS / PORCIÓN</span>
+                                <span class="total-value">${(recipe.calorias_por_porcion || recipe.caloriasPorPorcion || 0).toFixed(0)} kcal</span>
+                            </div>
+                        </div>
+
+                        <div class="footer">
+                            Desarrollado por Mercedes Recalde - Platify Recipe Costing App &copy; ${new Date().getFullYear()}
+                        </div>
+                    </div>
+                    <script>
+                        window.onload = () => {
+                            window.print();
+                        };
+                    </script>
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+    };
+
     // Filter only custom recipes (not the Excel ones)
     const customRecipes = recipes.filter(r => !r.fromExcel);
 
@@ -253,6 +375,24 @@ export default function RecipesList() {
                                 </span>
                             </div>
 
+                            {/* Recipe Image Preview */}
+                            {(recipe.photo_url || recipe.photoUrl) && (
+                                <div style={{ 
+                                    width: '100%', 
+                                    height: '160px', 
+                                    borderRadius: '8px', 
+                                    overflow: 'hidden', 
+                                    marginBottom: '1rem',
+                                    border: '1px solid var(--border-color)'
+                                }}>
+                                    <img 
+                                        src={recipe.photo_url || recipe.photoUrl} 
+                                        alt={recipe.name} 
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
+                                </div>
+                            )}
+
                             <div style={{ marginBottom: '1rem' }}>
                                 <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--primary)', fontSize: '1.125rem' }}>
                                     {recipe.nombre || recipe.name}
@@ -306,6 +446,22 @@ export default function RecipesList() {
                                 >
                                     {recipe.fromExcel ? <Eye size={14} /> : <Edit2 size={14} />}
                                     <span>{recipe.fromExcel ? t('recipesList.view') : t('recipesList.edit')}</span>
+                                </button>
+
+                                <button
+                                    onClick={() => handlePrint(recipe)}
+                                    className="btn btn-secondary"
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '0.5rem',
+                                        fontSize: '0.875rem',
+                                        padding: '0.5rem'
+                                    }}
+                                    title={t('common.print')}
+                                >
+                                    <Printer size={14} />
                                 </button>
 
                                 <button

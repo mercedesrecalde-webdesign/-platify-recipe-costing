@@ -4,6 +4,8 @@ import { X, Save, Plus, Trash2, Calculator } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useSettings } from '../../context/SettingsContext';
 import { formatCurrency } from '../../utils/currencyConverter';
+import { supabase } from '../../utils/supabaseClient';
+import { Image, ClipboardList, ShieldCheck, Upload, Trash } from 'lucide-react';
 
 export default function RecipeEditor({
     recipe = null,
@@ -12,41 +14,71 @@ export default function RecipeEditor({
     onSave
 }) {
     const { t } = useTranslation();
-    const { ingredients, correctionFactors, nutritionalInfo } = useData();
+    const { ingredients, getCorrectionFactor, getNutritionalInfo, addIngredient } = useData();
     const { currency } = useSettings();
 
     const [formData, setFormData] = useState({
         name: '',
         portions: 4,
-        ingredients: []
+        ingredients: [],
+        procedure: '',
+        haccpNotes: '',
+        photoUrl: ''
     });
+
+    const [isUploading, setIsUploading] = useState(false);
 
     const [errors, setErrors] = useState({});
     const [selectedIngredient, setSelectedIngredient] = useState('');
     const [netQuantity, setNetQuantity] = useState('');
+    const [isAddingNew, setIsAddingNew] = useState(false);
+    const [quickAddIngredient, setQuickAddIngredient] = useState({ name: '', purchasePrice: '', quantity: 1000, unit: 'g', category: 'Otros' });
 
     // Sync formData with recipe prop
     useEffect(() => {
         if (recipe) {
             // Normalize ingredients from both AI and manual recipes
-            const normalizedIngredients = (recipe.ingredients || []).map(ing => ({
-                id: ing.id || `recipe_ing_${Date.now()}_${Math.random()}`,
-                ingredientId: ing.ingredientId,
-                name: ing.name || ing.nombre,
-                neto: ing.neto || ing.quantity || 0,
-                unit: ing.unit,
-                fc: ing.fc || 1,
-                bruto: ing.bruto || ((ing.neto || ing.quantity || 0) * (ing.fc || 1)),
-                costoTotal: ing.costoTotal || 0,
-                costoPorcion: ing.costoPorcion || 0,
-                calories: ing.calories || 0,
-                caloriasPorcion: ing.caloriasPorcion || 0
-            }));
+            const normalizedIngredients = (recipe.ingredients || []).map(ing => {
+                const ingredientId = ing.ingredient_id || ing.ingredientId;
+                
+                // Lookup LATEST data from wholesale list
+                const wholesaleIng = ingredients.find(i => i.id === ingredientId);
+                
+                // Use latest data or fallback to saved data
+                const name = wholesaleIng?.name || ing.ingredient?.name || ing.name || ing.nombre;
+                const fc = getCorrectionFactor(name); // Always use latest FC logic
+                const neto = ing.net_quantity || ing.neto || ing.quantity || 0;
+                const bruto = neto * fc;
+                
+                // Use latest price for accurate costing
+                const purchasePrice = wholesaleIng?.purchasePrice || wholesaleIng?.purchase_price || 0;
+                const purchaseQty = wholesaleIng?.quantity || 1;
+                const cost = (bruto / purchaseQty) * purchasePrice;
+                
+                const calories = ing.calories || ing.calorias || 0;
+
+                return {
+                    id: ing.id || `recipe_ing_${Date.now()}_${Math.random()}`,
+                    ingredientId: ingredientId,
+                    name: name,
+                    neto: neto,
+                    unit: wholesaleIng?.unit || ing.unit,
+                    fc: fc,
+                    bruto: bruto,
+                    costoTotal: cost,
+                    costoPorcion: (cost / (recipe.portions || recipe.porciones || 1)),
+                    calories: calories,
+                    caloriasPorcion: (calories / (recipe.portions || recipe.porciones || 1))
+                };
+            });
 
             setFormData({
                 name: recipe.name || recipe.nombre || '',
                 portions: recipe.portions || recipe.porciones || 4,
-                ingredients: normalizedIngredients
+                ingredients: normalizedIngredients,
+                procedure: recipe.procedure || '',
+                haccpNotes: recipe.haccp_notes || recipe.haccpNotes || '',
+                photoUrl: recipe.photo_url || recipe.photoUrl || ''
             });
         } else {
             setFormData({
@@ -55,16 +87,8 @@ export default function RecipeEditor({
                 ingredients: []
             });
         }
-    }, [recipe, isOpen]);
+    }, [recipe, isOpen, ingredients, getCorrectionFactor]);
 
-    // Get correction factor for an ingredient
-    const getCorrectionFactor = (ingredientName) => {
-        const factor = correctionFactors.find(cf =>
-            cf.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
-            ingredientName.toLowerCase().includes(cf.name.toLowerCase())
-        );
-        return factor?.correctionFactor || 1;
-    };
 
     // Get nutritional info for an ingredient
     const getNutritionalData = (ingredientName) => {
@@ -76,7 +100,78 @@ export default function RecipeEditor({
     };
 
     // Add ingredient to recipe
-    const handleAddIngredient = () => {
+    const handleAddIngredient = async () => {
+        if (isAddingNew) {
+            // Parse and validate numeric inputs
+            const pPrice = parseFloat(quickAddIngredient.purchasePrice);
+            const pQty = parseFloat(quickAddIngredient.quantity);
+            const rQty = parseFloat(netQuantity);
+
+            if (isNaN(pPrice) || isNaN(pQty) || isNaN(rQty)) {
+                console.warn('Numeric validation failed', { pPrice, pQty, rQty });
+                alert('Por favor enter números válidos para el precio y las cantidades.');
+                return;
+            }
+
+            console.log('Attempting to add new ingredient to DB...', { ...quickAddIngredient, purchasePrice: pPrice, quantity: pQty });
+            
+            let createdIng;
+            try {
+                createdIng = await addIngredient({
+                    name: quickAddIngredient.name,
+                    purchasePrice: pPrice,
+                    quantity: pQty,
+                    unit: quickAddIngredient.unit,
+                    category: quickAddIngredient.category
+                });
+            } catch (err) {
+                console.error('Error in addIngredient call:', err);
+                return;
+            }
+
+            console.log('Response from addIngredient:', createdIng);
+
+            if (createdIng) {
+                try {
+                    const fc = getCorrectionFactor(createdIng.name) || 1;
+                    const bruto = rQty * fc;
+                    const costoTotal = (bruto / (createdIng.quantity || 1)) * createdIng.purchasePrice;
+                    
+                    const newRecipeIng = {
+                        id: `recipe_ing_${Date.now()}_${Math.random()}`,
+                        ingredientId: createdIng.id,
+                        name: createdIng.name,
+                        neto: rQty,
+                        unit: createdIng.unit,
+                        fc: fc,
+                        bruto: bruto,
+                        costoTotal: costoTotal,
+                        costoPorcion: (costoTotal / (formData.portions || 1)),
+                        calories: 0,
+                        caloriasPorcion: 0
+                    };
+
+                    setFormData(prev => ({
+                        ...prev,
+                        ingredients: [...prev.ingredients, newRecipeIng]
+                    }));
+                    
+                    setIsAddingNew(false);
+                    setQuickAddIngredient({
+                        name: '',
+                        purchasePrice: '',
+                        quantity: 1000,
+                        unit: 'g',
+                        category: 'Carnes'
+                    });
+                    setNetQuantity('');
+                } catch (err) {
+                    console.error('Error updating local recipe state:', err);
+                }
+            }
+            return;
+        }
+
         if (!selectedIngredient || !netQuantity || parseFloat(netQuantity) <= 0) {
             setErrors({ ingredient: t('recipeEditor.selectAndQuantity') });
             return;
@@ -85,16 +180,20 @@ export default function RecipeEditor({
         const ingredient = ingredients.find(ing => ing.id === selectedIngredient);
         if (!ingredient) return;
 
-        const neto = parseFloat(netQuantity);
+        const neto = parseFloat(netQuantity) || 0;
         const fc = getCorrectionFactor(ingredient.name);
         const bruto = neto * fc;
-        // FIXED: Calculate cost based on BRUTO weight (what you actually buy)
-        const costoTotal = (bruto / 1000) * ingredient.unitPrice;
+        
+        // Use latest price from wholesale list
+        const purchaseQuantity = ingredient.quantity || 1;
+        const price = ingredient.purchasePrice || ingredient.purchase_price || 0;
+        const costoTotal = (bruto / purchaseQuantity) * price;
+        
         const nutritional = getNutritionalData(ingredient.name);
-        const calories = (neto / 100) * (nutritional.calories || 0);
+        const calories = (neto / 100) * (nutritional?.calories || 0);
 
         const newIngredient = {
-            id: `recipe_ing_${Date.now()}`,
+            id: `recipe_ing_${Date.now()}_${Math.random()}`,
             ingredientId: ingredient.id,
             name: ingredient.name,
             neto,
@@ -102,19 +201,15 @@ export default function RecipeEditor({
             fc,
             bruto,
             costoTotal,
-            costoPorcion: 0, // Will be calculated
+            costoPorcion: (costoTotal / (formData.portions || 1)),
             calories,
-            caloriasPorcion: 0 // Will be calculated
+            caloriasPorcion: (calories / (formData.portions || 1))
         };
 
-        const updatedIngredients = [...formData.ingredients, newIngredient];
-        const updatedFormData = {
-            ...formData,
-            ingredients: updatedIngredients
-        };
-
-        // Recalculate per-portion values
-        recalculatePortions(updatedFormData);
+        setFormData(prev => ({
+            ...prev,
+            ingredients: [...prev.ingredients, newIngredient]
+        }));
 
         setSelectedIngredient('');
         setNetQuantity('');
@@ -189,7 +284,81 @@ export default function RecipeEditor({
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    // Image Compression & Upload
+    const handlePhotoUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setIsUploading(true);
+        try {
+            // 1. Compress Image using Canvas
+            const compressedFile = await compressImage(file);
+            
+            // 2. Upload to Supabase Storage
+            const fileExt = file.name.split('.').pop();
+            const fileName = `recipe_${Date.now()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { data, error } = await supabase.storage
+                .from('platify-photos')
+                .upload(filePath, compressedFile);
+
+            if (error) throw error;
+
+            // 3. Get Public URL
+            const { data: { publicUrl } } = supabase.storage
+                .from('platify-photos')
+                .getPublicUrl(filePath);
+
+            setFormData(prev => ({ ...prev, photoUrl: publicUrl }));
+        } catch (err) {
+            console.error("Error uploading photo:", err);
+            alert("Error al subir la foto. Asegurate de que el bucket 'platify-photos' existe en Supabase.");
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const compressImage = (file) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new window.Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const MAX_HEIGHT = 600;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                    }, 'image/jpeg', 0.7);
+                };
+            };
+        });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validate()) {
@@ -199,12 +368,13 @@ export default function RecipeEditor({
         const recipeData = {
             ...formData,
             id: recipe?.id || `recipe_${Date.now()}`,
-            totalCosto: totals.totalCosto,
-            totalCalorias: totals.totalCalorias,
-            costoPorPorcion: totals.costoPorPorcion,
-            caloriasPorPorcion: totals.caloriasPorPorcion,
-            createdAt: recipe?.createdAt || new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            total_cost: totals.totalCosto,
+            total_calories: totals.totalCalorias,
+            costo_por_porcion: totals.costoPorPorcion,
+            calorias_por_porcion: totals.caloriasPorPorcion,
+            haccp_notes: formData.haccpNotes,
+            photo_url: formData.photoUrl,
+            updated_at: new Date().toISOString()
         };
 
         onSave(recipeData);
@@ -283,67 +453,179 @@ export default function RecipeEditor({
                             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
                                 {t('recipeEditor.portions')} *
                             </label>
-                            <input
-                                type="number"
-                                className="input"
-                                value={formData.portions}
-                                onChange={(e) => handlePortionsChange(e.target.value)}
-                                min="1"
-                                style={{ width: '100%' }}
-                            />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <input
+                                    type="number"
+                                    className="input"
+                                    value={formData.portions}
+                                    onChange={(e) => handlePortionsChange(e.target.value)}
+                                    min="1"
+                                    style={{ width: '100px' }}
+                                />
+                                <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>porciones</span>
+                            </div>
                             {errors.portions && <span style={{ color: 'var(--error)', fontSize: '0.75rem', marginTop: '0.25rem', display: 'block' }}>{errors.portions}</span>}
                         </div>
                     </div>
 
                     {/* Add Ingredient Section */}
-                    <div style={{ background: 'var(--bg-tertiary)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
-                        <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: 'var(--text-primary)' }}>
-                            {t('recipeEditor.addIngredient')}
-                        </h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr auto', gap: '0.75rem', alignItems: 'end' }}>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                    {t('recipeEditor.ingredient')}
-                                </label>
-                                <select
-                                    className="input"
-                                    value={selectedIngredient}
-                                    onChange={(e) => setSelectedIngredient(e.target.value)}
-                                    style={{ width: '100%' }}
-                                >
-                                    <option value="">{t('recipeEditor.selectIngredient')}</option>
-                                    {ingredients.map(ing => (
-                                        <option key={ing.id} value={ing.id}>
-                                            {ing.name} ({formatCurrency(ing.unitPrice, currency)}/{ing.unit})
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                                    {t('recipeEditor.netQuantity')}
-                                </label>
-                                <input
-                                    type="number"
-                                    className="input"
-                                    value={netQuantity}
-                                    onChange={(e) => setNetQuantity(e.target.value)}
-                                    step="0.01"
-                                    min="0"
-                                    style={{ width: '100%' }}
-                                />
+                    <div style={{ background: 'var(--bg-tertiary)', padding: '1.25rem', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--border-color)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <Plus size={18} color="var(--primary)" />
+                                <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{isAddingNew ? t('ingredients.addNew') : t('recipeEditor.addIngredient')}</span>
                             </div>
                             <button
                                 type="button"
-                                className="btn btn-primary"
-                                onClick={handleAddIngredient}
-                                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                                onClick={() => setIsAddingNew(!isAddingNew)}
+                                style={{ background: 'transparent', border: 'none', color: 'var(--primary)', cursor: 'pointer', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'underline' }}
                             >
-                                <Plus size={16} />
-                                {t('recipeEditor.addIngredient')}
+                                {isAddingNew ? `« ${t('common.cancel')}` : `+ ${t('ingredients.addNew')}`}
                             </button>
                         </div>
-                        {errors.ingredient && <span style={{ color: 'var(--error)', fontSize: '0.75rem', marginTop: '0.5rem', display: 'block' }}>{errors.ingredient}</span>}
+
+                        {!isAddingNew ? (
+                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr auto', gap: '0.75rem', alignItems: 'end' }}>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                                        {t('recipeEditor.ingredient')}
+                                    </label>
+                                    <select
+                                        className="input"
+                                        value={selectedIngredient}
+                                        onChange={(e) => setSelectedIngredient(e.target.value)}
+                                        style={{ width: '100%' }}
+                                    >
+                                        <option value="">{t('recipeEditor.selectIngredient')}</option>
+                                        {Object.entries(
+                                            ingredients.reduce((acc, ing) => {
+                                                const cat = ing.category || t('ingredients.categories.other');
+                                                if (!acc[cat]) acc[cat] = [];
+                                                acc[cat].push(ing);
+                                                return acc;
+                                            }, {})
+                                        ).sort(([a], [b]) => a.localeCompare(b)).map(([category, items]) => (
+                                            <optgroup key={category} label={category}>
+                                                {items
+                                                    .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+                                                    .map(ing => (
+                                                        <option key={ing.id} value={ing.id}>
+                                                            {ing.name} ({formatCurrency(ing.purchasePrice, currency)} / {ing.quantity}{ing.unit})
+                                                        </option>
+                                                    ))}
+                                            </optgroup>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                                        {t('recipeEditor.netQuantity')}
+                                    </label>
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={netQuantity}
+                                        onChange={(e) => setNetQuantity(e.target.value)}
+                                        step="0.01"
+                                        min="0"
+                                        style={{ width: '100%' }}
+                                        placeholder="Ej: 500"
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={handleAddIngredient}
+                                    style={{ height: '42px', padding: '0 1.5rem' }}
+                                >
+                                    Añadir a Receta
+                                </button>
+                            </div>
+                        ) : (
+                            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 1fr 1fr auto', gap: '0.5rem', alignItems: 'end' }}>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('common.name')}</label>
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        value={quickAddIngredient.name}
+                                        onChange={(e) => setQuickAddIngredient({ ...quickAddIngredient, name: e.target.value })}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                        placeholder="Ej: Roast Beef"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('common.category')}</label>
+                                    <select
+                                        className="input"
+                                        value={quickAddIngredient.category}
+                                        onChange={(e) => setQuickAddIngredient({ ...quickAddIngredient, category: e.target.value })}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                    >
+                                        <option value="Carnes">{t('ingredients.categories.meat')}</option>
+                                        <option value="Vegetales">{t('ingredients.categories.vegetables')}</option>
+                                        <option value="Secos">{t('ingredients.categories.dry')}</option>
+                                        <option value="Lácteos">{t('ingredients.categories.dairy')}</option>
+                                        <option value="Otros">{t('ingredients.categories.other')}</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('ingredients.purchasePrice')} ({currency})</label>
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={quickAddIngredient.purchasePrice}
+                                        onChange={(e) => setQuickAddIngredient({ ...quickAddIngredient, purchasePrice: e.target.value })}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                        placeholder={currency}
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('common.quantity')}</label>
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={quickAddIngredient.quantity}
+                                        onChange={(e) => setQuickAddIngredient({ ...quickAddIngredient, quantity: e.target.value })}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('common.unit')}</label>
+                                    <select
+                                        className="input"
+                                        value={quickAddIngredient.unit}
+                                        onChange={(e) => setQuickAddIngredient({ ...quickAddIngredient, unit: e.target.value })}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                    >
+                                        <option value="g">{t('units.g')}</option>
+                                        <option value="ml">{t('units.ml')}</option>
+                                        <option value="unidades">{t('units.units')}</option>
+                                        <option value="kg">{t('units.kg')}</option>
+                                        <option value="l">{t('units.l')}</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>{t('recipes.netWeight')}</label>
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={netQuantity}
+                                        onChange={(e) => setNetQuantity(e.target.value)}
+                                        style={{ width: '100%', fontSize: '0.875rem' }}
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={handleAddIngredient}
+                                    style={{ height: '42px', background: 'var(--success)', whiteSpace: 'nowrap', padding: '0 1rem', fontSize: '0.875rem' }}
+                                >
+                                    {t('common.add')}
+                                </button>
+                            </div>
+                        )}
+                        {errors.ingredient && <span style={{ color: 'var(--error)', fontSize: '0.75rem', marginTop: '0.75rem', display: 'block' }}>{errors.ingredient}</span>}
                     </div>
 
                     {/* Ingredients Table */}
@@ -404,8 +686,99 @@ export default function RecipeEditor({
                         </div>
                     )}
 
+                    {/* Preparation, HACCP and Plating */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                        {/* Procedure */}
+                        <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <ClipboardList size={18} color="var(--primary)" />
+                                <label style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                                    {t('recipeEditor.procedure')}
+                                </label>
+                            </div>
+                            <textarea
+                                className="input"
+                                value={formData.procedure}
+                                onChange={(e) => setFormData({ ...formData, procedure: e.target.value })}
+                                style={{ width: '100%', minHeight: '150px', resize: 'vertical', lineHeight: '1.5' }}
+                                placeholder="Describí los pasos de la elaboración..."
+                            />
+                        </div>
+
+                        {/* HACCP & Safety */}
+                        <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <ShieldCheck size={18} color="var(--error)" />
+                                <label style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                                    {t('recipeEditor.haccp')}
+                                </label>
+                            </div>
+                            <textarea
+                                className="input"
+                                value={formData.haccpNotes}
+                                onChange={(e) => setFormData({ ...formData, haccpNotes: e.target.value })}
+                                style={{ width: '100%', minHeight: '150px', resize: 'vertical', borderLeft: '3px solid var(--error)' }}
+                                placeholder="Notas críticas de seguridad, temperaturas, etc."
+                            />
+                        </div>
+                    </div>
+
+                    {/* Photo Plating Section */}
+                    <div style={{ background: 'var(--bg-tertiary)', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem', border: '1px dashed var(--border-color)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                            <Image size={18} color="var(--accent)" />
+                            <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--text-primary)' }}>{t('recipeEditor.platingInstructions')}</h3>
+                        </div>
+                        
+                        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+                            <div style={{ flex: 1 }}>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                                    Subí una foto del plato terminado para mantener la uniformidad estética en todos los comedores.
+                                </p>
+                                <div style={{ position: 'relative' }}>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handlePhotoUpload}
+                                        style={{ display: 'none' }}
+                                        id="photo-upload"
+                                    />
+                                    <label
+                                        htmlFor="photo-upload"
+                                        className={`btn ${isUploading ? 'btn-secondary' : 'btn-primary'}`}
+                                        style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', cursor: isUploading ? 'not-allowed' : 'pointer' }}
+                                    >
+                                        <Upload size={16} />
+                                        {isUploading ? 'Subiendo...' : 'Subir Foto de Emplatado'}
+                                    </label>
+                                    
+                                    {formData.photoUrl && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData(prev => ({ ...prev, photoUrl: '' }))}
+                                            style={{ color: 'var(--error)', background: 'transparent', border: 'none', marginLeft: '1rem', cursor: 'pointer', fontSize: '0.875rem' }}
+                                        >
+                                            <Trash size={14} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
+                                            Eliminar foto
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                            
+                            {formData.photoUrl && (
+                                <div style={{ width: '200px', height: '150px', borderRadius: '8px', overflow: 'hidden', border: '2px solid var(--primary)', background: 'var(--bg-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <img 
+                                        src={formData.photoUrl} 
+                                        alt="Vista previa" 
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
                     {/* Totals Summary */}
-                    <div style={{ background: 'linear-gradient(135deg, var(--primary-light) 0%, var(--bg-tertiary) 100%)', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
+                    <div style={{ background: 'linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%)', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid var(--border-color)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                             <Calculator size={20} color="var(--primary)" />
                             <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--primary)' }}>{t('recipeEditor.costNutritionSummary')}</h3>
