@@ -13,7 +13,7 @@ import excelData from '../../data/excel_full_data.json';
 
 export default function RecipesList() {
     const { t } = useTranslation();
-    const { recipes, addRecipe, updateRecipe, deleteRecipe, ingredients } = useData();
+    const { recipes, addRecipe, updateRecipe, deleteRecipe, ingredients, getCorrectionFactor } = useData();
     const { currency } = useSettings();
     const { success } = useNotifications();
 
