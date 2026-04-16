@@ -139,11 +139,11 @@ export default function RecipesList() {
         // CSS for A4 Print
         const printStyles = `
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-            @page { size: A4; margin: 12mm; }
+            @page { size: A4; margin: 8mm; }
             body { 
                 font-family: 'Inter', sans-serif; 
                 color: #1f2937; 
-                line-height: 1.5; 
+                line-height: 1.4; 
                 padding: 0; 
                 margin: 0; 
                 background: white !important; 
@@ -153,12 +153,12 @@ export default function RecipesList() {
                 display: flex; 
                 justify-content: space-between; 
                 align-items: center; 
-                border-bottom: 3px solid #d4a93a; 
-                padding-bottom: 1rem; 
-                margin-bottom: 1.5rem; 
+                border-bottom: 2px solid #d4a93a; 
+                padding-bottom: 0.5rem; 
+                margin-bottom: 1rem; 
             }
             .title-area h1 { 
-                font-size: 22pt; 
+                font-size: 18pt; 
                 font-weight: 800; 
                 margin: 0; 
                 color: #111827; 
@@ -168,82 +168,83 @@ export default function RecipesList() {
             .protocol-badge {
                 background: #111827;
                 color: white;
-                padding: 4px 12px;
-                font-size: 10pt;
+                padding: 3px 10px;
+                font-size: 9pt;
                 font-weight: 600;
                 border-radius: 4px;
                 text-transform: uppercase;
             }
             .meta-grid { 
                 display: flex;
-                gap: 2rem;
-                margin-top: 0.5rem;
-                font-size: 10pt;
+                gap: 1.5rem;
+                margin-top: 0.25rem;
+                font-size: 9pt;
                 color: #4b5563;
                 font-weight: 600;
             }
-            .section { margin-bottom: 2rem; }
+            .section { margin-bottom: 1.25rem; }
             .section-header {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
-                margin-bottom: 0.75rem;
+                margin-bottom: 0.5rem;
                 border-bottom: 1px solid #e5e7eb;
-                padding-bottom: 0.25rem;
+                padding-bottom: 0.15rem;
             }
             .section-title { 
-                font-size: 12pt; 
+                font-size: 11pt; 
                 font-weight: 800; 
                 color: #111827;
                 text-transform: uppercase;
                 margin: 0;
             }
-            .table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; }
+            .table { width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; border-radius: 8px; overflow: hidden; }
             .table th { 
                 background: #f9fafb; 
                 text-align: left; 
-                padding: 10px; 
+                padding: 8px; 
                 border-bottom: 2px solid #e5e7eb; 
-                font-size: 9pt; 
+                font-size: 8.5pt; 
                 font-weight: 800; 
                 color: #374151;
             }
             .table td { 
-                padding: 10px; 
+                padding: 8px; 
                 border-bottom: 1px solid #f3f4f6; 
-                font-size: 10pt; 
+                font-size: 9pt; 
             }
             .table tr:nth-child(even) { background: #fafafa; }
             .haccp-box { 
                 border: 2px solid #ef4444; 
-                padding: 1rem; 
+                padding: 0.75rem; 
                 background: #fef2f2; 
                 color: #991b1b;
                 font-weight: 600;
-                font-size: 10pt;
+                font-size: 9pt;
             }
             .photo-frame { 
                 width: 100%; 
-                height: 220px; 
+                height: 180px; 
                 overflow: hidden; 
                 border-radius: 12px;
-                margin-bottom: 1.5rem; 
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                margin-bottom: 1rem; 
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                border: 1px solid #e5e7eb;
             }
             .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
             .procedure-container { 
-                font-size: 10pt; 
+                font-size: 9pt; 
                 color: #374151;
                 white-space: pre-wrap;
-                line-height: 1.6;
+                line-height: 1.4;
             }
             .brand-footer { 
-                margin-top: 2rem; 
-                padding-top: 1rem;
+                margin-top: 1rem; 
+                padding-top: 0.75rem;
                 border-top: 1px solid #eee;
                 display: flex;
                 justify-content: space-between;
-                font-size: 8pt; 
+                font-size: 7.5pt; 
                 color: #9ca3af; 
             }
         `;
