@@ -57,25 +57,37 @@ export function DataProvider({ children }) {
                         // Calculate total and portion cost if they are zero
                         let calcTotalCost = r.total_cost || 0;
                         let calcTotalCalories = r.total_calories || 0;
+                        
+                        // Recalculate ingredients for accuracy
+                        const processedIngredients = (r.ingredients || []).map(ri => {
+                            const ingData = ri.ingredient || {};
+                            const fc = getCorrectionFactor(ingData.name || ri.name || '');
+                            const neto = ri.net_quantity || 0;
+                            const bruto = neto * fc;
+                            
+                            // Cost calc for this item
+                            const price = ingData.purchase_price || 0;
+                            const qty = ingData.quantity || 1;
+                            const cost = (bruto / qty) * price;
+                            
+                            return {
+                                ...ri,
+                                fc: fc,
+                                bruto: bruto,
+                                cost: cost,
+                                unit: ingData.unit || ri.unit || 'g'
+                            };
+                        });
 
-                        if (calcTotalCost === 0 && r.ingredients?.length > 0) {
-                            r.ingredients.forEach(ri => {
-                                const ingData = ri.ingredient || {};
-                                const fc = correctionFactors.find(cf => 
-                                    cf.name.toLowerCase().includes((ingData.name || '').toLowerCase())
-                                )?.correctionFactor || 1;
-                                const neto = ri.net_quantity || 0;
-                                const bruto = neto * fc;
-                                const price = ingData.purchase_price || 0;
-                                const qty = ingData.quantity || 1;
-                                calcTotalCost += (bruto / qty) * price;
-                            });
+                        if (calcTotalCost === 0 && processedIngredients.length > 0) {
+                            calcTotalCost = processedIngredients.reduce((sum, pi) => sum + (pi.cost || 0), 0);
                         }
 
                         const portions = r.portions || 1;
                         
                         return {
                             ...r,
+                            ingredients: processedIngredients,
                             totalCost: calcTotalCost,
                             costoPorPorcion: r.costo_por_porcion || (calcTotalCost / portions),
                             totalCalories: r.total_calories || calcTotalCalories,
