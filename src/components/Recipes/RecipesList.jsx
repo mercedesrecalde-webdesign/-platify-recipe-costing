@@ -138,94 +138,201 @@ export default function RecipesList() {
         
         // CSS for A4 Print
         const printStyles = `
-            @page { size: A4; margin: 10mm; }
-            body { font-family: 'Inter', -apple-system, sans-serif; color: #333; line-height: 1.4; padding: 0; margin: 0; background: white !important; }
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+            @page { size: A4; margin: 12mm; }
+            body { 
+                font-family: 'Inter', sans-serif; 
+                color: #1f2937; 
+                line-height: 1.5; 
+                padding: 0; 
+                margin: 0; 
+                background: white !important; 
+            }
             .print-container { max-width: 100%; margin: 0 auto; }
-            .header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 1rem; }
-            .title { font-size: 20pt; font-weight: 800; margin: 0; color: #000; text-transform: uppercase; }
-            .meta { font-size: 11pt; font-weight: 600; color: #444; }
-            .section { margin-bottom: 1.5rem; }
-            .section-title { font-size: 12pt; font-weight: 800; border-bottom: 1px solid #000; margin-bottom: 0.5rem; padding-bottom: 2px; text-transform: uppercase; }
-            .table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-            .table th { background: #eee; text-align: left; padding: 6px; border: 1px solid #333; font-size: 10pt; font-weight: 800; }
-            .table td { padding: 6px; border: 1px solid #333; font-size: 10pt; }
-            .haccp { border: 2px solid #000; padding: 0.75rem; border-radius: 0; background: #fff; font-weight: 700; color: #d00; }
-            .photo-container { width: 100%; height: 240px; overflow: hidden; border: 1px solid #000; margin-bottom: 1rem; }
-            .photo-container img { width: 100%; height: 100%; object-fit: cover; }
-            .procedure-text { white-space: pre-wrap; font-size: 10pt; line-height: 1.5; }
+            .header { 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                border-bottom: 3px solid #d4a93a; 
+                padding-bottom: 1rem; 
+                margin-bottom: 1.5rem; 
+            }
+            .title-area h1 { 
+                font-size: 22pt; 
+                font-weight: 800; 
+                margin: 0; 
+                color: #111827; 
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+            }
+            .protocol-badge {
+                background: #111827;
+                color: white;
+                padding: 4px 12px;
+                font-size: 10pt;
+                font-weight: 600;
+                border-radius: 4px;
+                text-transform: uppercase;
+            }
+            .meta-grid { 
+                display: flex;
+                gap: 2rem;
+                margin-top: 0.5rem;
+                font-size: 10pt;
+                color: #4b5563;
+                font-weight: 600;
+            }
+            .section { margin-bottom: 2rem; }
+            .section-header {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+                border-bottom: 1px solid #e5e7eb;
+                padding-bottom: 0.25rem;
+            }
+            .section-title { 
+                font-size: 12pt; 
+                font-weight: 800; 
+                color: #111827;
+                text-transform: uppercase;
+                margin: 0;
+            }
+            .table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; }
+            .table th { 
+                background: #f9fafb; 
+                text-align: left; 
+                padding: 10px; 
+                border-bottom: 2px solid #e5e7eb; 
+                font-size: 9pt; 
+                font-weight: 800; 
+                color: #374151;
+            }
+            .table td { 
+                padding: 10px; 
+                border-bottom: 1px solid #f3f4f6; 
+                font-size: 10pt; 
+            }
+            .table tr:nth-child(even) { background: #fafafa; }
+            .haccp-box { 
+                border: 2px solid #ef4444; 
+                padding: 1rem; 
+                background: #fef2f2; 
+                color: #991b1b;
+                font-weight: 600;
+                font-size: 10pt;
+            }
+            .photo-frame { 
+                width: 100%; 
+                height: 220px; 
+                overflow: hidden; 
+                border-radius: 12px;
+                margin-bottom: 1.5rem; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+            .procedure-container { 
+                font-size: 10pt; 
+                color: #374151;
+                white-space: pre-wrap;
+                line-height: 1.6;
+            }
+            .brand-footer { 
+                margin-top: 2rem; 
+                padding-top: 1rem;
+                border-top: 1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                font-size: 8pt; 
+                color: #9ca3af; 
+            }
         `;
 
         const ingredientsHtml = (recipe.ingredients || []).map(ing => {
             const neto = ing.net_quantity || ing.neto || 0;
-            const fc = ing.fc || 1;
-            const bruto = ing.bruto || (neto * fc);
+            // Always recalculate FC and Bruto to ensure accuracy
+            const fc = getCorrectionFactor(ing.ingredient?.name || ing.name || '');
+            const bruto = neto * fc;
             return `
                 <tr>
-                    <td style="font-weight: 600;">${ing.ingredient?.name || ing.name || ing.nombre}</td>
-                    <td style="text-align: right;">${parseFloat(neto).toFixed(1)} ${ing.unit || 'g'}</td>
-                    <td style="text-align: center;">${parseFloat(fc).toFixed(2)}</td>
-                    <td style="text-align: right; font-weight: 700;">${parseFloat(bruto).toFixed(1)} ${ing.unit || 'g'}</td>
+                    <td style="font-weight: 600; color: #111827;">${ing.ingredient?.name || ing.name || ing.nombre}</td>
+                    <td style="text-align: right; color: #6b7280;">${parseFloat(neto).toFixed(1)} ${ing.unit || 'g'}</td>
+                    <td style="text-align: center; color: #d4a93a; font-weight: 800;">${parseFloat(fc).toFixed(2)}</td>
+                    <td style="text-align: right; font-weight: 800; color: #111827;">${parseFloat(bruto).toFixed(1)} ${ing.unit || 'g'}</td>
                 </tr>
             `;
         }).join('');
 
         const photoHtml = (recipe.photo_url || recipe.photoUrl) 
-            ? `<div class="photo-container"><img src="${recipe.photo_url || recipe.photoUrl}" alt="Emplatado" /></div>` 
+            ? `<div class="photo-frame"><img src="${recipe.photo_url || recipe.photoUrl}" alt="Emplatado" /></div>` 
             : '';
 
         printWindow.document.write(`
             <html>
                 <head>
-                    <title>FICHA TÉCNICA - ${recipe.name || recipe.nombre}</title>
+                    <title>FT - ${recipe.name || recipe.nombre}</title>
                     <style>${printStyles}</style>
                 </head>
                 <body>
                     <div class="print-container">
                         <div class="header">
-                            <div>
-                                <h1 class="title">${recipe.name || recipe.nombre}</h1>
-                                <div class="meta">
-                                    <span>PORCIONES: <strong>${recipe.portions || recipe.porciones}</strong></span>
+                            <div class="title-area">
+                                <h1>${recipe.name || recipe.nombre}</h1>
+                                <div class="meta-grid">
+                                    <span>PORCIONES: ${recipe.portions || recipe.porciones}</span>
+                                    <span>FECHA: ${new Date().toLocaleDateString()}</span>
                                 </div>
                             </div>
-                            <div style="text-align: right; font-weight: 900; font-size: 14pt;">PROTOCOLO DE COCINA</div>
+                            <div class="protocol-badge">Protocolo de Cocina</div>
                         </div>
 
                         ${photoHtml}
 
                         <div class="section">
-                            <h2 class="section-title">INGREDIENTES Y PESOS</h2>
+                            <div class="section-header">
+                                <h2 class="section-title">Ingredientes y Pesos Operativos</h2>
+                            </div>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Ingrediente</th>
-                                        <th style="text-align: right;">Peso Neto</th>
+                                        <th style="width: 40%">INGREDIENTE</th>
+                                        <th style="text-align: right;">PESO NETO</th>
                                         <th style="text-align: center;">FC</th>
-                                        <th style="text-align: right;">Peso Bruto (A COMPRAR)</th>
+                                        <th style="text-align: right;">PESO BRUTO (COMPRA)</th>
                                     </tr>
                                 </thead>
                                 <tbody>${ingredientsHtml}</tbody>
                             </table>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem;">
+                        <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 2rem;">
                             <div class="section">
-                                <h2 class="section-title">PROCEDIMIENTO DE ELABORACIÓN</h2>
-                                <div class="procedure-text">${recipe.procedure || 'No se especificó procedimiento.'}</div>
+                                <div class="section-header">
+                                    <h2 class="section-title">Procedimiento de Elaboración</h2>
+                                </div>
+                                <div class="procedure-container">${recipe.procedure || 'No se especificó procedimiento.'}</div>
                             </div>
                             <div class="section">
-                                <h2 class="section-title" style="color: #d00;">SEGURIDAD ALIMENTARIA (HACCP)</h2>
-                                <div class="haccp">${recipe.haccp_notes || recipe.haccpNotes || 'Mantener buenas prácticas de manufactura.'}</div>
+                                <div class="section-header">
+                                    <h2 class="section-title" style="color: #ef4444;">Seguridad Alimentaria (HACCP)</h2>
+                                </div>
+                                <div class="haccp-box">${recipe.haccp_notes || recipe.haccpNotes || 'Mantener buenas prácticas de manufactura.'}</div>
+                                
+                                <div style="margin-top: 2rem; border: 1px dashed #d1d5db; padding: 1rem; border-radius: 8px;">
+                                    <h3 style="margin: 0 0 0.5rem 0; font-size: 9pt; color: #374151;">NOTAS ADICIONALES</h3>
+                                    <div style="height: 100px;"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <div style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 0.5rem; font-size: 8pt; color: #999; text-align: center;">
-                            PLATIFY Gastronomic Ecosystem - Ficha Técnica de Elaboración
+                        <div class="brand-footer">
+                            <div>PLATIFY Gastronomic Ecosystem &bull; Gestión de Comedores</div>
+                            <div>&copy; ${new Date().getFullYear()} Mercedes Recalde</div>
                         </div>
                     </div>
                     <script>
                         window.onload = () => {
-                            window.print();
+                            setTimeout(() => { window.print(); }, 500);
                         };
                     </script>
                 </body>
