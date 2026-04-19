@@ -129,7 +129,7 @@ export default function WeeklyPlanner() {
                 <div>
                     <h2 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <CalendarDays size={28} style={{ color: 'var(--primary)' }} />
-                        Planificador Semanal London Supply
+                        Planificador Semanal Platify
                     </h2>
                     <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Armá el menú semanal y generá automáticamente la lista de compras y reporte de mermas.</p>
                 </div>

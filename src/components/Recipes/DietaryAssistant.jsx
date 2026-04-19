@@ -8,7 +8,7 @@ import { calculateRecipeMacros } from '../../data/dietaryData';
 
 export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, ingredients }) {
     const { t } = useTranslation();
-    const { correctionFactors, nutritionalInfo } = useData();
+    const { correctionFactors, nutritionalInfo, getCorrectionFactor } = useData();
     const { success, error: showError } = useNotifications();
 
     const [selectedDiet, setSelectedDiet] = useState('keto');
@@ -49,10 +49,10 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             // Calculate costs and nutrition
             const recipeMacros = calculateRecipeMacros(result.ingredients);
             const totalCost = result.ingredients.reduce((sum, ing) => {
-                // Calculate bruto weight using correction factor
-                const fc = 1; // Could improve by getting actual FC
+                const fc = getCorrectionFactor(ing.name) || 1;
                 const bruto = ing.quantity * fc;
-                const cost = (bruto / 1000) * ing.unitPrice;
+                const purchaseQty = ing.purchaseQuantity || 1;
+                const cost = (bruto / purchaseQty) * (ing.purchasePrice || 0);
                 return sum + cost;
             }, 0);
 
@@ -65,11 +65,16 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             const recipeData = {
                 name: result.name,
                 portions: result.portions,
+                procedure: result.procedure,
+                haccpNotes: result.haccpNotes,
                 ingredients: result.ingredients.map(ing => {
-                    const fc = 1; // Default correction factor
+                    const fc = getCorrectionFactor(ing.name) || 1;
                     const neto = ing.quantity;
                     const bruto = neto * fc;
-                    const costoTotal = (bruto / 1000) * ing.unitPrice; // Use BRUTO for cost
+                    const purchaseQty = ing.purchaseQuantity || 1;
+                    const costoTotal = (bruto / purchaseQty) * (ing.purchasePrice || 0);
+                    
+                    const itemCalories = (neto / 100) * (recipeMacros.calories / result.ingredients.reduce((sum, i) => sum + i.quantity, 0) * 100);
 
                     return {
                         id: `recipe_ing_${Date.now()}_${Math.random()}`,
@@ -81,8 +86,8 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                         bruto: bruto,
                         costoTotal: costoTotal,
                         costoPorcion: costoTotal / result.portions,
-                        calories: (neto / 100) * (recipeMacros.calories / result.ingredients.reduce((sum, i) => sum + i.quantity, 0) * 100),
-                        caloriasPorcion: 0
+                        calories: itemCalories,
+                        caloriasPorcion: itemCalories / result.portions
                     };
                 }),
                 dietType: selectedDiet,

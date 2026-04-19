@@ -47,17 +47,42 @@ export default function RecipesList() {
                 if (!row) continue;
 
                 const ingrediente = row[1];
+                const neto = row[2];
+                const um = row[3];
+                
                 if (!ingrediente || ingrediente === 'TOTALES' || ingrediente === 'PESO TOTAL') {
                     if (ingrediente === 'TOTALES' || ingrediente === 'PESO TOTAL') {
-                        totalCosto = row[6] || totalCosto;
-                        totalCalorias = row[8] || totalCalorias;
+                        if (totalCosto === 0) totalCosto = row[6] || 0;
+                        if (totalCalorias === 0) totalCalorias = row[8] || 0;
                     }
                     break;
                 }
 
-                if (ingrediente) {
-                    if (!totalCosto) totalCosto += (row[6] || 0);
-                    if (!totalCalorias) totalCalorias += (row[8] || 0);
+                if (ingrediente && neto && typeof neto === 'number') {
+                    const dbIng = ingredients.find(ing => 
+                        (ing.name || '').toLowerCase() === ingrediente.toLowerCase() ||
+                        (typeof ing.name === 'string' && ing.name.toLowerCase().includes(ingrediente.toLowerCase()))
+                    );
+
+                    const liveFc = getCorrectionFactor(ingrediente) || 1;
+                    const brutoCalculado = neto * liveFc;
+
+                    let costoCalculado = 0;
+                    if (dbIng) {
+                        const amount = dbIng.quantity || 1;
+                        const price = dbIng.purchase_price || dbIng.purchasePrice || 0;
+                        const dbUnit = (dbIng.unit || '').toUpperCase();
+                        let baseAmount = amount;
+                        if (dbUnit === 'KG' && (um === 'grs' || um === 'g')) baseAmount = amount * 1000;
+                        if (dbUnit === 'LTS' && (um === 'cc' || um === 'ml')) baseAmount = amount * 1000;
+                        if (dbUnit === 'L' && (um === 'cc' || um === 'ml')) baseAmount = amount * 1000;
+                        costoCalculado = (brutoCalculado / baseAmount) * price;
+                    } else {
+                        costoCalculado = row[6] || 0;
+                    }
+
+                    totalCosto += costoCalculado;
+                    totalCalorias += (row[8] || 0);
                 }
             }
 
@@ -73,7 +98,7 @@ export default function RecipesList() {
             });
         }
         return result;
-    }, []);
+    }, [ingredients, getCorrectionFactor]);
 
     const handleNewRecipe = () => {
         setSelectedRecipe(null);
@@ -251,15 +276,10 @@ export default function RecipesList() {
 
         const ingredientsHtml = (recipe.ingredients || []).map(ing => {
             const neto = ing.net_quantity || ing.neto || 0;
-            // Always recalculate FC and Bruto to ensure accuracy
-            const fc = getCorrectionFactor(ing.ingredient?.name || ing.name || '');
-            const bruto = neto * fc;
             return `
                 <tr>
                     <td style="font-weight: 600; color: #111827;">${ing.ingredient?.name || ing.name || ing.nombre}</td>
                     <td style="text-align: right; color: #6b7280;">${parseFloat(neto).toFixed(1)} ${ing.unit || 'g'}</td>
-                    <td style="text-align: center; color: #d4a93a; font-weight: 800;">${parseFloat(fc).toFixed(2)}</td>
-                    <td style="text-align: right; font-weight: 800; color: #111827;">${parseFloat(bruto).toFixed(1)} ${ing.unit || 'g'}</td>
                 </tr>
             `;
         }).join('');
@@ -291,15 +311,13 @@ export default function RecipesList() {
 
                         <div class="section">
                             <div class="section-header">
-                                <h2 class="section-title">Ingredientes y Pesos Operativos</h2>
+                                <h2 class="section-title">Ingredientes (Peso Operativo)</h2>
                             </div>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 40%">INGREDIENTE</th>
-                                        <th style="text-align: right;">PESO NETO</th>
-                                        <th style="text-align: center;">FC</th>
-                                        <th style="text-align: right;">PESO BRUTO (COMPRA)</th>
+                                        <th style="width: 70%">INGREDIENTE</th>
+                                        <th style="text-align: right;">PESO NETO (COCCIÓN)</th>
                                     </tr>
                                 </thead>
                                 <tbody>${ingredientsHtml}</tbody>

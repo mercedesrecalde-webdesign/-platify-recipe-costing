@@ -588,7 +588,8 @@ export function generateRecipeFromTemplate(dietType, mealTime, availableIngredie
             name: found.name,
             quantity: templateIng.quantity,
             unit: templateIng.unit,
-            unitPrice: found.unitPrice
+            purchasePrice: found.purchasePrice || found.unitPrice || 0,
+            purchaseQuantity: found.quantity || 1
         });
     }
 
@@ -605,7 +606,9 @@ export function generateRecipeFromTemplate(dietType, mealTime, availableIngredie
         name: template.name,
         portions: template.portions,
         ingredients: matchedIngredients,
-        macroTargets: template.macroTargets
+        macroTargets: template.macroTargets,
+        procedure: template.procedure || "Paso 1: Preparar la mise en place.\nPaso 2: Cocinar los ingredientes respetando los tiempos y temperaturas adecuados.\nPaso 3: Emplatar según el estándar establecido.",
+        haccpNotes: template.haccpNotes || "- Verificar temperatura de recepción de materias primas.\n- Evitar contaminación cruzada en tablas y utensilios.\n- Cocinar a temperatura segura (centro del alimento > 70°C).\n- Respetar cadena de frío al almacenar."
     };
 }
 

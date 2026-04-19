@@ -211,10 +211,12 @@ export function DataProvider({ children }) {
                         unitPrice = fallbackKgPrice / 1000;
                     }
                     
+                    const liveFc = getCorrectionFactor(dbIng?.name || ing.name) || 1;
                     return {
                         ...ing,
-                        grossQuantity: ing.netQuantity * (ing.correctionFactor || 1),
-                        cost: ing.netQuantity * (ing.correctionFactor || 1) * unitPrice
+                        correctionFactor: liveFc,
+                        grossQuantity: ing.netQuantity * liveFc,
+                        cost: ing.netQuantity * liveFc * unitPrice
                     };
                 });
                 

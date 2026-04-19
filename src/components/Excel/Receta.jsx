@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useSettings } from '../../context/SettingsContext';
+import { useData } from '../../context/DataContext';
 import { formatCurrency } from '../../utils/currencyConverter';
 import excelData from '../../data/excel_full_data.json';
 
 function Receta({ recetaNum = 1 }) {
     const { currency } = useSettings();
+    const { getCorrectionFactor, ingredients } = useData();
     // Try multiple variations of the sheet name (with and without spaces)
     const sheet = excelData[`RECETA ${recetaNum}`] ||
         excelData[`RECETA ${recetaNum} `] ||
@@ -59,23 +61,41 @@ function Receta({ recetaNum = 1 }) {
 
             if (ingrediente && neto && typeof neto === 'number') {
                 try {
-                    // Calculate BRUTO if not present: BRUTO = NETO * FC
-                    const brutoCalculado = (typeof bruto === 'number' && bruto > 0) ? bruto : (neto * (fc || 1));
+                    const dbIng = ingredients.find(i => 
+                        (i.name || '').toLowerCase() === ingrediente.toLowerCase() ||
+                        (typeof i.name === 'string' && i.name.toLowerCase().includes(ingrediente.toLowerCase()))
+                    );
+
+                    const liveFc = getCorrectionFactor(ingrediente) || 1;
+                    const brutoCalculado = neto * liveFc;
+
+                    let costoTotalCalculado = 0;
+                    if (dbIng) {
+                        const amount = dbIng.quantity || 1;
+                        const price = dbIng.purchase_price || dbIng.purchasePrice || 0;
+                        const dbUnit = (dbIng.unit || '').toUpperCase();
+                        let baseAmount = amount;
+                        if (dbUnit === 'KG' && (um === 'grs' || um === 'g')) baseAmount = amount * 1000;
+                        if (dbUnit === 'LTS' && (um === 'cc' || um === 'ml')) baseAmount = amount * 1000;
+                        if (dbUnit === 'L' && (um === 'cc' || um === 'ml')) baseAmount = amount * 1000;
+                        costoTotalCalculado = (brutoCalculado / baseAmount) * price;
+                    } else {
+                        costoTotalCalculado = (typeof costoTotal === 'number' ? costoTotal : 0);
+                    }
 
                     ingredientes.push({
                         nombre: ingrediente,
                         neto: neto,
                         um: um || 'grs',
-                        fc: fc || 1,
+                        fc: liveFc,
                         bruto: brutoCalculado,
-                        costoTotal: (typeof costoTotal === 'number' ? costoTotal : 0),
-                        costoPorcion: (typeof costoPorcion === 'number' ? costoPorcion : 0),
+                        costoTotal: costoTotalCalculado,
+                        costoPorcion: costoTotalCalculado / porciones,
                         valorCalorico: (typeof valorCalorico === 'number' ? valorCalorico : 0),
                         caloriasPorcion: (typeof caloriasPorcion === 'number' ? caloriasPorcion : 0)
                     });
                 } catch (error) {
                     console.warn(`Error processing ingredient: ${ingrediente}`, error);
-                    // Skip this ingredient if there's an error
                 }
             }
         }
@@ -97,7 +117,7 @@ function Receta({ recetaNum = 1 }) {
             totalCalorias: totalCalorias,
             caloriasPorPorcion: totalCalorias / porciones
         };
-    }, [sheet, recetaNum]);
+    }, [sheet, recetaNum, ingredients, getCorrectionFactor]);
 
     if (!recetaData) {
         return (
