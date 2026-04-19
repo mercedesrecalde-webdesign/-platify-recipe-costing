@@ -171,9 +171,26 @@ export default function RecipesList() {
                 line-height: 1.4; 
                 padding: 0; 
                 margin: 0; 
-                background: white !important; 
+                background: #f3f4f6 !important; 
             }
-            .print-container { max-width: 100%; margin: 0 auto; }
+            .print-container { 
+                max-width: 800px; 
+                margin: 2rem auto; 
+                background: white; 
+                padding: 3rem; 
+                border-radius: 8px; 
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            }
+            @media print {
+                body { background: white !important; }
+                .print-container { 
+                    max-width: 100%; 
+                    margin: 0; 
+                    padding: 0; 
+                    border-radius: 0; 
+                    box-shadow: none; 
+                }
+            }
             .header { 
                 display: flex; 
                 justify-content: space-between; 
@@ -329,13 +346,13 @@ export default function RecipesList() {
                                 <div class="section-header">
                                     <h2 class="section-title">Procedimiento de Elaboración</h2>
                                 </div>
-                                <div class="procedure-container">${recipe.procedure || 'No se especificó procedimiento.'}</div>
+                                <div class="procedure-container">${(recipe.procedure || 'No se especificó procedimiento.').replace(/\\n/g, '<br/>').replace(/\n/g, '<br/>')}</div>
                             </div>
                             <div class="section">
                                 <div class="section-header">
                                     <h2 class="section-title" style="color: #ef4444;">Seguridad Alimentaria (HACCP)</h2>
                                 </div>
-                                <div class="haccp-box">${recipe.haccp_notes || recipe.haccpNotes || 'Mantener buenas prácticas de manufactura.'}</div>
+                                <div class="haccp-box">${(recipe.haccp_notes || recipe.haccpNotes || 'Mantener buenas prácticas de manufactura.').replace(/\\n/g, '<br/>').replace(/\n/g, '<br/>')}</div>
                                 
                                 <div style="margin-top: 2rem; border: 1px dashed #d1d5db; padding: 1rem; border-radius: 8px;">
                                     <h3 style="margin: 0 0 0.5rem 0; font-size: 9pt; color: #374151;">NOTAS ADICIONALES</h3>
