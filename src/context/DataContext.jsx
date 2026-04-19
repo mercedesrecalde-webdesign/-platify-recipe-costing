@@ -295,13 +295,30 @@ export function DataProvider({ children }) {
     };
 
     const updateIngredient = async (id, updatedIngredient) => {
+        const dbFields = {
+            name: updatedIngredient.name,
+            category: updatedIngredient.category,
+            unit: updatedIngredient.unit,
+            purchase_price: updatedIngredient.purchasePrice,
+            quantity: updatedIngredient.quantity
+        };
+
         const { error } = await supabase
             .from('platify_ingredients')
-            .update(updatedIngredient)
+            .update(dbFields)
             .eq('id', id);
         
         if (!error) {
-            setIngredients(prev => prev.map(ing => ing.id === id ? { ...ing, ...updatedIngredient } : ing));
+            setIngredients(prev => prev.map(ing => 
+                ing.id === id ? { 
+                    ...ing, 
+                    ...updatedIngredient,
+                    purchase_price: updatedIngredient.purchasePrice,
+                    unitPrice: (updatedIngredient.purchasePrice || 0) / (updatedIngredient.quantity || 1)
+                } : ing
+            ));
+        } else {
+            console.error('Error updating ingredient:', error);
         }
     };
 
