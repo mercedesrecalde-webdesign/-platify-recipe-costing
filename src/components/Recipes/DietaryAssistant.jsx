@@ -129,7 +129,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             <div style={{
                 background: 'var(--bg-secondary)',
                 borderRadius: '16px',
-                padding: '2rem',
+                padding: '1rem',
                 maxWidth: '820px',
                 width: '100%',
                 boxShadow: '0 24px 60px rgba(0,0,0,0.4)',
