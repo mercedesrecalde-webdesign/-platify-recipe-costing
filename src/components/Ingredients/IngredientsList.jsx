@@ -13,9 +13,9 @@ function IngredientsList() {
     const [searchTerm, setSearchTerm] = useState('');
     const [showAddForm, setShowAddForm] = useState(false);
 
-    const filteredIngredients = ingredients.filter(ing =>
-        ing.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+   const filteredIngredients = ingredients
+        .filter(ing => ing.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
 
     return (
         <div className="fade-in">
