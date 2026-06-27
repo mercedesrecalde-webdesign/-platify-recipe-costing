@@ -336,7 +336,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
 
                 {/* Info */}
                 <div style={{
-                    marginTop: '0.85rem',
+                    marginTop: '0.4rem',
                     padding: '1rem',
                     background: 'var(--bg-tertiary)',
                     borderRadius: '8px',
