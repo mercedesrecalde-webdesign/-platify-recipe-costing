@@ -123,7 +123,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 10000,
-            padding: '1rem',
+            padding: '2.5rem 1rem 1rem 1rem',
             backdropFilter: 'blur(4px)'
         }} onClick={onClose}>
             <div style={{
