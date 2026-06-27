@@ -129,26 +129,26 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             <div style={{
                 background: 'var(--bg-secondary)',
                 borderRadius: '16px',
-                padding: '1rem',
-                maxWidth: '820px',
+                padding: '2rem',
+                maxWidth: '720px',
                 width: '100%',
                 boxShadow: '0 24px 60px rgba(0,0,0,0.4)',
                 animation: 'scaleIn 0.3s ease-out'
             }} onClick={(e) => e.stopPropagation()}>
 
                 {/* Header */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <div style={{
                             background: 'linear-gradient(135deg, var(--accent), var(--primary))',
-                            borderRadius: '12px',
-                            padding: '0.75rem',
+                            borderRadius: '10px',
+                            padding: '0.4rem',
                             display: 'flex'
                         }}>
-                            <Sparkles size={24} color="white" />
+                            <Sparkles size={18} color="white" />
                         </div>
                         <div>
-                            <h2 style={{ margin: 0, color: 'var(--primary)', fontSize: '1.5rem' }}>
+                            <h2 style={{ margin: 0, color: 'var(--primary)', fontSize: '1.15rem' }}>
                                 {t('dietAssistant.title')}
                             </h2>
                             <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
@@ -171,7 +171,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                 </div>
 
                 {/* Diet Selection */}
-                <div style={{ marginBottom: '2rem' }}>
+                <div style={{ marginBottom: '1.25rem' }}>
                     <label style={{
                         display: 'block',
                         marginBottom: '1rem',
@@ -183,7 +183,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                     </label>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+                        gridTemplateColumns: 'repeat(5, 1fr)',
                         gap: '0.5rem'
                     }}>
                         {dietOptions.map(diet => (
@@ -258,7 +258,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                 </div>
                 
                 {/* Meal Time Selection */}
-                <div style={{ marginBottom: '2.5rem' }}>
+                <div style={{ marginBottom: '1.25rem' }}>
                     <label style={{
                         display: 'block',
                         marginBottom: '1rem',
