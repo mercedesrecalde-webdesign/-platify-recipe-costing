@@ -183,15 +183,15 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                     </label>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                        gap: '0.75rem'
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+                        gap: '0.5rem'
                     }}>
                         {dietOptions.map(diet => (
                             <div
                                 key={diet.id}
                                 onClick={() => setSelectedDiet(diet.id)}
                                 style={{
-                                    padding: '1rem',
+                                    padding: '0.6rem',
                                     borderRadius: '12px',
                                     border: `2px solid ${selectedDiet === diet.id ? 'var(--primary)' : 'var(--border-color)'}`,
                                     background: selectedDiet === diet.id ? 'var(--primary-light)' : 'var(--bg-tertiary)',
@@ -200,7 +200,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                                     textAlign: 'center'
                                 }}
                             >
-                                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{diet.icon}</div>
+                                <div style={{ fontSize: '1.4rem', marginBottom: '0.25rem' }}>{diet.icon}</div>
                                 <div style={{
                                     fontWeight: '600',
                                     fontSize: '0.875rem',
