@@ -214,54 +214,46 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                                 </div>
                             </div>
                         ))}
-                    </div>
-                </div>
-
-                {/* Próximamente: Cocinar con lo que tengo */}
-                <div style={{ marginBottom: '1.5rem' }}>
-                    <div
-                        onClick={() => alert('🪄 Próximamente: cargá los ingredientes que tenés disponibles y Platify te dirá qué recetas podés preparar. ¡Aprovechamiento total de la materia prima!')}
-                        style={{
-                            background: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%)',
-                            borderRadius: '12px',
-                            padding: '0.85rem 1.25rem',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            gap: '1rem',
-                            boxShadow: '0 8px 24px rgba(139, 92, 246, 0.35)',
-                            transition: 'transform 0.2s, box-shadow 0.2s',
-                            position: 'relative',
-                            overflow: 'hidden'
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
-                    >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                            <div style={{ fontSize: '1.8rem', lineHeight: 1 }}>🪄</div>
-                            <div>
-                                <div style={{ fontWeight: '800', fontSize: '1.05rem', color: 'white', letterSpacing: '0.01em' }}>
-                                    ¿Qué cocino con lo que tengo?
-                                </div>
-                                <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.85)', marginTop: '0.15rem' }}>
-                                    Cargá tu materia prima disponible y descubrí recetas
-                                </div>
+                        {/* Próximamente: Cocinar con lo que tengo (ocupa 2 columnas) */}
+                        <div
+                            onClick={() => alert('🪄 Próximamente: cargá los ingredientes que tenés disponibles y Platify te dirá qué recetas podés preparar. ¡Aprovechamiento total de la materia prima!')}
+                            style={{
+                                gridColumn: 'span 2',
+                                background: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%)',
+                                borderRadius: '12px',
+                                padding: '0.6rem 1rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                gap: '0.25rem',
+                                boxShadow: '0 8px 24px rgba(139, 92, 246, 0.35)',
+                                transition: 'transform 0.2s',
+                                position: 'relative',
+                                overflow: 'hidden'
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
+                        >
+                            <span style={{
+                                background: 'rgba(255,255,255,0.25)',
+                                color: 'white',
+                                fontSize: '0.6rem',
+                                fontWeight: '700',
+                                padding: '0.15rem 0.5rem',
+                                borderRadius: '20px',
+                                letterSpacing: '0.05em',
+                                whiteSpace: 'nowrap'
+                            }}>
+                                ✨ PRÓXIMAMENTE
+                            </span>
+                            <div style={{ fontSize: '1.4rem', lineHeight: 1, marginTop: '0.1rem' }}>🪄</div>
+                            <div style={{ fontWeight: '800', fontSize: '0.875rem', color: 'white', lineHeight: 1.15 }}>
+                                ¿Qué cocino con lo que tengo?
                             </div>
                         </div>
-                        <span style={{
-                            background: 'rgba(255,255,255,0.25)',
-                            color: 'white',
-                            fontSize: '0.7rem',
-                            fontWeight: '700',
-                            padding: '0.3rem 0.7rem',
-                            borderRadius: '20px',
-                            letterSpacing: '0.05em',
-                            whiteSpace: 'nowrap',
-                            backdropFilter: 'blur(4px)'
-                        }}>
-                            ✨ PRÓXIMAMENTE
-                        </span>
                     </div>
                 </div>
                 
