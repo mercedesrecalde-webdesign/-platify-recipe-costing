@@ -278,7 +278,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                     </label>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(2, 1fr)',
+                        gridTemplateColumns: 'repeat(4, 1fr)',
                         gap: '0.75rem'
                     }}>
                         {mealTimes.map(meal => {
