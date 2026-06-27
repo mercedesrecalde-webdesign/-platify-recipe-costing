@@ -137,7 +137,7 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
             }} onClick={(e) => e.stopPropagation()}>
 
                 {/* Header */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <div style={{
                             background: 'linear-gradient(135deg, var(--accent), var(--primary))',
