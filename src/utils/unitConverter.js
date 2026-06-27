@@ -130,6 +130,22 @@ export function formatWithUnit(value, unit, decimals = 2) {
 }
 
 /**
+ * Formatea peso automaticamente: grande en kg, chico en g.
+ * Pensado para la Receta Standard (cocineras).
+ * @param {number} grams - Valor en gramos
+ * @returns {string} Texto formateado, ej: "4 kg" o "150 g"
+ */
+export function formatSmartWeight(grams) {
+    if (grams >= 1000) {
+        const kg = grams / 1000;
+        const kgStr = Number.isInteger(kg) ? kg.toString() : kg.toFixed(2).replace(/\.?0+$/, '');
+        return `${kgStr} kg`;
+    }
+    const gStr = Number.isInteger(grams) ? grams.toString() : grams.toFixed(0);
+    return `${gStr} g`;
+}
+
+/**
  * Get all units for a system
  * @param {string} system - System (metric, imperial)
  * @returns {object} Units object
