@@ -218,13 +218,13 @@ export default function DietaryAssistant({ isOpen, onClose, onGenerateRecipe, in
                 </div>
 
                 {/* Próximamente: Cocinar con lo que tengo */}
-                <div style={{ marginBottom: '2.5rem' }}>
+                <div style={{ marginBottom: '1.5rem' }}>
                     <div
                         onClick={() => alert('🪄 Próximamente: cargá los ingredientes que tenés disponibles y Platify te dirá qué recetas podés preparar. ¡Aprovechamiento total de la materia prima!')}
                         style={{
                             background: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%)',
                             borderRadius: '12px',
-                            padding: '1.25rem 1.5rem',
+                            padding: '0.85rem 1.25rem',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
