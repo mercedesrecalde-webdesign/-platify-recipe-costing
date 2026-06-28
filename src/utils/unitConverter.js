@@ -190,7 +190,20 @@ export function getUnitConversionFactor(unit) {
  * @param {number} purchasePrice - precio de la cantidad de compra
  * @returns {number} costo del ingrediente en la receta
  */
-export function calcularCostoIngrediente(brutoEnReceta, purchaseQuantity, purchaseUnit, purchasePrice) {
+export function calcularCostoIngrediente(brutoEnReceta, purchaseQuantity, purchaseUnit, purchasePrice, pesoUnidad = 0) {
+    const u = (purchaseUnit || '').toString().toLowerCase().trim();
+    const esUnidad = ['unidad', 'unidades', 'un', 'u', 'paquete', 'paquetes', 'lata', 'latas', 'botella', 'botellas', 'docena', 'docenas'].includes(u);
+
+    // Caso especial: compra por unidad/paquete/lata CON peso por unidad cargado.
+    // Ej: huevo comprado de a 30 unidades a $5000, cada huevo pesa 60g.
+    if (esUnidad && pesoUnidad && pesoUnidad > 0) {
+        const gramosTotalesCompra = (purchaseQuantity || 1) * pesoUnidad;
+        if (gramosTotalesCompra === 0) return 0;
+        const precioPorGramo = purchasePrice / gramosTotalesCompra;
+        return brutoEnReceta * precioPorGramo;
+    }
+
+    // Caso normal (kg, g, litros, ml): funciona igual que antes.
     const factor = getUnitConversionFactor(purchaseUnit);
     const purchaseQtyBase = (purchaseQuantity || 1) * factor;
     if (purchaseQtyBase === 0) return 0;
