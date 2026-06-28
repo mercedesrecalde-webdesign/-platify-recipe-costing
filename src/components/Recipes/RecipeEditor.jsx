@@ -55,7 +55,8 @@ export default function RecipeEditor({
                 const purchasePrice = wholesaleIng?.purchasePrice || wholesaleIng?.purchase_price || 0;
                 const purchaseQty = wholesaleIng?.quantity || 1;
                 const purchaseUnit = wholesaleIng?.unit || '';
-                const cost = calcularCostoIngrediente(bruto, purchaseQty, purchaseUnit, purchasePrice);
+                const pesoUnidad = wholesaleIng?.pesoUnidad || wholesaleIng?.peso_unidad || 0;
+                const cost = calcularCostoIngrediente(bruto, purchaseQty, purchaseUnit, purchasePrice, pesoUnidad);
                 
                 const calories = ing.calories || ing.calorias || 0;
 
@@ -185,7 +186,8 @@ export default function RecipeEditor({
         
        // Use latest price from wholesale list (función central de costos)
         const price = ingredient.purchasePrice || ingredient.purchase_price || 0;
-        const costoTotal = calcularCostoIngrediente(bruto, ingredient.quantity || 1, ingredient.unit || '', price);
+        const pesoUnidad = ingredient.pesoUnidad || ingredient.peso_unidad || 0;
+        const costoTotal = calcularCostoIngrediente(bruto, ingredient.quantity || 1, ingredient.unit || '', price, pesoUnidad);
         
         const nutritional = getNutritionalData(ingredient.name);
         const calories = (neto / 100) * (nutritional?.calories || 0);
