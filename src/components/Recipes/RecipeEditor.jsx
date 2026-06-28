@@ -4,6 +4,7 @@ import { X, Save, Plus, Trash2, Calculator } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useSettings } from '../../context/SettingsContext';
 import { formatCurrency } from '../../utils/currencyConverter';
+import { calcularCostoIngrediente } from '../../utils/unitConverter';
 import { supabase } from '../../utils/supabaseClient';
 import { Image, ClipboardList, ShieldCheck, Upload, Trash } from 'lucide-react';
 
