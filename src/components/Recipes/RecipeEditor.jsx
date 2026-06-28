@@ -181,8 +181,13 @@ export default function RecipeEditor({
         const fc = getCorrectionFactor(ingredient.name);
         const bruto = neto * fc;
         
-        // Use latest price from wholesale list
-        const purchaseQuantity = ingredient.quantity || 1;
+       // Use latest price from wholesale list
+        const rawQuantity = ingredient.quantity || 1;
+        const purchaseUnit = (ingredient.unit || '').toLowerCase();
+        // Convertir la cantidad de compra a unidad base (gramos/ml) para que coincida con el neto de la receta
+        const purchaseQuantity = (purchaseUnit === 'kg' || purchaseUnit === 'lt' || purchaseUnit === 'l')
+            ? rawQuantity * 1000
+            : rawQuantity;
         const price = ingredient.purchasePrice || ingredient.purchase_price || 0;
         const costoTotal = (bruto / purchaseQuantity) * price;
         
