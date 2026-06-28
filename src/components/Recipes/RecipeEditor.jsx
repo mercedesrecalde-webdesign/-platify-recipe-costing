@@ -53,10 +53,9 @@ export default function RecipeEditor({
                 
                 // Use latest price for accurate costing
                 const purchasePrice = wholesaleIng?.purchasePrice || wholesaleIng?.purchase_price || 0;
-                const rawQty = wholesaleIng?.quantity || 1;
-                const pUnit = (wholesaleIng?.unit || '').toLowerCase();
-                const purchaseQty = (pUnit === 'kg' || pUnit === 'lt' || pUnit === 'l') ? rawQty * 1000 : rawQty;
-                const cost = (bruto / purchaseQty) * purchasePrice;
+                const purchaseQty = wholesaleIng?.quantity || 1;
+                const purchaseUnit = wholesaleIng?.unit || '';
+                const cost = calcularCostoIngrediente(bruto, purchaseQty, purchaseUnit, purchasePrice);
                 
                 const calories = ing.calories || ing.calorias || 0;
 
@@ -184,15 +183,9 @@ export default function RecipeEditor({
         const fc = getCorrectionFactor(ingredient.name);
         const bruto = neto * fc;
         
-       // Use latest price from wholesale list
-        const rawQuantity = ingredient.quantity || 1;
-        const purchaseUnit = (ingredient.unit || '').toLowerCase();
-        // Convertir la cantidad de compra a unidad base (gramos/ml) para que coincida con el neto de la receta
-        const purchaseQuantity = (purchaseUnit === 'kg' || purchaseUnit === 'lt' || purchaseUnit === 'l')
-            ? rawQuantity * 1000
-            : rawQuantity;
+       // Use latest price from wholesale list (función central de costos)
         const price = ingredient.purchasePrice || ingredient.purchase_price || 0;
-        const costoTotal = (bruto / purchaseQuantity) * price;
+        const costoTotal = calcularCostoIngrediente(bruto, ingredient.quantity || 1, ingredient.unit || '', price);
         
         const nutritional = getNutritionalData(ingredient.name);
         const calories = (neto / 100) * (nutritional?.calories || 0);
