@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../context/SettingsContext';
 import { useData } from '../../context/DataContext';
@@ -8,6 +8,160 @@ import { translateIngredient } from '../../utils/ingredientTranslations';
 import IngredientEditor from '../Ingredients/IngredientEditor';
 import ConfirmDialog from '../UI/ConfirmDialog';
 import { Edit2, Trash2, Plus, Search } from 'lucide-react';
+
+// Fila editable: maneja el valor mientras se escribe en estado local,
+// y solo guarda en Supabase cuando el usuario sale del campo (onBlur) o aprieta Enter.
+// Esto evita el bug de guardar en cada tecla (70000 -> 700).
+function FilaPrecio({ item, index, currency, i18n, t, updateIngredient, success, onEdit, onDelete }) {
+    // Valores locales mientras se edita (no tocan la base hasta confirmar)
+    const [cantidadLocal, setCantidadLocal] = useState(item.cantidad);
+    const [precioLocal, setPrecioLocal] = useState(item.precioCompra);
+
+    // Si el item cambia desde afuera (otra edición, recarga), sincronizamos
+    useEffect(() => {
+        setCantidadLocal(item.cantidad);
+        setPrecioLocal(item.precioCompra);
+    }, [item.cantidad, item.precioCompra]);
+
+    // Guarda en Supabase una sola vez, con los valores completos
+    const guardar = (nuevaCantidad, nuevoPrecio) => {
+        const cantidadNum = parseFloat(nuevaCantidad) || 0;
+        const precioNum = parseFloat(nuevoPrecio) || 0;
+
+        const updatedData = { ...item.originalData };
+        updatedData.quantity = cantidadNum;
+        updatedData.purchasePrice = precioNum;
+        updatedData.unitPrice = cantidadNum > 0 ? precioNum / cantidadNum : 0;
+
+        updateIngredient(item.id, updatedData);
+        success(t('prices.priceUpdated'));
+    };
+
+    // Al salir del campo cantidad: guarda si cambió
+    const onBlurCantidad = () => {
+        if (parseFloat(cantidadLocal) !== parseFloat(item.cantidad)) {
+            guardar(cantidadLocal, precioLocal);
+        }
+    };
+
+    // Al salir del campo precio: guarda si cambió
+    const onBlurPrecio = () => {
+        if (parseFloat(precioLocal) !== parseFloat(item.precioCompra)) {
+            guardar(cantidadLocal, precioLocal);
+        }
+    };
+
+    // Enter = guardar y sacar el foco
+    const onKeyDownGuardar = (e) => {
+        if (e.key === 'Enter') {
+            e.target.blur();
+        }
+    };
+
+    // Precio unitario en vivo (calculado con los valores locales)
+    const precioUnitarioLocal = (parseFloat(cantidadLocal) > 0)
+        ? (parseFloat(precioLocal) || 0) / parseFloat(cantidadLocal)
+        : 0;
+
+    return (
+        <tr style={{ background: index % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-tertiary)' }}>
+            <td>
+                <span className="badge badge-primary" style={{ fontSize: '0.7rem' }}>
+                    {item.categoria}
+                </span>
+            </td>
+            <td style={{ fontWeight: '500' }}>
+                {translateIngredient(item.nombre, i18n.language)}
+            </td>
+            <td style={{ textAlign: 'right', padding: '0.5rem' }}>
+                <input
+                    type="number"
+                    value={cantidadLocal}
+                    onChange={(e) => setCantidadLocal(e.target.value)}
+                    onBlur={onBlurCantidad}
+                    onKeyDown={onKeyDownGuardar}
+                    style={{
+                        width: '80px',
+                        textAlign: 'right',
+                        fontFamily: 'monospace',
+                        padding: '0.375rem 0.5rem',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '4px',
+                        background: 'var(--bg-primary)',
+                        color: 'var(--text-primary)',
+                        fontSize: '0.875rem'
+                    }}
+                    step="0.01"
+                    min="0"
+                />
+            </td>
+            <td>{item.um}</td>
+            <td style={{ textAlign: 'right', padding: '0.5rem' }}>
+                <input
+                    type="number"
+                    value={precioLocal}
+                    onChange={(e) => setPrecioLocal(e.target.value)}
+                    onBlur={onBlurPrecio}
+                    onKeyDown={onKeyDownGuardar}
+                    style={{
+                        width: '100px',
+                        textAlign: 'right',
+                        fontFamily: 'monospace',
+                        padding: '0.375rem 0.5rem',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '4px',
+                        background: 'var(--bg-primary)',
+                        color: 'var(--text-primary)',
+                        fontSize: '0.875rem'
+                    }}
+                    step="0.01"
+                    min="0"
+                />
+            </td>
+            <td style={{ textAlign: 'right', fontFamily: 'monospace', fontWeight: '600', color: 'var(--primary)', padding: '0.75rem' }}>
+                {formatCurrency(precioUnitarioLocal, currency)}
+            </td>
+            <td style={{ textAlign: 'center' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                    <button
+                        onClick={() => onEdit(item)}
+                        style={{
+                            background: 'var(--primary)',
+                            border: 'none',
+                            color: 'white',
+                            padding: '0.5rem',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'all 0.2s'
+                        }}
+                        title={t('prices.editFull')}
+                    >
+                        <Edit2 size={14} />
+                    </button>
+                    <button
+                        onClick={() => onDelete(item)}
+                        style={{
+                            background: 'var(--error)',
+                            border: 'none',
+                            color: 'white',
+                            padding: '0.5rem',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'all 0.2s'
+                        }}
+                        title={t('common.delete')}
+                    >
+                        <Trash2 size={14} />
+                    </button>
+                </div>
+            </td>
+        </tr>
+    );
+}
 
 function PreciosMayoristas() {
     const { t, i18n } = useTranslation();
@@ -133,120 +287,20 @@ function PreciosMayoristas() {
                                 </td>
                             </tr>
                         ) : (
-                            filteredItems.map((item, index) => {
-                                const handleFieldChange = (field, value) => {
-                                    const updatedData = { ...item.originalData };
-
-                                    if (field === 'quantity') {
-                                        updatedData.quantity = parseFloat(value) || 0;
-                                    } else if (field === 'purchasePrice') {
-                                        updatedData.purchasePrice = parseFloat(value) || 0;
-                                    }
-
-                                    // Recalculate unit price
-                                    updatedData.unitPrice = updatedData.quantity > 0
-                                        ? updatedData.purchasePrice / updatedData.quantity
-                                        : 0;
-
-                                    updateIngredient(item.id, updatedData);
-                                    success(t('prices.priceUpdated'));
-                                };
-
-                                return (
-                                    <tr key={item.id} style={{ background: index % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-tertiary)' }}>
-                                        <td>
-                                            <span className="badge badge-primary" style={{ fontSize: '0.7rem' }}>
-                                                {item.categoria}
-                                            </span>
-                                        </td>
-                                        <td style={{ fontWeight: '500' }}>
-                                            {translateIngredient(item.nombre, i18n.language)}
-                                        </td>
-                                        <td style={{ textAlign: 'right', padding: '0.5rem' }}>
-                                            <input
-                                                type="number"
-                                                value={item.cantidad}
-                                                onChange={(e) => handleFieldChange('quantity', e.target.value)}
-                                                style={{
-                                                    width: '80px',
-                                                    textAlign: 'right',
-                                                    fontFamily: 'monospace',
-                                                    padding: '0.375rem 0.5rem',
-                                                    border: '1px solid var(--border-color)',
-                                                    borderRadius: '4px',
-                                                    background: 'var(--bg-primary)',
-                                                    color: 'var(--text-primary)',
-                                                    fontSize: '0.875rem'
-                                                }}
-                                                step="0.01"
-                                                min="0"
-                                            />
-                                        </td>
-                                        <td>{item.um}</td>
-                                        <td style={{ textAlign: 'right', padding: '0.5rem' }}>
-                                            <input
-                                                type="number"
-                                                value={item.precioCompra}
-                                                onChange={(e) => handleFieldChange('purchasePrice', e.target.value)}
-                                                style={{
-                                                    width: '100px',
-                                                    textAlign: 'right',
-                                                    fontFamily: 'monospace',
-                                                    padding: '0.375rem 0.5rem',
-                                                    border: '1px solid var(--border-color)',
-                                                    borderRadius: '4px',
-                                                    background: 'var(--bg-primary)',
-                                                    color: 'var(--text-primary)',
-                                                    fontSize: '0.875rem'
-                                                }}
-                                                step="0.01"
-                                                min="0"
-                                            />
-                                        </td>
-                                        <td style={{ textAlign: 'right', fontFamily: 'monospace', fontWeight: '600', color: 'var(--primary)', padding: '0.75rem' }}>
-                                            {formatCurrency(item.precioUnitario, currency)}
-                                        </td>
-                                        <td style={{ textAlign: 'center' }}>
-                                            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                                                <button
-                                                    onClick={() => handleEdit(item)}
-                                                    style={{
-                                                        background: 'var(--primary)',
-                                                        border: 'none',
-                                                        color: 'white',
-                                                        padding: '0.5rem',
-                                                        borderRadius: '4px',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        transition: 'all 0.2s'
-                                                    }}
-                                                    title={t('prices.editFull')}
-                                                >
-                                                    <Edit2 size={14} />
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDeleteClick(item)}
-                                                    style={{
-                                                        background: 'var(--error)',
-                                                        border: 'none',
-                                                        color: 'white',
-                                                        padding: '0.5rem',
-                                                        borderRadius: '4px',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        transition: 'all 0.2s'
-                                                    }}
-                                                    title={t('common.delete')}
-                                                >
-                                                    <Trash2 size={14} />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                );
-                            })
+                            filteredItems.map((item, index) => (
+                                <FilaPrecio
+                                    key={item.id}
+                                    item={item}
+                                    index={index}
+                                    currency={currency}
+                                    i18n={i18n}
+                                    t={t}
+                                    updateIngredient={updateIngredient}
+                                    success={success}
+                                    onEdit={handleEdit}
+                                    onDelete={handleDeleteClick}
+                                />
+                            ))
                         )}
                     </tbody>
                 </table>
