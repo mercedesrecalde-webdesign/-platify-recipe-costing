@@ -92,10 +92,7 @@ export default function RecipeEditor({
 
     // Get nutritional info for an ingredient
     const getNutritionalData = (ingredientName) => {
-        const info = nutritionalInfo.find(ni =>
-            ni.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
-            ingredientName.toLowerCase().includes(ni.name.toLowerCase())
-        );
+        const info = getNutritionalInfo(ingredientName);
         return info || { calories: 0 };
     };
 
