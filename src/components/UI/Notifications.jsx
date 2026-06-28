@@ -48,7 +48,7 @@ function NotificationContainer({ notifications, onRemove }) {
             position: 'fixed',
             top: '1rem',
             right: '1rem',
-            zIndex: 9999,
+           zIndex: 10001,
             display: 'flex',
             flexDirection: 'column',
             gap: '0.5rem',
