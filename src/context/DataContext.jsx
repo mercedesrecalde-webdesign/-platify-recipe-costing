@@ -146,6 +146,7 @@ export function DataProvider({ children }) {
                     const mappedIngredients = cloudIngredients.map(ing => ({
                         ...ing,
                         purchasePrice: ing.purchase_price,
+                        pesoUnidad: ing.peso_unidad || 0,
                         unitPrice: (ing.purchase_price || 0) / (ing.quantity || 1)
                     }));
                     setIngredients(mappedIngredients);
@@ -266,6 +267,7 @@ export function DataProvider({ children }) {
                 unit: ingredient.unit,
                 purchase_price: ingredient.purchasePrice,
                 quantity: ingredient.quantity,
+                peso_unidad: ingredient.pesoUnidad || 0,
                 user_id: user?.id || null
             };
 
@@ -300,7 +302,8 @@ export function DataProvider({ children }) {
             category: updatedIngredient.category,
             unit: updatedIngredient.unit,
             purchase_price: updatedIngredient.purchasePrice,
-            quantity: updatedIngredient.quantity
+            quantity: updatedIngredient.quantity,
+            peso_unidad: updatedIngredient.pesoUnidad || 0
         };
 
         const { error } = await supabase
