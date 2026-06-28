@@ -12,10 +12,15 @@ export default function IngredientEditor({
         category: 'SECOS',
         quantity: 1,
         unit: 'KG',
-        purchasePrice: 0
+        purchasePrice: 0,
+        pesoUnidad: 0
     });
 
     const [errors, setErrors] = useState({});
+
+    // Unidades de conteo que necesitan un peso por unidad para costear bien
+    const unidadesDeConteo = ['unidades', 'unidad', 'paquete', 'lata', 'botella', 'docena'];
+    const esUnidadDeConteo = unidadesDeConteo.includes((formData.unit || '').toLowerCase());
 
     if (!isOpen) return null;
 
@@ -211,7 +216,27 @@ export default function IngredientEditor({
                             </select>
                         </div>
                     </div>
-
+{/* Peso por unidad (solo para unidades/paquete/lata/botella) */}
+                    {esUnidadDeConteo && (
+                        <div style={{ marginBottom: '1rem', background: 'var(--bg-tertiary)', padding: '1rem', borderRadius: '8px', border: '1px dashed var(--primary)' }}>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                                Peso por unidad (g) — para costear en recetas
+                            </label>
+                            <input
+                                type="number"
+                                className="input"
+                                value={formData.pesoUnidad || ''}
+                                onChange={(e) => handleChange('pesoUnidad', parseFloat(e.target.value) || 0)}
+                                step="1"
+                                min="0"
+                                style={{ width: '100%' }}
+                                placeholder="Ej: 60 (un huevo pesa ~60g)"
+                            />
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+                                Cuánto pesa UNA unidad en gramos. Necesario para calcular el costo cuando la receta pide gramos pero comprás por unidad.
+                            </div>
+                        </div>
+                    )}
                     {/* Purchase Price */}
                     <div style={{ marginBottom: '1rem' }}>
                         <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-primary)' }}>
