@@ -52,7 +52,9 @@ export default function RecipeEditor({
                 
                 // Use latest price for accurate costing
                 const purchasePrice = wholesaleIng?.purchasePrice || wholesaleIng?.purchase_price || 0;
-                const purchaseQty = wholesaleIng?.quantity || 1;
+                const rawQty = wholesaleIng?.quantity || 1;
+                const pUnit = (wholesaleIng?.unit || '').toLowerCase();
+                const purchaseQty = (pUnit === 'kg' || pUnit === 'lt' || pUnit === 'l') ? rawQty * 1000 : rawQty;
                 const cost = (bruto / purchaseQty) * purchasePrice;
                 
                 const calories = ing.calories || ing.calorias || 0;
