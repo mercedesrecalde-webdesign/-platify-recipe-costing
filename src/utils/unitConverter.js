@@ -164,3 +164,36 @@ export function getSystemUnits(system = 'metric') {
 }
 
 export { CONVERSIONS };
+/**
+ * Normaliza una unidad y devuelve su factor de conversión a la unidad base (gramos o ml).
+ * Maneja todas las variantes: KG/kg/kilo, L/LT/LITROS/litro, g/grs/gramos, ml/cc, unidades, etc.
+ */
+export function getUnitConversionFactor(unit) {
+    const u = (unit || '').toString().toLowerCase().trim();
+    // Peso: convertir a gramos
+    if (['kg', 'kilo', 'kilos', 'kilogramo', 'kilogramos'].includes(u)) return 1000;
+    if (['g', 'gr', 'grs', 'gramo', 'gramos'].includes(u)) return 1;
+    // Volumen: convertir a ml
+    if (['l', 'lt', 'litro', 'litros'].includes(u)) return 1000;
+    if (['ml', 'cc', 'mililitro', 'mililitros'].includes(u)) return 1;
+    // Conteo: no se convierten
+    if (['unidad', 'unidades', 'un', 'u', 'paquete', 'paquetes', 'lata', 'latas', 'botella', 'botellas', 'docena', 'docenas'].includes(u)) return 1;
+    // Por defecto, no convierte
+    return 1;
+}
+
+/**
+ * Calcula el costo de un ingrediente en una receta, convirtiendo unidades automáticamente.
+ * @param {number} brutoEnReceta - cantidad bruta usada en la receta (gramos/ml)
+ * @param {number} purchaseQuantity - cantidad de compra (ej: 5 si es "5 LITROS")
+ * @param {string} purchaseUnit - unidad de compra (ej: "LITROS", "KG")
+ * @param {number} purchasePrice - precio de la cantidad de compra
+ * @returns {number} costo del ingrediente en la receta
+ */
+export function calcularCostoIngrediente(brutoEnReceta, purchaseQuantity, purchaseUnit, purchasePrice) {
+    const factor = getUnitConversionFactor(purchaseUnit);
+    const purchaseQtyBase = (purchaseQuantity || 1) * factor;
+    if (purchaseQtyBase === 0) return 0;
+    const precioPorBase = purchasePrice / purchaseQtyBase;
+    return brutoEnReceta * precioPorBase;
+}
